@@ -1,7 +1,8 @@
-<p>
-    <strong>[% l('Rating:') %]</strong>
-    [% rating_stars(entity) %]
-    [%- IF entity.rating_count -%]
-    <br />[% link_entity(entity, "ratings", l("Show user ratings")) %]
-    [%- END -%]
-</p>
+[% WRAPPER 'layout/sidebar/properties.tt' %]
+    [% INCLUDE 'layout/sidebar/property.tt' label=l('Rating:')
+       content=rating_stars(entity) %]
+[% END %]
+
+[%- IF entity.rating_count -%]
+    [% link_entity(entity, "ratings", l("Show user ratings")) %]
+[%- END -%]

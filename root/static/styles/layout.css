@@ -53,6 +53,8 @@ fieldset legend {
     font-weight: bold;
 }
 
+#sidebar h2 { font-size: 100% }
+
 h3 {
     margin-top: 1em;
     margin-bottom: 0;
@@ -316,7 +318,7 @@ pre code {
 }
 
 #sidebar ul.links {
-    margin-left: 0em;
+    margin: 0;
     padding-left: 2em;
 }
 
@@ -520,6 +522,7 @@ table.details td.old {
 /* Sidebar properties */
 dl.properties {
     margin-bottom: 12pt;
+    margin: 0;
 }
 
 dl.properties dt {
