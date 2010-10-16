@@ -37,101 +37,40 @@
     </ul></p>
 [% END %]
 
-[%- MACRO editable_property(label, text, field, field_name, class, property, datatype)
-        IF field && editing;
-            IF class.defined;
-                class = class _ ' hidden';
-            ELSE;
-                class = 'hidden';
-            END;
-            INCLUDE 'layout/sidebar/property.tt' content=field class=class
-                label=r.label(field_name, label) property=property datatype=datatype;
-        ELSE;
-            INCLUDE 'layout/sidebar/property.tt' content=text IF text;
-        END %]
-
-[%- BLOCK release_properties;
-        WRAPPER 'layout/sidebar/properties.tt';
-            USE r = FormRenderer(form);
-
-            release_properties = [
-                {
-                    label => l('Date:'),
-                    text => release.date.format,
-                    field => r.date('date'),
-                    field_name => 'date',
-                    class => 'date',
-                },
-                {
-                    label => l('Packaging:'),
-                    text => release.packaging.name,
-                    field => r.select('packaging_id'),
-                    field_name => 'packaging_id',
-                },
-                {
-                    label => l('Status:'),
-                    text => release.status.name,
-                    field => r.select('status_id'),
-                    field_name => 'status_id',
-                },
-                {
-                    label => l('Language:'),
-                    text => release.language.name,
-                    field => r.select('language_id'),
-                    field_name => 'country_id',
-                },
-                {
-                    label => l('Script:'),
-                    text => release.script.name,
-                    field => r.select('script_id'),
-                    field_name => 'country_id',
-                },
-                {
-                    label => l('Country:'),
-                    text => release.country.name,
-                    field => r.select('country_id'),
-                    field_name => 'country_id',
-                },
-                {
-                    label => l('Format:'),
-                    text => release.combined_format_name,
-                },
-                {
-                    label => l('Quality:'),
-                    text => quality_name(release.quality),
-                },
-                {
-                    label => l('Type:'),
-                    text => release.release_group.type.name,
-                },
-            ];
-
-            editable_property(prop.label, prop.text, prop.field, prop.field_name, prop.class, prop.rdfa_property)
-                FOR prop=release_properties;
+[%- BLOCK release_properties %]
+        [% WRAPPER 'layout/sidebar/properties.tt';
+            INCLUDE 'layout/sidebar/property.tt' label=l('Type')
+               content=release.release_group.type.name IF release.release_group.type.name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Date')
+               content=release.date.format IF release.date.format;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Packaging')
+               content=release.packaging.name IF release.packaging.name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Status')
+               content=release.status.name IF release.status.name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Language')
+               content=release.language.name IF release.language.name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Script')
+               content=release.script.name IF release.script.name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Country')
+               content=release.country.name IF release.country.name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Format')
+               content=release.combined_format_name IF release.combined_format_name;
+            INCLUDE 'layout/sidebar/property.tt' label=l('Quality')
+               content=quality_name(release.quality) IF quality_name(release.quality);
         END;
     END %]
 
 [%- BLOCK release_label_properties;
         WRAPPER 'layout/sidebar/properties.tt';
-            USE r = FormRenderer(form);
-            editable_property(l('Barcode:'), release.barcode, r.text('barcode'), 'barcode', '', 'mo:gtin', 'xsd:string');
+            INCLUDE 'layout/sidebar/property.tt' label=l('Barcode')
+               content=release.barcode property='mo:tgin' datatype='xsd:string' IF release.barcode;
         END;
-        IF release.labels.size OR editing %]
            <h3>[% l('Released on:') %]</h3>
+        IF release.labels.size %]
            <ul class="release-labels links">
                [% FOR label=release.labels %]
                    <li class="release-label">
-                     [% IF editing %]
-                       [% field = form.field('labels').field(loop.index) %]
-                       [% r.checkbox(field.field('deleted'), class => 'remove') %]
-                       [% r.hidden(field.field('label_id'), class => 'label-id') %]
-                       [% '<span class="label">' _ label.label.name _ '</span>' %]
-                       &ndash;
-                       [% r.text(form.field('labels').field(loop.index).field('catalog_number'),
-                                 size => 8, class => 'catalog-number') %]
-                     [% ELSE %]
-                       [% rdfa_link_label(label.label) %] &ndash; [% rdfa_release_catno(label.catalog_number) %]
-                     [% END %]
+                     [% rdfa_link_label(label.label) %] &ndash; [% rdfa_release_catno(label.catalog_number) %]
                    </li>
                [% END %]
            </ul>
@@ -163,14 +102,11 @@ WRAPPER 'layout/sidebar.tt';
     INCLUDE release_properties;
     INCLUDE release_label_properties;
 
-    UNLESS editing;
-        INCLUDE 'layout/sidebar/sidebar-rating.tt' entity=release.release_group;
-        INCLUDE 'layout/sidebar/sidebar-tags.tt' tags=top_tags more=more_tags entity=release.release_group
-        tag_this_text=l('Tag release group');
-        INCLUDE links;
-    	INCLUDE other_versions;    
-        INCLUDE lists IF c.user_exists;
-    END;
+    INCLUDE 'layout/sidebar/sidebar-rating.tt' entity=release.release_group;
+    INCLUDE 'layout/sidebar/sidebar-tags.tt' tags=top_tags more=more_tags entity=release.release_group
+    tag_this_text=l('Tag release group');
+    INCLUDE links;
+    INCLUDE lists IF c.user_exists;
   END;
 END;
 
