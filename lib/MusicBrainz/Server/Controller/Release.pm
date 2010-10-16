@@ -14,7 +14,9 @@ with 'MusicBrainz::Server::Controller::Role::Details';
 with 'MusicBrainz::Server::Controller::Role::Relationship';
 with 'MusicBrainz::Server::Controller::Role::EditListing';
 
-use MusicBrainz::Server::Controller::Role::Tag;
+use MusicBrainz::Server::Controller::Role::Tag qw(
+    $TOP_TAGS_COUNT
+);
 
 use MusicBrainz::Server::Constants qw(
     $EDIT_RELEASE_CHANGE_QUALITY
@@ -63,8 +65,13 @@ after 'load' => sub
     my $entity = $c->stash->{$self->{entity_name}};
     my @tags = $c->model('ReleaseGroup')->tags->find_top_tags(
         $release->release_group->id,
-        $MusicBrainz::Server::Controller::Role::Tag::TOP_TAGS_COUNT);
-    $c->stash->{top_tags} = \@tags;
+        $TOP_TAGS_COUNT);
+    my $count = $c->model('ReleaseGroup')->tags->find_tag_count($release->release_group->id);
+
+    $c->stash(
+        top_tags => \@tags,
+        more_tags => $count > @tags,
+    );
 
     # We need to load more artist credits in 'show'
     if ($c->action->name ne 'show') {

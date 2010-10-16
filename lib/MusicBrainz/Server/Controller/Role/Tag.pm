@@ -4,7 +4,11 @@ use Readonly;
 
 requires 'load', '_load_paged';
 
-Readonly my $TOP_TAGS_COUNT => 5;
+use base 'Exporter';
+
+our @EXPORT_OK = qw($TOP_TAGS_COUNT);
+
+Readonly our $TOP_TAGS_COUNT => 5;
 
 after 'load' => sub
 {
@@ -14,8 +18,10 @@ after 'load' => sub
     my @tags = $c->model($self->{model})->tags->find_top_tags($entity->id, $TOP_TAGS_COUNT);
     my $count = $c->model($self->{model})->tags->find_tag_count($entity->id);
 
-    $c->stash( top_tags => \@tags );
-    $c->stash( more_tags => $count > @tags );
+    $c->stash(
+        top_tags => \@tags,
+        more_tags => $count > @tags,
+    );
 };
 
 sub tags : Chained('load') PathPart('tags')
