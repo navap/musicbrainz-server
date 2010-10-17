@@ -38,7 +38,7 @@
            content=release.combined_format_name IF release.combined_format_name;
     END %]
 
-    <h2>Other stuff</h2>
+    <h2>[% l('Other details') %]</h2>
     [% WRAPPER 'layout/sidebar/properties.tt';
         INCLUDE 'layout/sidebar/property.tt' label=l('Type:')
            content=release.release_group.type.name IF release.release_group.type.name;
