@@ -196,6 +196,7 @@
 
 /* for an inline rater */
 .inline-rating{
+    text-align: left;
     display:-moz-inline-block;
     display:-moz-inline-box;
     display:inline-block;

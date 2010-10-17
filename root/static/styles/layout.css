@@ -537,6 +537,10 @@ dl.properties dt {
     line-height: 200%;
 }
 
+#sidebar dl.properties dd {
+    text-align: right;
+}
+
 /* Search Plugins */
 dl.search-plugins dt {
     font-weight: bold;
