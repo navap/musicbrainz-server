@@ -14,9 +14,11 @@
       <form action="[% c.uri_for_action('/otherlookup/' _ field.0) %]">
         [% WRAPPER form_row %]
           [% r.label(field.0, field.1) %]
-          [% r.text(field.0, { size => 32 }) %]
-          <input type="submit" value="[% l('Search') %]" />
-          [% field_errors(other_lookup, field.0) %]
+          <div class="input">
+            [% r.text(field.0, { size => 32 }) %]
+            <button class="btn" type="submit">[% l('Search') %]</button>
+            [% field_errors(other_lookup, field.0) %]
+          </div>
         [% END %]
       </form>
     [% END %]

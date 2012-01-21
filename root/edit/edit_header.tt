@@ -17,7 +17,7 @@
 <div class="edit-header[%- PROCESS edit_status -%]">
     [% IF summary %]
         <div class="edit-description">
-            <table>
+            <table class="no-styling">
                 <tr>
                     <td>
                         [% IF voter && voter.id != c.user.id %]

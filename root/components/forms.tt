@@ -1,7 +1,7 @@
 [%- MACRO form_submit(label, class) BLOCK %]
-    <span class="buttons[% ' ' _ class IF class %]">
-        <button type="submit">[% label %]</button>
-    </span>
+    <div class="actions[% ' ' _ class IF class %]">
+        <button type="submit" class="btn">[% label %]</button>
+    </div>
 [%- END -%]
 
 [%- MACRO as_auto_editor BLOCK -%]
@@ -20,8 +20,8 @@
 
 [%- MACRO enter_edit(extra) BLOCK -%]
     [%- as_auto_editor() -%]
-    <div class="row no-label buttons">
-        <button type="submit" class="submit positive">[% l('Enter edit') %]</button>
+    <div class="actions">
+        <button type="submit" class="btn success">[% l('Enter edit') %]</button>
         [% extra %]
     </div>
 [%- END -%]
@@ -29,54 +29,62 @@
 [%- MACRO field_errors(form, field_name) BLOCK -%]
     [% field = form.field(field_name) || field_name %]
     [%- IF field.has_errors OR field.error_fields -%]
-        <ul class="errors">
-          [%- FOR err IN field.errors -%]
-            <li>[% err | html %]</li>
-          [%- END -%]
-          [%- FOR field IN field.error_fields -%]
-            [% FOR err IN field.errors %]
-            <li>[% err | html %]</li>
-            [% END %]
-          [%- END -%]
-        </ul>
+        [%- FOR err IN field.errors -%]
+          <span class="help-block error">[% err | html %]</span>
+        [%- END -%]
+
+        [%- FOR field IN field.error_fields -%]
+          [% FOR err IN field.errors %]
+            <span class="help-block error">[% err | html %]</span>
+          [% END %]
+        [%- END -%]
     [%- END -%]
 [%- END -%]
 
 [%- BLOCK form_row -%]
-    <div class="row" [% IF row_id %]id="[% row_id %]"[% END %]>
-      [% content %]
+    [% field = form.field(field_name) || field_name %]
+    <div class="clearfix[%- IF field.has_errors OR field.error_fields -%] error[% END %]"[% IF row_id %] id="[% row_id %]"[% END %]>
+        [% content %]
     </div>
 [%- END -%]
 
 [%- MACRO form_row_text(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
       [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.text(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      <div class="input">
+        [% r.text(field_name) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_text_long(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
       [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.text(field_name, { size => 47 })  %]
-      [% field_errors(form, field_name) %]
+      <div class="input">
+        [% r.text(field_name, { size => 47 })  %]
+        [% field_errors(form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_textarea(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
       [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.textarea(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      <div class="input">
+        [% r.textarea(field_name) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_password(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
       [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.password(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      <div class="input">
+        [% r.password(field_name) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
@@ -91,16 +99,20 @@
 [%- MACRO form_row_select(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
       [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.select(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      <div class="input">
+        [% r.select(field_name) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_date(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label, fake => 1) %]
-      [% r.date(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label) %]
+      <div class="input">
+        [% r.date(field_name) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
@@ -108,12 +120,14 @@
     [%- id = id || 'entity-artist' -%]
     [%- WRAPPER form_row -%]
         <label for="[% id %]" class="required">[% l('Artist:') %]</label>
-        <span class="autocomplete">
-          <input type="text" id="[% id %]" style="width: 262px"
-              value="[% html_escape(form.field('artist_credit').item.name) %]" />
-          <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
-        </span>
-        <input type="button" id="open-ac" value=" &gt;&gt; " style="width: 32px; height: 22px; margin-left: 3px;" />
+        <div class="input autocomplete">
+          <div class="input-append">
+            <input type="text" id="[% id %]"
+                value="[% html_escape(form.field('artist_credit').item.name) %]" />
+            <img class="add-on search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
+            <input type="button" id="open-ac" value="&gt;&gt;" style="width: 32px; margin-top: 0; margin-left: 5px;" />
+          </div>
+        </div>
         [% field_errors(r.form, 'artist_credit') %]
     [%- END -%]
 [%- END -%]
@@ -143,7 +157,7 @@
         [%- (l('Please use the Guess Case button to fix common style errors.')) -%]
       </p>
       <div class="buttons">
-        <a href="#guesscase">[% l('Guess case') %]</a>
+        <a class="btn" href="#guesscase">[% l('Guess case') %]</a>
       </div>
       <div class="guesscase-options">
         <table>

@@ -3,7 +3,7 @@
 <table class="details split-artist">
   <tr>
     <th>[% l('Artist Credit:') %]</th>
-    <td class="old">[% expanded_artist_credit(edit.display_data.artist_credit.old) %]</td>
-    <td class="new">[% expanded_artist_credit(edit.display_data.artist_credit.new) %]</td>
+    <td><span class="old">[% expanded_artist_credit(edit.display_data.artist_credit.old) %]</span></td>
+    <td><span class="new">[% expanded_artist_credit(edit.display_data.artist_credit.new) %]</span></td>
   </tr>
 </table>

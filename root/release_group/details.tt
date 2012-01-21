@@ -1,6 +1,6 @@
 [% WRAPPER "release_group/layout.tt" title=l('Details') page='details' %]
 <h2>[%- l('Details') -%]</h2>
-<table class="details" [% rdfa_about_attr(rdfa_release_group_curi(rg)) %]>
+<table class="details condensed-table" [% rdfa_about_attr(rdfa_release_group_curi(rg)) %]>
   <tr>
     <th>[%- l('Name:') -%]</th>
     <td>[% link_entity(rg) %]</td>

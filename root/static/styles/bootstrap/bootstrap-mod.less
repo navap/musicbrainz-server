@@ -1,0 +1,136 @@
+/*!
+ * Bootstrap @VERSION
+ *
+ * Copyright 2011 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world @twitter by @mdo and @fat.
+ * Date: @DATE
+ */
+
+// CSS Reset
+// @import "reset.less";
+
+// Core variables and mixins
+@import "variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "mixins.less";
+
+// Grid system and page structure
+// @import "scaffolding.less";
+
+// Styled patterns and elements
+// @import "type.less";
+@import "forms.less";
+@import "tables.less";
+@import "patterns.less";
+
+@mborange:      #FFBA58;
+@mbpurple:      #736DAB;
+
+
+table {
+  width: auto;
+  font-size: 12px;
+
+  th {
+    word-break: keep-all;
+    white-space: nowrap;
+  }
+
+  th, td {
+    line-height: normal;
+    padding: 5px 5px 4px;
+  }
+
+  .condensed-table {
+    th, td {
+      padding: 2px 4px;
+    }
+  }
+
+  &[border^="0"],
+  &#toc,
+  &.no-styling {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: none;
+    width: auto;
+    
+    tbody, tfoot, thead,
+    tr, th, td { 
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-weight: normal;
+      font-style: normal;
+      font-size: 100%;
+      line-height: 1;
+      font-family: inherit;
+    }
+  }
+
+  .pos {
+    width: 1em;
+    white-space: nowrap;
+  }
+
+  .year { width: 4em; }
+  .count { width: 2em; }
+  .rating { width: 50px; }
+  .treleases { width: 3em; }
+  .t { text-align: right; }
+
+  &.tbl {
+    margin-top: 1em;
+    width: 100%;
+
+    .zebra-striped;
+    .condensed-table;
+  }
+
+  &#toc {
+    .bordered-table;
+  }
+
+  &.details {
+    th, td {
+      border: none;
+      padding: 1px;
+    }
+    th {
+      padding-left: 10pt;
+    }
+  }
+}
+
+.pagination {
+  height: auto;
+  margin: 1em 0;
+
+  a {
+    line-height: 1.5em;
+    color: @black;
+    padding: 0 10px;
+  }
+
+  a:hover, .active a {
+    background-color: @mborange;
+  }
+
+  .pagination-pagecount {
+    margin-left: 1em;
+    line-height: 1.5em;
+  }
+}
+
+input,
+textarea,
+select,
+.uneditable-input {
+  color: @black;
+}
+
+form .clearfix {
+  margin-bottom: 10px;
+}

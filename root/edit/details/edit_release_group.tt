@@ -23,8 +23,8 @@
   [%- IF edit.display_data.artist_credit -%]
   <tr>
     <th>[% l('Artist:') %]</th>
-    <td class="old">[% expanded_artist_credit(edit.display_data.artist_credit.old) %]</td>
-    <td class="new">[% expanded_artist_credit(edit.display_data.artist_credit.new) %]</td>
+    <td><span class="old">[% expanded_artist_credit(edit.display_data.artist_credit.old) %]</span></td>
+    <td><span class="new">[% expanded_artist_credit(edit.display_data.artist_credit.new) %]</span></td>
   </tr>
   [%- END -%]
 </table>

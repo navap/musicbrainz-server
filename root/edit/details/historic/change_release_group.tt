@@ -11,7 +11,7 @@
   </tr>
   <tr>
     <th>[% l('Release group:') %]</th>
-    <td class="old">[% descriptive_link(edit.display_data.release_group.old) %]</td>
-    <td class="new">[% descriptive_link(edit.display_data.release_group.new) %]</td>
+    <td><span class="old">[% descriptive_link(edit.display_data.release_group.old) %]</span></td>
+    <td><span class="new">[% descriptive_link(edit.display_data.release_group.new) %]</span></td>
   </tr>
 </table>

@@ -17,7 +17,7 @@
 
   <tr>
     <th>[% l('Artist:') %]</th>
-    <td class="old">[% link_entity(edit.display_data.artist.old) %]</td>
-    <td class="new">[% link_entity(edit.display_data.artist.new) %]</td>
+    <td><span class="old">[% link_entity(edit.display_data.artist.old) %]</span></td>
+    <td><span class="new">[% link_entity(edit.display_data.artist.new) %]</span></td>
   </tr>
 </table>

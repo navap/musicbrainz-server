@@ -24,13 +24,13 @@
         <tbody [%- rdfa_about_attr(rdfa_release_curi(release)) -%]>
         [%- FOR medium=release.mediums -%]
             <tr class="subh[% ' mp' IF medium.edits_pending %]">
-                <td>&nbsp;</td><td colspan="[% IF show_artists %]4[% ELSE %]3[% END %]">
+                <th>&nbsp;</th><th colspan="[% IF show_artists %]4[% ELSE %]3[% END %]">
                     [% rdfa_medium_in_release(medium) %]
-                </td>
+                </th>
             </tr>
-	    <div [% rdfa_about_attr(rdfa_tracklist_curi(medium)) %] [% rdfa_typeof(rdfa_concept_curi('medium')) %]>
-            [%- INCLUDE 'tracklist/tracklist.tt' tracklist=medium.tracklist -%]
-	    </div>
+            <div [% rdfa_about_attr(rdfa_tracklist_curi(medium)) %] [% rdfa_typeof(rdfa_concept_curi('medium')) %]>
+                  [%- INCLUDE 'tracklist/tracklist.tt' tracklist=medium.tracklist -%]
+            </div>
         [%- END -%]
         </tbody>
     </table>

@@ -48,8 +48,8 @@
   [% IF edit.data.old.parent %]
   <tr>
     <th>[% l('Parent') %]</th>
-    <td class="old">[% edit.data.old.parent %]</td>
-    <td class="new">[% edit.data.new.parent %]</td>
+    <td><span class="old">[% edit.data.old.parent %]</span></td>
+    <td><span class="new">[% edit.data.new.parent %]</span></td>
   </tr>
   [% END %]
 </table>

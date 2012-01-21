@@ -17,7 +17,7 @@
 
   <tr>
     <th>[% l('Artist:') %]</th>
-    <td class="old">[% edit.display_data.artist.old.name %]</td>
-    <td class="new">[% edit.display_data.artist.new.name %]</td>
+    <td><span class="old">[% edit.display_data.artist.old.name %]</span></td>
+    <td><span class="new">[% edit.display_data.artist.new.name %]</span></td>
   </tr>
 </table>

@@ -10,7 +10,7 @@
         [% form_row_text_long(r, 'puid', l('PUID:')) %]
 
         <div class="row no-label">
-        [% form_submit(l('Search')) %]
+          [% form_submit(l('Search')) %]
         </div>
     </form>
 </div>

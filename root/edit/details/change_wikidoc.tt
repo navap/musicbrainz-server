@@ -9,24 +9,24 @@
   [% IF edit.data.old_version %]
   <tr>
     <th>[% l('Old version:') %]</th>
-    <td class="old">[% edit.data.old_version %]</td>
+    <td><span class="old">[% edit.data.old_version %]</span></td>
   </tr>
   [% ELSE %]
   <tr>
     <th>[% l('Old version:') %]</th>
-    <td class="new">[% l('New page') %]</td>
+    <td><span class="new">[% l('New page') %]</span></td>
   </tr>
   [% END %]
 
   [% IF edit.data.new_version %]
   <tr>
     <th>[% l('New version:') %]</th>
-    <td class="new">[% edit.data.new_version %]</td>
+    <td><span class="new">[% edit.data.new_version %]</span></td>
   </tr>
   [% ELSE %]
   <tr>
     <th>[% l('New version:') %]</th>
-    <td class="old">[% l('Page removed') %]</td>
+    <td><span class="old">[% l('Page removed') %]</span></td>
   </tr>
   [% END %]
 </table>

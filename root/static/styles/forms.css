@@ -52,7 +52,7 @@ form div.row p { float: none; clear: none; }
 form div.no-label,
 form p.no-label,
 form ul.errors {
-    margin-left: 144px;
+    margin-left: 150px;
 }
 
 form ul.errors {
@@ -203,7 +203,6 @@ div.half-width fieldset {
 
 div.half-width fieldset.editnote {
     background-color: inherit;
-    border: 0;
 }
 
 div.half-width fieldset legend {
@@ -227,7 +226,6 @@ div.half-width fieldset label.required {
 div.half-width fieldset input,
 div.half-width fieldset select {
     font-size: 1em;
-    width: 300px;
 }
 
 div.half-width fieldset input[type=checkbox],
@@ -236,7 +234,6 @@ div.half-width fieldset span.partial-date input {
 }
 
 div.half-width fieldset textarea {
-    width: 300px;
 }
 
 div.half-width fieldset input.label-code {

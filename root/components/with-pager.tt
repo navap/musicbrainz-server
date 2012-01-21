@@ -1,4 +1,3 @@
-[% INCLUDE "components/paginator.tt" %]
 [% IF search || total %]
     <p class="pageselector-results">
       [%- IF total OR query=="" -%]
@@ -8,5 +7,9 @@
       [%- END -%]
     </p>
 [% END %]
+
+[% INCLUDE "components/paginator.tt" %]
+
 [% content %]
+
 [% INCLUDE "components/paginator.tt" %]

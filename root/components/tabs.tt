@@ -1,7 +1,21 @@
-<div class="tabs">
-    <ul class="tabs">
-        [%- FOREACH link IN list -%]
-            <li[% IF link.0 == page %] class="sel"[% END %]>[% link.1 %]</li>
-        [%- END -%]
-    </ul>
-</div>
+[% visible_tabs = visible_tabs || 100 %]
+<ul class="tabs">
+    [%# Display tabs for the first x tabs in the list %] 
+    [%- FOREACH link IN list.slice(0,visible_tabs - 1) -%]
+        <li[% IF link.0 == page %] class="active"[% END %]>[% link.1 %]</li>
+    [%- END -%]
+
+    [%# Group the remainder under a 'More' tab %]
+    [% IF list.size > visible_tabs %]
+      <li class="dropdown" data-dropdown="dropdown">
+        <a href="#" class="dropdown-toggle">[% l('More') %]</a>
+        <ul class="dropdown-menu">
+          [%- FOREACH link IN list.slice(visible_tabs-1) -%]
+              <li[% IF link.0 == page %] class="active"[% END %]>[% link.1 %]</li>
+          [%- END -%]
+        </ul>
+      </li>
+    [% END %]
+</ul>
+
+<div style="clear:left;"></div>

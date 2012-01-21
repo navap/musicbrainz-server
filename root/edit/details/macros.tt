@@ -5,8 +5,8 @@
     [%- split = split || '' -%]
     <tr>
       <th>[% label %]</th>
-      <td class="old">[% Diff.diff_side(old, new, '-', split) %]</td>
-      <td class="new">[% Diff.diff_side(old, new, '+', split) %]</td>
+      <td><span class="old">[% Diff.diff_side(old, new, '-', split) %]</span></td>
+      <td><span class="new">[% Diff.diff_side(old, new, '+', split) %]</span></td>
     </tr>
   [%- END -%]
 [%- END -%]
@@ -19,8 +19,8 @@
   [%- IF old != new -%]
     <tr>
       <th>[% label %]</th>
-      <td class="old">[% old %]</td>
-      <td class="new">[% new %]</td>
+      <td><span class="old">[% old %]</span></td>
+      <td><span class="new">[% new %]</span></td>
     </tr>
   [%- END -%]
 [%- END -%]

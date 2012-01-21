@@ -23,11 +23,11 @@
 
   <tr>
     <th>[% l('New language:') %]</th>
-    <td class="new">[% edit.display_data.language.name %]</td>
+    <td><span class="new">[% edit.display_data.language.name %]</span></td>
   </tr>
 
   <tr>
     <th>[% l('New script:') %]</th>
-    <td class="new">[% edit.display_data.script.name %]</td>
+    <td><span class="new">[% edit.display_data.script.name %]</span></td>
   </tr>
 </table>

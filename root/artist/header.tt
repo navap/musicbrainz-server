@@ -21,4 +21,4 @@
     </p>
 </div>
 
-[% INCLUDE 'components/tabs.tt' list=info_links %]
+[% INCLUDE 'components/tabs.tt' list=info_links visible_tabs=5 %]

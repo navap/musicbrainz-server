@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <th>[% l('Data Quality:') %]</th>
-    <td class="old">[% quality_name(edit.display_data.quality.old) %]</td>
-    <td class="new">[% quality_name(edit.display_data.quality.new) %]</td>
+    <td><span class="old">[% quality_name(edit.display_data.quality.old) %]</span></td>
+    <td><span class="new">[% quality_name(edit.display_data.quality.new) %]</span></td>
   </tr>
 </table>

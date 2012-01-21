@@ -46,6 +46,10 @@
         //]]></script>
         [% BLOCK layout_head %][% END %]
         [%- INCLUDE layout_head -%]
+    
+        <link rel="stylesheet/less" href="[% c.uri_for('/static/styles/bootstrap/bootstrap-mod.less') %]" media="all" />
+        <script src="[% c.uri_for('/static/lib/less/less-1.1.6.min.js') %]"></script>
+        <script src="[% c.uri_for('/static/lib/bootstrap/bootstrap-dropdown.js') %]"></script>
     </head>
     <body>
         [%- IF c.debug -%][%- INCLUDE 'debug/stats.tt' -%][%- END -%]
@@ -70,7 +74,7 @@
             </div>
         </div>
 
-        [% IF server_details.staging_server %]
+        [% IF !server_details.staging_server %]
             <div class="server-details">
                 <p>
                     [%~ server_details.staging_server_description || l('This is a MusicBrainz development server.') =%]

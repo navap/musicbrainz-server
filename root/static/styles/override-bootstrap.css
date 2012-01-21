@@ -1,0 +1,17 @@
+.partial-date input { width: auto; }
+
+div.half-width fieldset { padding-right: 20px; }
+
+div.half-width fieldset legend { padding-left: 0; }
+
+
+
+h2 + table { margin-top: 1em; }
+
+
+
+.tabs::after, .pills::after { clear:none !important; }
+
+
+
+.pagination ul { padding-left: 0; }

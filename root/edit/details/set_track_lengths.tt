@@ -38,14 +38,14 @@
           [% FOR length = edit.display_data.length.old;
                old_length = edit.display_data.length.old.${ loop.index } | format_length;
                new_length = edit.display_data.length.new.${ loop.index } | format_length;
-               '<td class="old">' _ Diff.diff_side(old_length, new_length, '-', '') _ '</td>';
+               '<td><span class="old">' _ Diff.diff_side(old_length, new_length, '-', '') _ '</span></td>';
              END %]
         </tr>
         <tr>
           [% FOR length = edit.display_data.length.old;
                old_length = edit.display_data.length.old.${ loop.index } | format_length;
                new_length = edit.display_data.length.new.${ loop.index } | format_length;
-               '<td class="new">' _ Diff.diff_side(old_length, new_length, '+', '') _ '</td>';
+               '<td><span class="new">' _ Diff.diff_side(old_length, new_length, '+', '') _ '</span></td>';
              END %]
         </tr>
       </table>

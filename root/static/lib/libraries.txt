@@ -1,4 +1,12 @@
 
+-- bootstrap/bootstrap-dropdown.js --
+
+library:     bootstrap
+license:     Apache 2.0
+version:     1.4.0
+author:      Twitter
+url:         http://twitter.github.com/bootstrap/javascript.html#dropdown
+
 -- jquery/jquery-1.5.1.js --
 
 library:     jQuery
@@ -27,6 +35,14 @@ library:     json2
 license:     Public Domain
 author:      Douglas Crockford
 url:         http://www.json.org/json2.js
+
+-- less/ --
+
+library:     LESS
+version:     1.1.6
+license:     Apache 2.0
+author:      Alexis Sellier
+url:         http://lesscss.org/
 
 -- qunit/ --
 

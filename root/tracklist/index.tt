@@ -3,7 +3,7 @@
 
     <div id="content">
         <h2>[%- l('Tracks') -%]</h2>
-        <table class="tbl">
+        <table class="zebra-striped condensed-table">
             <thead>
                 <tr>
                     <th class="pos t">#</th>
@@ -22,7 +22,7 @@
 
         <h2>[%- l('Appears on releases') -%]</h2>
 
-        <table class="tbl">
+        <table class="zebra-striped condensed-table">
             <thead>
                 <tr>
                     <th>[% l('Medium #') %]</th>

@@ -8,3 +8,4 @@ styles/extra/homepage.css
 styles/extra/user.css
 styles/extra/wikidocs.css
 
+styles/override-bootstrap.css

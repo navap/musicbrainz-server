@@ -14,12 +14,14 @@
       [% form_row_text_long(r, 'website', l('Website:')) %]
       [% WRAPPER form_row %]
         [% r.label('biography', l('Bio:')) %]
-        [% r.textarea('biography', { cols => 80, rows => 5 }) %]
-        [% field_errors(form, 'biography') %]
+        <div class="input">
+          [% r.textarea('biography', { cols => 80, rows => 5 }) %]
+          [% field_errors(form, 'biography') %]
+        </div>
       [% END %]
-      <div class="row no-label">
+
       [% form_submit(l('Save')) %]
-      </div>
+
       <p class="row no-label">[% l('If you would like to delete your account, you may {uri|do so here}.', { uri => c.uri_for_action("/admin/delete_user", user.name) })%]</p>
     </form>
 

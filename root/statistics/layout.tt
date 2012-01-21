@@ -1,8 +1,8 @@
 [%- info_links = [
-    ['index', '<span class="mp"><a href="/statistics">Overview</a></span>']
-    ['countries', '<span class="mp"><a href="/statistics/countries">Countries</a></span>'],
-    ['languages-scripts', '<span class="mp"><a href="/statistics/languages-scripts">Languages/Scripts</a></span>'],
-    ['timeline', '<span class="mp"><a href="/statistics/timeline/main">Timeline</a></span>'],
+    ['index', '<a href="/statistics">Overview</a>']
+    ['countries', '<a href="/statistics/countries">Countries</a>'],
+    ['languages-scripts', '<a href="/statistics/languages-scripts">Languages/Scripts</a>'],
+    ['timeline', '<a href="/statistics/timeline/main">Timeline</a>'],
 ] -%]
 
 [%- IF full_width -%]
