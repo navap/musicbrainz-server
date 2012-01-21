@@ -11,6 +11,8 @@
           [%- END -%]
         [%- END -%]
         <title>[% title %][% " - " IF title && !nosuffix %][% "MusicBrainz" IF !nosuffix %]</title>
+        <link rel="stylesheet/less" href="[% c.uri_for('/static/styles/bootstrap.less') %]" media="all" />
+        <script src="[% c.uri_for('/static/lib/less/less-1.1.6.min.js') %]"></script>
         [% css_manifest('common.css.manifest') %]
         [% IF extra_css %]
             <link rel="stylesheet" type="text/css" href="[% c.uri_for('/static/styles/extra/') %][% extra_css %]" />
