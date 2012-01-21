@@ -606,47 +606,6 @@ table.tbl ul {
     list-style: none;
 }
 
-/* Paginator */
-.pageselector a, .pageselector span {
-    font-size: 90%;
-    padding: 0.05em 0.4em;
-}
-
-.pageselector a {
-    border: solid 1px #000;
-    text-decoration: none;
-    background-color: #FFF;
-    color: #000;
-}
-
-.pageselector a:hover {
-    background-color: #FFBA58;
-}
-
-.pageselector a.sel {
-    background-color: #FFBA58;
-    font-weight: bold;
-}
-
-.pageselector span {
-    border: solid 1px #999999;
-    background-color: #EEEEEE;
-    color: #999999;
-}
-
-.pageselector em {
-    font-style: normal;
-    margin-left: 0.5em;
-}
-
-.pageselector + .tbl {
-    margin-top: 0px !important;
-}
-
-.pageselector-results {
-    margin-bottom: 0;
-}
-
 /* Browse Entity pages */
 .browse-entities {
     margin-top: 1em;

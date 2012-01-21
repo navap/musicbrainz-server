@@ -1,6 +1,5 @@
-[% INCLUDE "components/paginator.tt" %]
 [% IF search || total %]
-    <p class="pageselector-results">
+    <p class="pagination-results">
       [%- IF total OR query=="" -%]
         [%- ln('Found {n} result', 'Found {n} results' , pager.total_entries, { n=add_commas(pager.total_entries) } ) -%]
       [%- ELSE -%]
@@ -8,5 +7,6 @@
       [%- END -%]
     </p>
 [% END %]
+[% INCLUDE "components/paginator.tt" %]
 [% content %]
 [% INCLUDE "components/paginator.tt" %]
