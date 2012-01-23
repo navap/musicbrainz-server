@@ -6,9 +6,9 @@
 <p class="subheader">
     <span class="prefix">~</span>
         [% l('Release by {artist}', {artist = rdfa_artist_credit(release.artist_credit)})%]
-    <span class="small">
+    <small>
         (<a href="[% c.uri_for_action('/release_group/show', [release.release_group.gid]) %]">[% l("see all versions of this release, {count} available", { count => release.release_group.release_count}) %]</a>)
-    </span>
+    </small>
 
 	[%- rdfa_release_invisible_header(release) -%]
 </p>

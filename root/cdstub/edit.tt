@@ -68,7 +68,7 @@
                 </div>
             [% END %]
         </fieldset>
-        <div class="row no-label">
+        <div class="clearfix">
             [% form_submit(l('Submit')) %]
         </div>
     </form>

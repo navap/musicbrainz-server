@@ -4,6 +4,13 @@ input.mb_placeholder { color: #aaa ! important; }
 input[disabled].lookup-performed,
 input[disabled] { background: #DCDAD5; cursor: default; }
 
+input,
+textarea,
+select,
+.uneditable-input {
+  color: #000000;
+}
+
 button.nobutton {
     background: inherit;
     color: inherit;
@@ -18,13 +25,15 @@ button.nobutton {
 div.various-artists.warning { width: 50em; }
 
 fieldset {
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin: 12px 0 18px;
     border: none;
     padding: 0;
 }
 
-fieldset legend { margin-top: 0; }
+fieldset legend {
+    margin-top: 0;
+    padding-left: 0
+}
 
 form div.row {
     clear: left;
@@ -50,8 +59,7 @@ div.bubble div.row div.label { width: 150px; }
 form div.row p { float: none; clear: none; }
 
 form div.no-label,
-form p.no-label,
-form ul.errors {
+form p.no-label {
     margin-left: 144px;
 }
 
@@ -77,16 +85,11 @@ input.lookup-performed { background: #bfb; }
 form .input-note {
     font-style: italic;
     font-size: 85%;
+    margin-left: 150px;
 }
 
 div.enter-edit input.submit {
     font-size: 18pt;
-}
-
-ul.radio-list {
-    list-style-type: none;
-    list-style-image: none;
-    padding: 0;
 }
 
 label.required,
@@ -144,7 +147,6 @@ div.guesscase-options table td { vertical-align: top; width: 50%; }
    __________________________________ */
 
 span.autocomplete { display: inline-block; position: relative; }
-span.autocomplete img.search { position: absolute; right: 2px; top: 3px; }
 span.autocomplete.disabled img.search { display: none; }
 span.autocomplete input.ui-autocomplete-loading + img.search { display: none; }
 
@@ -207,9 +209,6 @@ div.half-width fieldset.editnote {
 }
 
 div.half-width fieldset legend {
-    color: #fc6714;
-    font-size: 120%;
-    font-weight: bold;
     margin: 0 10px;
 }
 
@@ -224,23 +223,9 @@ div.half-width fieldset label.required {
     font-weight: bold;
 }
 
-div.half-width fieldset input,
-div.half-width fieldset select {
-    font-size: 1em;
-    width: 300px;
-}
-
 div.half-width fieldset input[type=checkbox],
 div.half-width fieldset span.partial-date input {
     width: auto;
-}
-
-div.half-width fieldset textarea {
-    width: 300px;
-}
-
-div.half-width fieldset input.label-code {
-    width: 100px;
 }
 
 div.half-width fieldset h3 {

@@ -10,17 +10,21 @@
     [%- USE r = FormRenderer(form) -%]
 
     <form action="[% c.req.uri %]" method="post">
+    <fieldset>
       [% form_row_text_long(r, 'email', l('Email:')) %]
       [% form_row_text_long(r, 'website', l('Website:')) %]
       [% WRAPPER form_row %]
         [% r.label('biography', l('Bio:')) %]
-        [% r.textarea('biography', { cols => 80, rows => 5 }) %]
+        <div class="input">
+        [% r.textarea('biography', { rows => 5, class => 'xxlarge' }) %]
         [% field_errors(form, 'biography') %]
+        </div>
       [% END %]
-      <div class="row no-label">
-      [% form_submit(l('Save')) %]
+      <div class="clearfix">
+        [% form_submit(l('Save')) %]
       </div>
-      <p class="row no-label">[% l('If you would like to delete your account, you may {uri|do so here}.', { uri => c.uri_for_action("/admin/delete_user", user.name) })%]</p>
+      <p class="input">[% l('If you would like to delete your account, you may {uri|do so here}.', { uri => c.uri_for_action("/admin/delete_user", user.name) })%]</p>
+    </fieldset>
     </form>
 
 [% END %]

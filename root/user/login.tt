@@ -16,23 +16,23 @@
     [%- USE r = FormRenderer(login_form) -%]
     <form action="[% c.req.uri_with({ uri => redirect }) %]" method="post">
         [% IF login_form.has_errors || bad_login -%]
-            <div class="row no-label">
-                <span class="error"><strong>[% l('Incorrect username or password') %]</strong></span>
+            <div class="clearfix error">
+                <span class="input help-block"><strong>[% l('Incorrect username or password') %]</strong></span>
             </div>
         [%- END %]
         [% form_row_text(r, 'username', l('Username:')) %]
         [% form_row_password(r, 'password', l('Password:')) %]
         [% IF server_details.staging_server && server_details.is_sanitized %]
-            <div class="row no-label">
+            [% WRAPPER form_row %]
                 <span class="input-note" style="color: #f22; font-weight: bold;">[% l('This is a development server; all passwords have been reset to "mb".') %]</span>
-            </div>
+            [% END %]
         [% END %]
 
         [% form_row_checkbox(r, 'remember_me', l('Keep me logged in')) %]
 
-        <div class="row no-label">
+        [% WRAPPER form_row %]
             [% form_submit(l('Log In'), 'login') %]
-        </div>
+        [% END %]
     </form>
 
     <p>

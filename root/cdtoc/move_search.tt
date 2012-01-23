@@ -9,21 +9,21 @@
   <form action="[% c.req.uri_for_action('/cdtoc/move') %]" method="get">
     [% USE r = FormRenderer(query_release) %]
     <input type="hidden" name="toc" value="[% medium_cdtoc.id %]" />
-    [% WRAPPER form_row %]
-      [% r.label('query', l('Release title:')) %]
-      [% r.text('query') %]
-      [% form_submit(l('Search')) %]
+      [% form_row_text(r, query, l('Release title:')) %]
+      [% WRAPPER form_row %]
+        [% form_submit(l('Search')) %]
+      [% END %]
     [% END %]
   </form>
 
   <form action="[% c.req.uri %]" method="GET">
     <input type="hidden" name="toc" value="[% medium_cdtoc.id %]" />
     [%- IF releases.size -%]
-        <div class="row">
-          <div class="label required">[% l('Results:') %]</div>
-          <div class="no-label">
+        [% WRAPPER form_row %]
+          <label class="required">[% l('Results:') %]</label>
+          <div class="input">
             [% WRAPPER 'components/with-pager.tt' %]
-             <ul class="radio-list">
+             <ul class="inputs-list">
               [%- FOREACH release=releases -%]
               [%- release = release.entity -%]
               <li>
@@ -35,10 +35,10 @@
             </ul>
             [% END %]
           </div>
-        </div>
-        <div class="row no-label">
+        [% END %]
+        [% WRAPPER form_row %]
           [% form_submit(l('Select')) %]
-        </div>
+        [% END %]
     [%- END -%]
   </form>
 [% END %]

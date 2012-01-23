@@ -1,5 +1,5 @@
 // CSS Reset
-// @import "reset.less";
+// @import "bootstrap/reset.less";
 
 // Core variables and mixins
 @import "bootstrap/variables.less"; // Modify this for custom colors, font-sizes, etc
@@ -10,7 +10,7 @@
 
 // Styled patterns and elements
 // @import "type.less";
-// @import "bootstrap/forms.less";
+@import "bootstrap/forms.less";
 // @import "bootstrap/tables.less";
 @import "bootstrap/patterns.less";
 
@@ -19,6 +19,12 @@
 @mbpurple:      #736DAB;
 
 // MB styles
+
+form {
+  .clearfix {
+    margin-bottom: 6px;
+  }
+}
 
 .pagination {
   height: auto;

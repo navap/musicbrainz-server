@@ -58,9 +58,9 @@
     [% USE r = FormRenderer(query_artist) %]
     <input type="hidden" name="toc" value="[% toc %]" />
     [% form_row_text(r, 'query', l('Artist:')) %]
-    <div class="row no-label">
+    [% WRAPPER form_row %]
       [% form_submit(l('Search')) %]
-    </div>
+    [% END %]
   </form>
 
   <h2>[% l('Search by release') %]</h2>
@@ -68,9 +68,9 @@
     [% USE r = FormRenderer(query_release) %]
     <input type="hidden" name="toc" value="[% toc %]" />
     [% form_row_text(r, 'query', l('Release:')) %]
-    <div class="row no-label">
+    [% WRAPPER form_row %]
       [% form_submit(l('Search')) %]
-    </div>
+    [% END %]
   </form>
 [% ELSE %]
   [% IF medium_cdtocs.size %]

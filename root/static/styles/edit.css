@@ -90,7 +90,7 @@ table.vote-tally .date {
 }
 
 .edit-notes .edit-note-text {
-    padding-left: 1em;
+    padding-left: 12px;
 }
 
 .edit-notes .edit-note h3 {
@@ -120,6 +120,10 @@ table.vote-tally .date {
     color: #333333;
     float: right;
     font-weight: normal;
+}
+
+.edit-notes + .input {
+    margin-left: 17px;
 }
 
 .add-edit-note {

@@ -23,9 +23,9 @@
             [% form_row_select(r, 'type', l('Type:')) %]
             [% form_row_select(r, 'status', l('Status:')) %]
 
-         <div class="row no-label">
-             [% form_submit(l("Search")) %]
-         </div>
+            [% WRAPPER form_row %]
+              [% form_submit(l("Search")) %]
+            [% END %]
        </form>
     </div>
 [% END %]
@@ -77,7 +77,7 @@
             [%- END -%]
 
             <input type="hidden" name="url" value="[% c.req.uri %]" />
-            <div class="row no-label" style="text-align: right">
+            <div class="clearfix" style="text-align: right">
                 [% form_submit(l('Submit votes & edit notes')) %]
             </div>
         </form>

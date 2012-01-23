@@ -26,14 +26,16 @@
       [% WRAPPER form_row %]
         [% rg_field = form.field('release_group.name') %]
         <label for="[% rg_field.id %]">[% l('Release Group:') %]</label>
-        <span class="release-group autocomplete">
-          <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
-          <input type="hidden" class="gid" value="[% release_group.gid | html %]" />
-          <input type="hidden" class="comment" value="[% release_group.comment | html %]" />
-          [% r.hidden ('release_group_id', class => 'id') %]
-          [% r.text(rg_field, class => 'name') %]
-        </span>
-        [% field_errors(r.form, 'release_group.name') %]
+        <div class="input">
+          <span class="release-group autocomplete input-append">
+            <input type="hidden" class="gid" value="[% release_group.gid | html %]" />
+            <input type="hidden" class="comment" value="[% release_group.comment | html %]" />
+            [% r.hidden ('release_group_id', class => 'id') %]
+            [% r.text(rg_field, class => 'name') %]
+            <img class="search add-on" src="[% c.uri_for("/static/images/icons/search.png") %]" />
+          </span>
+          [% field_errors(r.form, 'release_group.name') %]
+        </div>
       [% END %]
 
       [%- form_row_artist_credit(form, 'release-artist') -%]
@@ -49,54 +51,44 @@
     <fieldset>
       <legend>[% l('Release event') %]</legend>
 
-      [% WRAPPER form_row %]
-         <label for="release-date">[% l('Date:') %]</label>
-         [% r.date('date') %]
-      [% END %]
-      [% field_errors(r.form, 'date') %]
-
+      [% form_row_date(r, 'date', l('Date:')) %]
       [% form_row_select (r, 'country_id', l('Country:')) %]
+      [% form_row_text (r, 'barcode', l('Barcode:')) %]
+      [% form_row_checkbox (r, 'no_barcode', l('This release does not have a barcode')) %]
       [% form_row_select (r, 'packaging_id', l('Packaging:')) %]
 
-      <div class="label-container" style="padding: 0.5em 0">
+      <div class="label-container" style="width: 400px">
         [% FOR field=form.field('labels').fields %]
-        <div class="release-label">
-          [%- r.label(field.field('name'), l('Label:'), class => 'label-name') -%]
-          <span class="label autocomplete">
-            <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
-            [% label_id = field.field('label_id').value %]
-            [% label = labels_by_id.$label_id %]
-            <input type="hidden" class="gid" value="[% label.gid | html %]" />
-            <input type="hidden" class="comment" value="[% label.comment | html %]" />
-            <input type="hidden" class="sortname" value="[% label.sort_name | html %]" />
-            [%- r.hidden(field.field('label_id'), class => 'id') -%]
-            [%- r.text(field.field('name'), class => 'name') -%]
-          </span>
-          [%- r.label(field.field('catalog_number'), l('Cat.No:'), class => 'catno') -%]
-          [%- r.text (field.field('catalog_number'), class => 'catno' ) -%]
+          <div class="release-label">
 
-          <span class="remove-label">
-            [%- r.hidden(field.field('deleted')) -%]
-            <a class="icon remove-label" href="#remove_label">
-              <img src="[% c.uri_for('/static/images/icons/delete_row.png') %]" title="[% l('Remove Label') %]" alt="[% l('Remove Label') %]" />
-            </a>
-          </span>
+            <div class="clearfix">
+            [%- r.label(field.field('name'), l('Label:'), class => 'label-name') -%]
+            <div class="input">
+                <span class="label autocomplete input-append">
+                  [% label_id = field.field('label_id').value %]
+                  [% label = labels_by_id.$label_id %]
+                  <input type="hidden" class="gid" value="[% label.gid | html %]" />
+                  <input type="hidden" class="comment" value="[% label.comment | html %]" />
+                  <input type="hidden" class="sortname" value="[% label.sort_name | html %]" />
+                  [%- r.hidden(field.field('label_id'), class => 'id') -%]
+                  [%- r.text(field.field('name'), class => 'name') -%]
+                  <img class="search add-on" src="[% c.uri_for("/static/images/icons/search.png") %]" />
+                </span>
+            </div>
+            </div>
 
-        </div>
-        [% END %]
-
-        [% WRAPPER form_row %]
-          <div class="add-label" style="text-align: right; width: 100%; ">
-            <span class="add-label" style="padding: 0 1em;">[% l('Add Label') %]</span>
-            <a class="icon add-label" href="#add_label" style="margin-right: 14px;">
-              <img src="[% c.uri_for('/static/images/icons/add_row.png') %]" title="[% l('Add Label') %]" alt="[% l('Add Label') %]" />
-            </a>
+            <div class="clearfix">
+            [%- r.label(field.field('catalog_number'), l('Catalogue Number:'), class => 'catno') -%]
+            <div class="input">
+                [%- r.text (field.field('catalog_number'), class => 'catno small' ) -%]
+                  <a class="btn info add-label" href="#add_label">
+                    [% l('Add Label') %]
+                  </a>
+            </div>
+            </div>
           </div>
         [% END %]
       </div>
-
-      [% form_row_text (r, 'barcode', l('Barcode:')) %]
-      [% form_row_checkbox (r, 'no_barcode', l('This release does not have a barcode')) %]
     </fieldset>
 
     <fieldset class="information">
@@ -105,9 +97,9 @@
       [% form_row_text(r, 'comment', l('Disambiguation:')) %]
     </fieldset>
 
-    <div class="buttons ui-helper-clearfix">
-        [% r.submit ('cancel', l('Cancel'), class => 'negative') %]
-        [% r.submit ('next', l('Next »')) %]
+    <div class="clearfix">
+        [% r.submit ('cancel', l('Cancel'), class => 'btn danger') %]
+        [% r.submit ('next', l('Next »'), class => 'btn primary') %]
     </div>
   </div>
 
@@ -158,12 +150,7 @@
        </p>
        <p class="barcode-message"></p>
        <p class="barcode-confirm">
-          <label for="id-barcode_confirm">
-            <strong>
-              [%- r.checkbox('barcode_confirm') %]
-              [% l("I confirm that this is the barcode as it appears on the release.") -%]
-            </strong>
-          </label>
+         [% form_row_checkbox (r, 'barcode_confirm', l('I confirm that this is the barcode as it appears on the release.')) %]
        </p>
        <p>
          [% l('If you do not know whether the release has a barcode or not, just leave this blank.') %]

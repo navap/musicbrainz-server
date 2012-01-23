@@ -108,11 +108,9 @@
 /* Special */
 
 /* search button in header*/
-.buttons.header-search { display: inline; }
-.buttons.header-search button {
-    float: none;
+.header-search {
     display: inline;
-    padding: 2px 6px !important;
+    margin-left: 0 !important;
 }
 
 

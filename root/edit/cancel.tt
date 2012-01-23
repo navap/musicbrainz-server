@@ -20,9 +20,11 @@
         [% r.textarea('edit_note', { class => 'edit-note', cols => 80, rows => 5 }) %]
         [% field_errors(form, 'edit_note') %]
      [% END %]
-     <div class="row no-label buttons">
-        <button type="submit" class="submit positive">[% l('Cancel edit') %]</button>
+    [% WRAPPER form_row %]
+      <div class="input">
+        <button type="submit" class="submit btn danger">[% l('Cancel edit') %]</button>
         [% extra %]
-    </div>
+      </div>
+    [% END %]
    </form>
 [% END %]

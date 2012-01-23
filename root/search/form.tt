@@ -31,21 +31,23 @@
         [% WRAPPER form_row %]
             [% search.label('limit', l('Results per page:')) %]
             [% field = search.form.field('limit') %]
-            <select id="id-[% field.html_name %]" name="[% field.html_name %]">
-                [% FOR i=[25,50,100] %]
-                <option value="[% i %]"
-                    [% IF i==field.value %]selected="selected"[% END %]>
-                  [% l('Up to {n}', { n => i }) %]
-                </option>
-                [% END %]
-            </select>
-            [% field_errors(search.form, 'limit') %]
+            <div class="input">
+              <select id="id-[% field.html_name %]" name="[% field.html_name %]">
+                  [% FOR i=[25,50,100] %]
+                  <option value="[% i %]"
+                      [% IF i==field.value %]selected="selected"[% END %]>
+                    [% l('Up to {n}', { n => i }) %]
+                  </option>
+                  [% END %]
+              </select>
+              [% field_errors(search.form, 'limit') %]
+            </div>
         [% END %]
         [% form_row_checkbox(search, 'advanced', l('Use {doc|advanced query syntax}', { doc => doc_link('Text_Search_Syntax') })) %]
         [% form_row_checkbox(search, 'direct', l('Direct database search')) %]
-        <div class="row no-label">
-        [% form_submit(l('Search')) %]
-        </div>
+        [% WRAPPER form_row %]
+          [% form_submit(l('Search')) %]
+        [% END %]
     </form>
 </div>
 

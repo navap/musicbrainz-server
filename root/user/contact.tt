@@ -16,9 +16,9 @@
         [% form_row_checkbox(r, 'reveal_address', l('Reveal my email address')) %]
         [% form_row_checkbox(r, 'send_to_self', l('Send a copy to my own email address')) %]
 
-        <div class="row no-label">
+        [% WRAPPER form_row %]
             [% form_submit(l('Send')) %]
-        </div>
+        [% END %]
     </form>
 
 [%- END -%]

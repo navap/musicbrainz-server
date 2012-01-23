@@ -2,22 +2,21 @@
   <form action="[% c.req.uri_for_action('/cdtoc/attach') %]" method="get">
     [% USE r = FormRenderer(query_artist) %]
     <input type="hidden" name="toc" value="[% toc %]" />
-    [% WRAPPER form_row %]
-      [% r.label('query', l('Artist:')) %]
-      [% r.text('query') %]
-      [% form_submit(l('Search')) %]
-    [% END %]
+      [% form_row_text(r, query, l('Artist:')) %]
+      [% WRAPPER form_row %]
+        [% form_submit(l('Search')) %]
+      [% END %]
   </form>
 
   <form action="[% c.req.uri %]" method="GET">
     <input type="hidden" name="toc" value="[% toc %]" />
     [%- IF artists.size -%]
       <input type="hidden" name="filter-artist.query" value="[% query_artist.field('query').value %]" />
-        <div class="row">
-          <div class="label required">[% l('Results:') %]</div>
-          <div class="no-label">
+        [% WRAPPER form_row %]
+          <label class="required">[% l('Results:') %]</label>
+          <div class="input">
             [% WRAPPER 'components/with-pager.tt' %]
-             <ul class="radio-list">
+             <ul class="inputs-list">
               [%- FOREACH artist=artists -%]
               [%- artist = artist.entity -%]
               <li>
@@ -28,10 +27,10 @@
             </ul>
             [% END %]
           </div>
-        </div>
-        <div class="row no-label">
+        [% END %]
+        [% WRAPPER form_row %]
           [% form_submit(l('Select')) %]
-        </div>
+        [% END %]
     [%- END -%]
   </form>
 
@@ -43,6 +42,8 @@
     <input type="hidden" name="artist_credit.names.0.name"
            value="[% query_artist.field('query').value %]" />
     <input type="hidden" name="mediums.0.toc" value="[% toc %]" />
-    [% form_submit(l('Add a new release')) %]
+  [% WRAPPER form_row %]
+      [% form_submit(l('Add a new release')) %]
+  [% END %]
   </form>
 [% END %]

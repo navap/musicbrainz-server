@@ -109,7 +109,7 @@ pre code {
     color: #FFF;
 }
 
-#header-logo div {
+#header-logo > div {
     position: relative;
     top: 17px;
     float: right;
@@ -499,7 +499,7 @@ tr.diff-changes {
 
 .lastupdate,
 .annotation-details,
-.small {
+small {
     font-size: 90%;
     color: #777;
     font-style: italic;
