@@ -822,12 +822,12 @@ MB.Control.ArtistCreditVertical = function ($target, $container, $button) {
     var self = MB.Control.ArtistCreditContainer ($target, $container);
 
     $container.bind ('bubbleOpen.mb', function (event) {
-        $button.val (' << ');
+        $button.val ('<<');
         self.disableTarget ();
     });
 
     $container.bind ('bubbleClose.mb', function (event) {
-        $button.val (' >> ');
+        $button.val ('>>');
         self.enableTarget ();
     });
 
