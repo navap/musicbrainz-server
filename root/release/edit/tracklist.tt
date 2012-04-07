@@ -314,7 +314,7 @@
           </span>
         </td>
         <td class="credits-button">
-          <a class="credits-button" href="#credits">[% l('credits') %]</a>
+          <a class="credits-button tooltip" href="#credits" title="[%l('Enter a name variation or a collaboration') %]">[% l('Edit artist credit') %]</a>
         </td>
         <td class="length">
           <input type="text" class="track-length" size="5" value="?:??" />
@@ -331,7 +331,7 @@
         </td>
       </tr>
       <tr class="track-artist-credit container" style="display: none">
-        <td colspan="6">
+        <td colspan="7">
           [% artist_credit_row(release_artist) %]
         </td>
       </tr>
