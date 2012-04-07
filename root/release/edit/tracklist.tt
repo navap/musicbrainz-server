@@ -71,15 +71,13 @@
       <td class="icon">
         <input type="button" class="icon remove-artist-credit"
           title="[% l('Remove Artist Credit') %]"
-          style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0;" />
+          style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
       </td>
     </tr>
   [% END %]
 
     <tr>
-      <td> </td>
-      <td> </td>
-      <td style="text-align: right;">
+      <td colspan="4" class="buttons">
         <button type="button" class="nobutton add-artist-credit">
             [%- l('Add Artist Credit') -%]
         </button>
@@ -268,10 +266,9 @@
             <th class="length">[% l('Length') %]</th>
           </tr>
         </thead>
-        <tfoot />
         <tbody>
           <tr class="track" style="display: none;">
-            <td class="position" style="text-align: right;"></td>
+            <td class="position t"></td>
             <td class="title"></td>
             <td class="artist"></td>
             <td class="length"></td>
@@ -301,7 +298,7 @@
     [%# The following is only included so it can be cloned when adding new tracks. --warp. %]
     <table class="tracklist-template" style="display: none">
       <tr class="track">
-        <td class="position">
+        <td class="position t">
           <span class="pos"></span>
         </td>
         <td class="reorder">
@@ -433,7 +430,6 @@
               <th class="icons"></th>
             </tr>
           </thead>
-          <tfoot />
           <tbody> </tbody>
         </table>
       </div>
