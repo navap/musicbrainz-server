@@ -429,9 +429,11 @@
         </table>
       </div>
 
+      [%# If you change any of the html structure in this div,
+          make sure to fix the onkeydown JS. -navap %]
       <div class="icon add-track" style="float: right;">
         <span style="padding-right: 1em">
-          [% l('Add {num} track(s)', num => '<input type="text" class="add-track-count" value="1" />') %]
+          [% l('Add {num} track(s)', num => '<input type="text" class="add-track-count" value="1" onkeydown="if (event.keyCode == 13) $(this).parent().next(\'input.add-track\').click(); return false;" />') %]
         </span>
           <input type="button" class="icon add-track"
             title="[% l('Add track(s)') %]"
