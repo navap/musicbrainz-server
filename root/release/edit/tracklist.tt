@@ -365,11 +365,11 @@
                 [% r.hidden(medium_field.field('tracklist_id'), class => 'tracklist-id') %]
 
                 <div class="row">
-                  [% r.label(medium_field.field('format_id'), l('Format')) %]
+                  [% r.label(medium_field.field('format_id'), l('Format:')) %]
                   [% r.select(medium_field.field('format_id'), class => 'format') %]
                 </div>
                 <div class="row advanced-tracklist">
-                  [% r.label(medium_field.field('name'), l('Disc title')) %]
+                  [% r.label(medium_field.field('name'), l('Disc title:')) %]
                   [% r.text(medium_field.field('name'), class => 'name') %]
 
                   <input type="button" class="icon guesscase-medium"
