@@ -77,11 +77,16 @@
   [% END %]
 
     <tr>
-      <td colspan="4" class="buttons">
-        <button type="button" class="nobutton add-artist-credit">
+      <td colspan="3" class="buttons">
+        <button type="button" class="nobutton add-artist-credit" style="margin-top: 1em;">
             [%- l('Add Artist Credit') -%]
         </button>
+
+        <button type="button" class="nobutton close-artist-credit" style="float:right; margin-top: 1em; margin-right: 0;">
+            [%- l('Done') -%]
+        </button>
       </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
