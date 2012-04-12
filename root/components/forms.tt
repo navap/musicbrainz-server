@@ -241,7 +241,7 @@
       <div class="row">
         <label> &nbsp; </label>
         <span class="buttons">
-            <button type="button" class="nobutton add-artist-credit">
+            <button type="button" class="add-artist-credit">
                 [%- l('Add Artist Credit') -%]
             </button>
         </span>

@@ -29,11 +29,11 @@
 [%- END -%]
 
 [%- MACRO artist_credit_row(release_artist) BLOCK -%]
-<table class="artist-credit bubble" style="width: 100%">
+<table class="artist-credit bubble">
   <thead>
     <tr class="artist-credit-preview">
       <td colspan="4">
-        <p style="margin: 0 0 1em; font-size: 95%;">
+        <p>
           <strong>[% l('Preview:') %]</strong>
           <span class="artist-credit-preview">[% artist_credit(release_artist) %]</span>
         </p>
@@ -70,20 +70,19 @@
       </td>
       <td class="icon">
         <input type="button" class="icon remove-artist-credit"
-          title="[% l('Remove Artist Credit') %]"
+          title="[% l('Remove Credit') %]"
           style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
       </td>
     </tr>
   [% END %]
 
     <tr>
-      <td colspan="3" class="buttons">
-        <button type="button" class="nobutton add-artist-credit" style="margin-top: 1em;">
-            [%- l('Add Artist Credit') -%]
-        </button>
-
-        <button type="button" class="nobutton close-artist-credit" style="float:right; margin-top: 1em; margin-right: 0;">
+      <td colspan="3" class="buttons" style="padding:0">
+        <button type="button" class="positive close-artist-credit">
             [%- l('Done') -%]
+        </button>
+        <button type="button" class="add-artist-credit">
+            [%- l('Add Credit') -%]
         </button>
       </td>
       <td></td>
@@ -319,12 +318,12 @@
           </span>
         </td>
         <td class="credits-button">
-          <a class="credits-button tooltip" href="#credits" title="[%l('Enter a name variation or a collaboration') %]">[% l('Change artist credit') %]</a>
+          <a class="credits-button" href="#credits" title="[%l('Enter a name variation or a collaboration') %]">[% l('Change credit') %]</a>
         </td>
         <td class="length">
           <input type="text" class="track-length" size="5" value="?:??" />
         </td>
-        <td class="icon">
+        <td class="icon pos">
           <input type="button" class="icon guesscase-track"
             title="[% l('Guess case track') %]"
             style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
@@ -380,12 +379,11 @@
                   <input type="button" class="icon guesscase-medium"
                       title="[% l('Guess case disc title') %]"
                       style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
-
                 </div>
             </div>
           </td>
 
-          <td class="tools buttons" style="vertical-align: middle;">
+          <td class="tools buttons">
             <input type="button" class="track-parser"
                 title="[% l('Track Parser') %]"
                 value="[% l('Track Parser') %]" />
@@ -454,12 +452,12 @@
 
       <fieldset class="guesscase">
         <legend>[% l('Guess case') %]</legend>
-        <table style="width: 100%">
+        <table class="guess-case">
           <tr>
-            <td class="icon" style="vertical-align: top; padding: 10px; width: 32px;">
+            <td class="icon">
               <img src="[% c.uri_for("/static/images/icons/guesscase.32x32.png") %]" />
             </td>
-            <td class="options" style="vertical-align: top;">
+            <td class="options">
               <p class="guesscase-options">
                 <select name="gc-mode" id="gc-mode"> </select>
                 <br />
@@ -470,8 +468,8 @@
                 <label for="gc-roman">[% l('Uppercase roman numerals') %]</label>
               </p>
             </td>
-            <td class="buttons" style="margin: 10px; vertical-align: top;">
-              <a href="#guesscase" style="float: right">[% l('Guess case') %]</a>
+            <td class="buttons">
+              <a href="#guesscase">[% l('Guess case') %]</a>
             </td>
           </tr>
         </table>
