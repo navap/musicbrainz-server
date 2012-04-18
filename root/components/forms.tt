@@ -148,7 +148,7 @@
               value="[% html_escape(form.field('artist_credit').item.name) %]" />
           <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
         </span>
-        <input type="button" id="open-ac" value=" &gt;&gt; " style="width: 32px; height: 22px; margin-left: 3px;" />
+        <input type="button" id="open-ac" value="&gt;&gt;" style="width: 32px; height: 22px; margin-top: 0; margin-left: 3px;" />
         [% field_errors(r.form, 'artist_credit') %]
     [%- END -%]
 [%- END -%]
@@ -243,7 +243,7 @@
         [%- artistnum = loop.index -%]
 
         [%- artist = ac.field('artist').item -%]
-        <div class="artist-credit-box" style="margin: 2em 0">
+        <div class="artist-credit-box" style="margin: 1.5em 0">
 
           <div class="row">
             <label><strong>[% l('Artist in MusicBrainz') %]</strong></label>
@@ -257,7 +257,7 @@
 
             <input type="button" class="icon remove-artist-credit"
               title="[% l('Remove Artist Credit') %]" 
-              style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
 
           </div>
 

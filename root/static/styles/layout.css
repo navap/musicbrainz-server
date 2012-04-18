@@ -344,9 +344,9 @@ h1 img.gravatar {
 
 div.notice,
 div.warning {
-    margin: 2em auto;
+    margin: 1em auto;
     border: 1px solid #a1a1a1;
-    min-height: 54px;
+    min-height: 50px;
     width: 30em;
     background: #ffffd0;
 }
@@ -358,7 +358,7 @@ div.notice p { margin: 1em; }
 
 div.warning img.warning {
     float: left;
-    margin: 12px 10px 8px 10px;
+    margin: 8px 10px 8px 10px;
     width: 32px;
     height: 32px;
 }
