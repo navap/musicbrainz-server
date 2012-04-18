@@ -1,8 +1,9 @@
-input { background: #fff; color: #000; margin: 0; }
+input, select { background: #fff; color: #000; margin: 0; }
 input:-moz-placeholder { color: #aaa; }
 input.mb_placeholder { color: #aaa ! important; }
 input[disabled].lookup-performed,
 input[disabled] { background: #DCDAD5; cursor: default; }
+select { padding: 1px 0; }
 
 button.nobutton:focus,
 button.nobutton:hover,
