@@ -769,7 +769,8 @@ MB.Control.ArtistCreditRow = function ($target, $container, $button) {
     var self = MB.Control.ArtistCreditContainer ($target, $container);
 
     var $artistcolumn = $target.closest ('table.medium').find ('input.artistcolumn');
-    var $credits = $target.closest ('tr.track').find ('a.credits-button');
+    var $artistautocomplete = $target.closest ('tr.track').find ('td.artist.autocomplete');
+    var $credits = $target.closest ('tr.track').find ('td.credits-button');
 
     var parent_enableTarget = self.enableTarget;
     var parent_disableTarget = self.disableTarget;
@@ -777,6 +778,7 @@ MB.Control.ArtistCreditRow = function ($target, $container, $button) {
     self.enableTarget = function () {
         if ($artistcolumn.is (':checked')) {
             parent_enableTarget ();
+            $artistautocomplete.attr('colspan',1)
             $credits.show ();
         };
     };
@@ -786,6 +788,7 @@ MB.Control.ArtistCreditRow = function ($target, $container, $button) {
         if (keep_credits)
             return;
 
+        $artistautocomplete.attr('colspan',2)
         $credits.hide ();
     };
 

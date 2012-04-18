@@ -77,18 +77,15 @@
   [% END %]
 
     <tr>
-      <td> </td>
-      <td> </td>
-      <td style="text-align: right;">
-        <button type="button" class="nobutton add-artist-credit">
-            [%- l('Add Artist Credit') -%]
+      <td colspan="3" class="buttons" style="padding:0">
+        <button type="button" class="positive close-artist-credit">
+            [%- l('Done') -%]
+        </button>
+        <button type="button" class="add-artist-credit">
+            [%- l('Add Credit') -%]
         </button>
       </td>
-      <td class="icon">
-        <input type="button" class="icon add-artist-credit"
-          title="[% l('Add Artist Credit') %]"
-          style="background-image: url([% c.uri_for("/static/images/icons/add_row.png") %]); width: 16px; height: 16px; border: 0;" />
-      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -339,7 +336,7 @@
         </td>
       </tr>
       <tr class="track-artist-credit container" style="display: none">
-        <td colspan="6">
+        <td colspan="7">
           [% artist_credit_row(release_artist) %]
         </td>
       </tr>
