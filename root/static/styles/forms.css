@@ -1,4 +1,4 @@
-input { background: #fff; color: #000; }
+input { background: #fff; color: #000; margin: 0; }
 input:-moz-placeholder { color: #aaa; }
 input.mb_placeholder { color: #aaa ! important; }
 input[disabled].lookup-performed,

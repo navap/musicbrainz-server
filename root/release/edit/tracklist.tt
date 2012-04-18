@@ -29,7 +29,7 @@
 [%- END -%]
 
 [%- MACRO artist_credit_row(release_artist) BLOCK -%]
-<table class="artist-credit bubble" style="width: 100%">
+<table class="artist-credit bubble">
   <thead>
     <tr class="artist-credit-preview">
       <td colspan="4">
@@ -71,7 +71,7 @@
       <td class="icon">
         <input type="button" class="icon remove-artist-credit"
           title="[% l('Remove Artist Credit') %]"
-          style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0;" />
+          style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
       </td>
     </tr>
   [% END %]
@@ -268,10 +268,9 @@
             <th class="length">[% l('Length') %]</th>
           </tr>
         </thead>
-        <tfoot />
         <tbody>
           <tr class="track" style="display: none;">
-            <td class="position" style="text-align: right;"></td>
+            <td class="position t"></td>
             <td class="title"></td>
             <td class="artist"></td>
             <td class="length"></td>
@@ -301,17 +300,17 @@
     [%# The following is only included so it can be cloned when adding new tracks. --warp. %]
     <table class="tracklist-template" style="display: none">
       <tr class="track">
-        <td class="position">
+        <td class="position 2">
           <span class="pos" style="display: none;"></span>
           <input class="pos" type="text" />
         </td>
         <td class="reorder">
             <input type="button" class="icon track-down"
               title="[% l('Move track down') %]"
-              style="background-image: url([% c.uri_for("/static/images/icons/track-down.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/track-down.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
             <input type="button" class="icon track-up"
               title="[% l('Move track up') %]"
-              style="background-image: url([% c.uri_for("/static/images/icons/track-up.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/track-up.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
         <td class="title">
           <input type="hidden" class="id" />
           <input type="text" class="track-name" />
@@ -328,15 +327,15 @@
         <td class="length">
           <input type="text" class="track-length" size="5" value="?:??" />
         </td>
-        <td class="icon">
+        <td class="icon pos">
           <input type="button" class="icon guesscase-track"
             title="[% l('Guess case track') %]"
-            style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0;" />
+            style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
 
           <input type="hidden" class="deleted" value="0" />
           <input type="button" class="icon remove-track"
             title="[% l('Remove track') %]"
-            style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0;" />
+            style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
         </td>
       </tr>
       <tr class="track-artist-credit container" style="display: none">
@@ -359,10 +358,10 @@
           <td class="icon">
             <input type="button" class="icon expand-disc"
               title="[% l('Expand Disc') %]"
-              style="background-image: url([% c.uri_for("/static/images/icons/expand.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/expand.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
             <input type="button" class="icon collapse-disc"
               title="[% l('Collapse Disc') %]"
-              style="display: none; background-image: url([% c.uri_for("/static/images/icons/collapse.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="display: none; background-image: url([% c.uri_for("/static/images/icons/collapse.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
           </td>
 
           <td class="format">
@@ -383,13 +382,12 @@
 
                   <input type="button" class="icon guesscase-medium"
                       title="[% l('Guess case disc title') %]"
-                      style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0;" />
-
+                      style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
                 </div>
             </div>
           </td>
 
-          <td class="tools" style="vertical-align: middle;">
+          <td class="tools buttons">
             <input type="button" class="track-parser"
                 title="[% l('Track Parser') %]"
                 value="[% l('Track Parser') %]" />
@@ -398,14 +396,14 @@
           <td class="icon" style="text-align: right;">
             <input type="button" class="icon disc-down"
               title="[% l('Move disc down') %]"
-              style="background-image: url([% c.uri_for("/static/images/icons/down.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/down.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
             <input type="button" class="icon disc-up"
               title="[% l('Move disc up') %]"
-              style="background-image: url([% c.uri_for("/static/images/icons/up.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/up.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
             <span class="empty-icon" style="display: inline-block; width: 16px; height: 16px;"> </span>
             <input type="button" class="icon remove-disc"
               title="[% l('Remove disc') %]"
-              style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0;" />
+              style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
           </td>
         </tr>
       </table>
@@ -420,7 +418,7 @@
 
       <div class="tracklist-padding">
         [% field_errors(form, medium_field.full_name) %]
-        <table class="medium tbl" style="display: none">
+        <table class="medium tbl" style="border-bottom: 0; display: none">
           <thead>
             <tr>
               <th class="position">[% l('#') %]</th>
@@ -434,7 +432,6 @@
               <th class="icons"></th>
             </tr>
           </thead>
-          <tfoot />
           <tbody> </tbody>
         </table>
       </div>
@@ -452,7 +449,7 @@
         </span>
         <input type="button" class="icon add-track"
             title="[% l('Add track(s)') %]"
-            style="background-image: url([% c.uri_for("/static/images/icons/add_row.png") %]); width: 16px; height: 16px; border: 0;" />
+            style="background-image: url([% c.uri_for("/static/images/icons/add_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
       </div>
 
     </fieldset>
@@ -463,12 +460,12 @@
 
       <fieldset class="guesscase">
         <legend>[% l('Guess case') %]</legend>
-        <table style="width: 100%">
+        <table class="guess-case">
           <tr>
-            <td class="icon" style="vertical-align: top; padding: 10px; width: 32px;">
+            <td class="icon">
               <img src="[% c.uri_for("/static/images/icons/guesscase.32x32.png") %]" />
             </td>
-            <td class="options" style="vertical-align: top;">
+            <td class="options">
               <p class="guesscase-options">
                 <select name="gc-mode" id="gc-mode"> </select>
                 <br />
@@ -479,8 +476,8 @@
                 <label for="gc-roman">[% l('Uppercase roman numerals') %]</label>
               </p>
             </td>
-            <td class="buttons" style="margin: 10px; vertical-align: top;">
-              <a href="#guesscase" style="float: right">[% l('Guess case') %]</a>
+            <td class="buttons">
+              <a href="#guesscase">[% l('Guess case') %]</a>
             </td>
           </tr>
         </table>
