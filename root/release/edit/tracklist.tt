@@ -33,17 +33,17 @@
   <thead>
     <tr class="artist-credit-preview">
       <td colspan="4">
-        <div class="row">
-          <label>[% l('Preview') %]</label>
+        <p>
+          <strong>[% l('Preview:') %]</strong>
           <span class="artist-credit-preview">[% artist_credit(release_artist) %]</span>
-        </div>
+        </p>
       </td>
     </tr>
 
     <tr class="artist-credit-header">
-      <th>[% l('Artist in MusicBrainz') %]</th>
-      <th>[% l('Artist as credited on this track') %]</th>
-      <th>[% l('Join phrase') %]</th>
+      <th>[% l('Artist:') %]</th>
+      <th>[% l('Artist as credited on this track:') %]</th>
+      <th>[% l('Join phrase:') %]</th>
       <th> </th>
     </tr>
   </thead>
@@ -70,7 +70,7 @@
       </td>
       <td class="icon">
         <input type="button" class="icon remove-artist-credit"
-          title="[% l('Remove Artist Credit') %]"
+          title="[% l('Remove Credit') %]"
           style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0; margin-top: 0;" />
       </td>
     </tr>
@@ -322,7 +322,7 @@
           </span>
         </td>
         <td class="credits-button">
-          <a class="credits-button" href="#credits">[% l('credits') %]</a>
+          <a class="credits-button" href="#credits" title="[%l('Enter a name variation or a collaboration') %]">[% l('Change credit') %]</a>
         </td>
         <td class="length">
           <input type="text" class="track-length" size="5" value="?:??" />
@@ -373,11 +373,11 @@
                 [% r.hidden(medium_field.field('tracklist_id'), class => 'tracklist-id') %]
 
                 <div class="row">
-                  [% r.label(medium_field.field('format_id'), l('Format')) %]
+                  [% r.label(medium_field.field('format_id'), l('Format:')) %]
                   [% r.select(medium_field.field('format_id'), class => 'format') %]
                 </div>
                 <div class="row advanced-tracklist">
-                  [% r.label(medium_field.field('name'), l('Disc title')) %]
+                  [% r.label(medium_field.field('name'), l('Disc title:')) %]
                   [% r.text(medium_field.field('name'), class => 'name') %]
 
                   <input type="button" class="icon guesscase-medium"
