@@ -259,7 +259,7 @@
       <table class="import-tracklist medium tbl" style="display: none">
         <thead>
           <tr>
-            <th class="position">[% l('#') %]</th>
+            <th class="pos">[% l('#') %]</th>
             <th class="title">[% l('Title') %]</th>
             <th class="artist">[% l('Artist') %]</th>
             <th class="length">[% l('Length') %]</th>
@@ -267,7 +267,7 @@
         </thead>
         <tbody>
           <tr class="track" style="display: none;">
-            <td class="position t"></td>
+            <td class="pos t"></td>
             <td class="title"></td>
             <td class="artist"></td>
             <td class="length"></td>
@@ -418,7 +418,7 @@
         <table class="medium tbl" style="border-bottom: 0; display: none">
           <thead>
             <tr>
-              <th class="position">[% l('#') %]</th>
+              <th class="pos">[% l('#') %]</th>
               <th class="reorder"></th>
               <th class="title">[% l('Title') %]</th>
               <th class="artist" colspan="2">
@@ -467,12 +467,14 @@
             <td class="options">
               <p class="guesscase-options">
                 <select name="gc-mode" id="gc-mode"> </select>
-                <br />
-                <input type="checkbox" name="gc-keepuppercase" id="gc-keepuppercase" checked="checked">
-                <label for="gc-keepuppercase">[% l('Keep uppercase words uppercased') %]</label>
-                <br />
-                <input type="checkbox" name="gc-roman" id="gc-roman">
-                <label for="gc-roman">[% l('Uppercase roman numerals') %]</label>
+                <div class="row">
+                  <input type="checkbox" name="gc-keepuppercase" id="gc-keepuppercase" checked="checked">
+                  <label for="gc-keepuppercase" class="inline">[% l('Keep uppercase words uppercased') %]</label>
+                </div>
+                <div class="row">
+                  <input type="checkbox" name="gc-roman" id="gc-roman">
+                  <label for="gc-roman" class="inline">[% l('Uppercase roman numerals') %]</label>
+                </div>
               </p>
             </td>
             <td class="buttons">

@@ -30,8 +30,12 @@ MB.Control.ReleaseTrack = function (parent, $track, $artistcredit) {
     self.$row = $track;
     self.$acrow = $artistcredit;
 
+<<<<<<< HEAD
     self.$position = $track.find ('td.position span');
     self.$number = $track.find ('td.position input');
+=======
+    self.$position = $track.find ('td.pos span');
+>>>>>>> RE: More spacing fixes
     self.$title = $track.find ('td.title input.track-name');
     self.$id = $track.find ('td.title input[type=hidden]');
     self.$artist = $track.find ('td.artist input');

@@ -237,7 +237,7 @@
               { doc => doc_link('Artist_Credit') }) -%]
       </p>
       <div class="row">
-        <label>[% l('Preview:') %]</label>
+        <label><strong>[% l('Preview:') %]</strong></label>
         <span class="artist-credit-preview">[% artist_credit(acfield.item) %]</span>
       </div>
 
