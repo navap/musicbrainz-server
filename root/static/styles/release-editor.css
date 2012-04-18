@@ -161,17 +161,13 @@ table.medium.tbl td.icon      { text-align: right; }
 table.medium.tbl td.guesscase a { color: #d3d3d3; font-weight: bolder; }
 #release-editor table.medium.tbl th {
     background:url("../images/layout/table-header-2.gif") repeat-x scroll 0 50% transparent;
-    border-bottom:1px solid #999;
-    border-left:1px solid #CCC;
-    font-size:95%;
-    padding: 3px 5px;
-    text-align:left;
 }
 #release-editor .medium.tbl tr td {
     background: #fff;
     border: 1px dotted #eee;
     padding: 0 5px;
 }
+#release-editor .medium.tbl tr td:last-child { border-right: 0; }
 
 #release-editor .medium.tbl td input[type=text][disabled] { color: #aaa; }
 #release-editor .medium.tbl td input[type=text] {
