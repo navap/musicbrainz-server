@@ -98,10 +98,16 @@ sub direct : Private
             $c->model('ReleaseGroupType')->load(@entities);
         }
         when ('release') {
+            $c->model('ReleaseGroup')->load(@entities);
+#           $c->model('ReleaseGroupType')->load( map { $_->release_group } @entities);
+            $c->model('ReleaseStatus')->load(@entities);
             $c->model('Country')->load(@entities);
             $c->model('Language')->load(@entities);
             $c->model('Script')->load(@entities);
+            $c->model('ReleaseLabel')->load(@entities);
+            $c->model('Label')->load(map { $_->all_labels} @entities);
             $c->model('Medium')->load_for_releases(@entities);
+            $c->model('MediumFormat')->load(map { $_->all_mediums } @entities);
         }
         when ('label') {
             $c->model('LabelType')->load(@entities);
