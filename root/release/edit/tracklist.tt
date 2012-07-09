@@ -70,7 +70,7 @@
       </td>
       <td class="icon">
         <input type="button" class="icon remove-artist-credit"
-          title="[% l('Remove Artist Credit') %]"
+          title="[% l('Remove Credit') %]"
           style="background-image: url([% c.uri_for("/static/images/icons/delete_row.png") %]); width: 16px; height: 16px; border: 0;" />
       </td>
     </tr>
@@ -323,7 +323,7 @@
           </span>
         </td>
         <td class="credits-button">
-          <a class="credits-button" href="#credits">[% l('credits') %]</a>
+          <a class="credits-button" href="#credits">[% l('Change artist credit') %]</a>
         </td>
         <td class="length t">
           <input type="text" class="track-length" size="5" value="?:??" />
