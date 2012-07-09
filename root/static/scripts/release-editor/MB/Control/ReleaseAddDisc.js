@@ -68,7 +68,7 @@ MB.Control.ReleaseImportSearchResult = function (parent, $template) {
                 var artist = item.artist ? item.artist :
                     item.artist_credit ? MB.utility.renderArtistCredit(item.artist_credit) : "";
 
-                tr.find ('td.position').text (idx + 1);
+                tr.find ('td.pos').text (idx + 1);
                 tr.find ('td.title').text (item.name);
                 tr.find ('td.artist').text (artist);
                 tr.find ('td.length').text (MB.utility.formatTrackLength (item.length));

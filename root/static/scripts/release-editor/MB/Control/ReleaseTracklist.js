@@ -30,7 +30,7 @@ MB.Control.ReleaseTrack = function (parent, $track, $artistcredit) {
     self.$row = $track;
     self.$acrow = $artistcredit;
 
-    self.$position = $track.find ('td.position span');
+    self.$position = $track.find ('td.pos span');
     self.$number = $track.find ('td.position input');
     self.$title = $track.find ('td.title input.track-name');
     self.$id = $track.find ('td.title input[type=hidden]');

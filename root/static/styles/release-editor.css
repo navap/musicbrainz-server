@@ -155,23 +155,19 @@ div.guesscase-options,
 table.medium.tbl tr.deleted { display: none; }
 table.medium.tbl td.position  { width: 4em; }
 table.medium.tbl td.reorder  { width: 38px; }
-table.medium.tbl td.credits-button { width: 4em; text-align: right; }
+table.medium.tbl td.credits-button { width: 11em; }
 table.medium.tbl td.length    { width: 5em; }
-table.medium.tbl td.icon      { width: 38px; text-align; right; }
+table.medium.tbl td.icon      { text-align: right; }
 table.medium.tbl td.guesscase a { color: #d3d3d3; font-weight: bolder; }
 #release-editor table.medium.tbl th {
     background:url("../images/layout/table-header-2.gif") repeat-x scroll 0 50% transparent;
-    border-bottom:1px solid #999;
-    border-left:1px solid #CCC;
-    font-size:95%;
-    padding: 3px 5px;
-    text-align:left;
 }
 #release-editor .medium.tbl tr td {
     background: #fff;
     border: 1px dotted #eee;
     padding: 0 5px;
 }
+#release-editor .medium.tbl tr td:last-child { border-right: 0; }
 
 #release-editor .medium.tbl td input[type=text][disabled] { color: #aaa; }
 #release-editor .medium.tbl td input[type=text] {
@@ -213,16 +209,22 @@ table.medium.tbl td.guesscase a { color: #d3d3d3; font-weight: bolder; }
 
 #release-editor div.basic-medium-format-and-title label { float: none; }
 
-#release-editor table.advanced-format { width: 100%; }
+#release-editor table.advanced-format { width: 100%; padding: 2px 10px; }
 #release-editor table.advanced-format td { vertical-align: top; }
-#release-editor table.advanced-format td.icon { padding: 10px; }
+#release-editor table.advanced-format div.row { margin-top: 0; }
 
 #release-editor fieldset.advanced-disc div.icon { padding: 10px; }
 #release-editor fieldset.advanced-disc div.add-track input.add-track-count {
-    width: 2em; margin: 0.2em; padding: 0;
+    width: 2em; padding: 0;
 }
 #release-editor fieldset.advanced-disc div.icon { display: none; }
 #release-editor fieldset.advanced-disc.expanded div.icon { display: block; }
+
+#release-editor table.guesscase { width: 100%; padding: 2px 10px 10px; }
+#release-editor table.guesscase td { vertical-align: top; }
+#release-editor table.guesscase .icon { padding-right: 10px; width: 32px; }
+#release-editor table.guesscase .options p { margin: 0; }
+#release-editor table.guesscase .buttons a { float: right; margin: 0; }
 
 #release-editor fieldset legend {
     color: #fc6714;
@@ -262,21 +264,20 @@ table.medium.tbl td.guesscase a { color: #d3d3d3; font-weight: bolder; }
 #release-editor .medium.tbl tr.track-artist-credit th { background: inherit; }
 
 #release-editor .medium.tbl tr.track-artist-credit td table {
-    margin: 0; padding: 12px; border: 1px solid #999;
+    margin: 0; padding: 12px; border: 1px solid #999; width: 100%;
     background: #f0f0f0;
     -moz-border-radius: 12px;
     -webkit-border-radius: 12px;
     border-radius: 12px;
 }
 
-#release-editor .medium.tbl tr.track-artist-credit td table td {
-    background: #f0f0f0;
-    padding: 2px;
-}
+#release-editor .medium.tbl tr.track-artist-credit td table td { background: #f0f0f0; }
+#release-editor .medium.tbl tr.track-artist-credit td table .icon { width: 16px; padding-right: 0; }
+#release-editor .medium.tbl tr.track-artist-credit td table .artist-credit-preview p { margin: 0 0 1em; }
+#release-editor .medium.tbl tr.track-artist-credit td table .add-artist-credit { float:right; margin: 1em 1em 0 0; }
+#release-editor .medium.tbl tr.track-artist-credit td table .close-artist-credit { float: right; margin: 1em 0 0 0; }
+#release-editor .medium.tbl tr.track-artist-credit td table .cancel-artist-credit { margin: 1em 0 0 5px; }
 
-#release-editor .medium.tbl tr.track-artist-credit td table td.icon {
-    padding-left: 10px
-}
 
 #release-editor .documentation div.barcode-container,
 #release-editor .documentation div.artist-credit-container { width: 100%; margin-top: 60px; }

@@ -243,7 +243,7 @@
         [%- artistnum = loop.index -%]
 
         [%- artist = ac.field('artist').item -%]
-        <div class="artist-credit-box" style="margin: 2em 0">
+        <div class="artist-credit-box" style="margin: 1.5em 0">
 
           <div class="row">
             <label><strong>[% l('Artist in MusicBrainz:') %]</strong></label>

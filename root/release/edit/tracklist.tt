@@ -29,7 +29,7 @@
 [%- END -%]
 
 [%- MACRO artist_credit_row(release_artist) BLOCK -%]
-<table class="artist-credit bubble" style="width: 100%">
+<table class="artist-credit bubble">
   <thead>
     <tr class="artist-credit-preview">
       <td colspan="4">
@@ -262,7 +262,7 @@
       <table class="import-tracklist medium tbl" style="display: none">
         <thead>
           <tr>
-            <th class="position">[% l('#') %]</th>
+            <th class="pos">[% l('#') %]</th>
             <th class="title">[% l('Title') %]</th>
             <th class="artist">[% l('Artist') %]</th>
             <th class="length">[% l('Length') %]</th>
@@ -271,10 +271,10 @@
         <tfoot />
         <tbody>
           <tr class="track" style="display: none;">
-            <td class="position" style="text-align: right;"></td>
+            <td class="pos t"></td>
             <td class="title"></td>
             <td class="artist"></td>
-            <td class="length"></td>
+            <td class="length t"></td>
           </tr>
         </tbody>
       </table>
@@ -325,10 +325,10 @@
         <td class="credits-button">
           <a class="credits-button" href="#credits">[% l('credits') %]</a>
         </td>
-        <td class="length">
+        <td class="length t">
           <input type="text" class="track-length" size="5" value="?:??" />
         </td>
-        <td class="icon">
+        <td class="icon pos">
           <input type="button" class="icon guesscase-track"
             title="[% l('Guess case track') %]"
             style="background-image: url([% c.uri_for("/static/images/icons/guesscase.png") %]); width: 16px; height: 16px; border: 0;" />
@@ -340,7 +340,7 @@
         </td>
       </tr>
       <tr class="track-artist-credit container" style="display: none">
-        <td colspan="6">
+        <td colspan="7">
           [% artist_credit_row(release_artist) %]
         </td>
       </tr>
@@ -423,7 +423,7 @@
         <table class="medium tbl" style="display: none">
           <thead>
             <tr>
-              <th class="position">[% l('#') %]</th>
+              <th class="pos">[% l('#') %]</th>
               <th class="reorder"></th>
               <th class="title">[% l('Title') %]</th>
               <th class="artist" colspan="2">
@@ -461,26 +461,28 @@
     <div class="guesscase-advanced">
       [%#- FIXME: use guesscase() -%]
 
-      <fieldset class="guesscase">
+      <fieldset>
         <legend>[% l('Guess case') %]</legend>
-        <table style="width: 100%">
+        <table class="guesscase">
           <tr>
-            <td class="icon" style="vertical-align: top; padding: 10px; width: 32px;">
+            <td class="icon">
               <img src="[% c.uri_for("/static/images/icons/guesscase.32x32.png") %]" />
             </td>
-            <td class="options" style="vertical-align: top;">
+            <td class="options">
               <p class="guesscase-options">
                 <select name="gc-mode" id="gc-mode"> </select>
-                <br />
-                <input type="checkbox" name="gc-keepuppercase" id="gc-keepuppercase" checked="checked">
-                <label for="gc-keepuppercase">[% l('Keep uppercase words uppercased') %]</label>
-                <br />
-                <input type="checkbox" name="gc-roman" id="gc-roman">
-                <label for="gc-roman">[% l('Uppercase roman numerals') %]</label>
+                <div class="row">
+                  <input type="checkbox" name="gc-keepuppercase" id="gc-keepuppercase" checked="checked">
+                  <label for="gc-keepuppercase" class="inline">[% l('Keep uppercase words uppercased') %]</label>
+                </div>
+                <div class="row">
+                  <input type="checkbox" name="gc-roman" id="gc-roman">
+                  <label for="gc-roman" class="inline">[% l('Uppercase roman numerals') %]</label>
+                </div>
               </p>
             </td>
-            <td class="buttons" style="margin: 10px; vertical-align: top;">
-              <a href="#guesscase" style="float: right">[% l('Guess case') %]</a>
+            <td class="buttons">
+              <a href="#guesscase">[% l('Guess Case') %]</a>
             </td>
           </tr>
         </table>
