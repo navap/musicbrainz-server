@@ -148,7 +148,7 @@
               value="[% html_escape(form.field('artist_credit').item.name) %]" />
           <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
         </span>
-        <input type="button" id="open-ac" value=" &gt;&gt; " style="width: 32px; height: 22px; margin-left: 3px;" />
+        <input type="button" id="open-ac" value="&raquo;" style="width: 32px; height: 22px; margin-left: 3px;" />
         [% field_errors(r.form, 'artist_credit') %]
     [%- END -%]
 [%- END -%]
