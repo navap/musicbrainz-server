@@ -77,18 +77,18 @@
   [% END %]
 
     <tr>
-      <td> </td>
-      <td> </td>
-      <td style="text-align: right;">
-        <button type="button" class="nobutton add-artist-credit">
-            [%- l('Add Artist Credit') -%]
+      <td colspan="3" class="buttons" style="padding:0">
+        <button type="button" class="negative cancel-artist-credit">
+          [%- l('Cancel') -%]
+        </button>
+        <button type="button" class="positive close-artist-credit">
+          [%- l('Done') -%]
+        </button>
+        <button type="button" class="add-artist-credit">
+          [%- l('Add Credit') -%]
         </button>
       </td>
-      <td class="icon">
-        <input type="button" class="icon add-artist-credit"
-          title="[% l('Add Artist Credit') %]"
-          style="background-image: url([% c.uri_for("/static/images/icons/add_row.png") %]); width: 16px; height: 16px; border: 0;" />
-      </td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -389,7 +389,7 @@
             </div>
           </td>
 
-          <td class="tools" style="vertical-align: middle;">
+          <td class="tools buttons">
             <input type="button" class="track-parser"
                 title="[% l('Track Parser') %]"
                 value="[% l('Track Parser') %]" />
@@ -439,11 +439,10 @@
         </table>
       </div>
 
-      <div style="float: left; padding: 10px;">
-         <input type="button" class="reset-track-numbers"
-            style="font-weight: normal; font-size: 12px;"
-            title="[%- l('reset track numbers') -%]"
-            value="[%- l('reset track numbers') -%]" />
+      <div class="buttons" style="padding: 10px;">
+         <button type="button" class="reset-track-numbers">
+            [%- l('Reset Track Numbers') -%]
+         </button>
       </div>
 
       <div class="icon add-track" style="float: right;">
