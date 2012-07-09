@@ -235,7 +235,7 @@
         [%- l('Use the following fields to enter collaborations, see the <a href="{url}">Artist Credit</a> documentation for more information.', url => c.uri_for ('/doc/Artist_Credit')) -%]
       </p>
       <div class="row">
-        <label>[% l('Preview') %]</label>
+        <label><strong>[% l('Preview:') %]</strong></label>
         <span class="artist-credit-preview">[% artist_credit(acfield.item) %]</span>
       </div>
 
@@ -246,7 +246,7 @@
         <div class="artist-credit-box" style="margin: 2em 0">
 
           <div class="row">
-            <label><strong>[% l('Artist in MusicBrainz') %]</strong></label>
+            <label><strong>[% l('Artist in MusicBrainz:') %]</strong></label>
             <span class="artist autocomplete">
               [%- r.text (ac.field('artist').field('name'), class => 'name') -%]
               <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
@@ -262,14 +262,14 @@
           </div>
 
           <div class="row">
-            <label>[% l('Artist as credited') %]</label>
+            <label>[% l('Credited as:') %]</label>
             <span class="artistcredit">
               [%- r.text (ac.field('name'), class => 'credit') -%]
             </span>
           </div>
 
           <div class="row join-container">
-            <label>[% l('Join phrase') %]</label>
+            <label>[% l('Join phrase:') %]</label>
             <span class="joinphrase">
               [%- r.text (ac.field('join_phrase'), class => 'join') -%]
             </span>

@@ -33,16 +33,16 @@
   <thead>
     <tr class="artist-credit-preview">
       <td colspan="4">
-        <div class="row">
-          <label>[% l('Preview') %]</label>
+        <p>
+          <strong>[% l('Preview:') %]</strong>
           <span class="artist-credit-preview">[% artist_credit(release_artist) %]</span>
-        </div>
+        </p>
       </td>
     </tr>
 
     <tr class="artist-credit-header">
-      <th>[% l('Artist in MusicBrainz') %]</th>
-      <th>[% l('Artist as credited on this track') %]</th>
+      <th>[% l('Artist') %]</th>
+      <th>[% l('Credited as') %]</th>
       <th>[% l('Join phrase') %]</th>
       <th> </th>
     </tr>
@@ -374,11 +374,11 @@
                 [% r.hidden(medium_field.field('tracklist_id'), class => 'tracklist-id') %]
 
                 <div class="row">
-                  [% r.label(medium_field.field('format_id'), l('Format')) %]
+                  [% r.label(medium_field.field('format_id'), l('Format:')) %]
                   [% r.select(medium_field.field('format_id'), class => 'format') %]
                 </div>
                 <div class="row advanced-tracklist">
-                  [% r.label(medium_field.field('name'), l('Disc title')) %]
+                  [% r.label(medium_field.field('name'), l('Disc title:')) %]
                   [% r.text(medium_field.field('name'), class => 'name') %]
 
                   <input type="button" class="icon guesscase-medium"
