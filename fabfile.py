@@ -84,13 +84,21 @@ def production():
     with cd('/home/musicbrainz/musicbrainz-server'):
         # Carton has a tendency to change this file when it does update
         # It's important that we discard these
-        sudo("git reset --hard -- carton.lock", user="musicbrainz")
+        sudo("git reset HEAD -- carton.lock", user="musicbrainz")
+        sudo("git checkout -- carton.lock", user="musicbrainz")
 
         # If there's anything uncommited this must be fixed
         sudo("git diff --exit-code", user="musicbrainz")
         sudo("git diff --exit-code --cached", user="musicbrainz")
 
+        old_rev = sudo("git rev-parse HEAD", user="musicbrainz")
         sudo("git pull --ff-only", user="musicbrainz")
+        new_rev = sudo("git rev-parse HEAD", user="musicbrainz")
+
+        sql_updates = sudo("git diff --name-only %s %s -- admin/sql/updates" % (old_rev, new_rev), user="musicbrainz")
+        if sql_updates != '':
+            puts("Remember to update the following files:")
+            puts(sql_updates)
 
     shutdown()
     sudo("/home/musicbrainz/musicbrainz-server/admin/production-deploy.sh", user="musicbrainz")
