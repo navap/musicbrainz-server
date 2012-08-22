@@ -269,8 +269,11 @@ MB.Control.ReleaseTrack = function (parent, $track, $artistcredit) {
 
     var $target = self.$row.find ("td.artist input");
     var $button = self.$row.find ("a[href=#credits]");
-    self.bubble_collection.add ($button, self.$acrow);
-    self.artist_credit = MB.Control.ArtistCreditRow ($target, self.$acrow, $button);
+
+    var bubble = self.bubble_collection.add ($button, self.$acrow);
+    self.artist_credit = MB.Control.ArtistCreditRow ($target, self.$acrow);
+
+    self.$acrow.find ('.close-artist-credit').bind ('click.mb', bubble.hide);
 
     self.duration = null;
     self.duration_str = '?:??';
