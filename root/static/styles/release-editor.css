@@ -276,7 +276,7 @@ table.medium.tbl td.guesscase a { color: #d3d3d3; font-weight: bolder; }
 #release-editor .medium.tbl tr.track-artist-credit td table .artist-credit-preview p { margin: 0 0 1em; }
 #release-editor .medium.tbl tr.track-artist-credit td table .add-artist-credit { float:right; margin: 1em 1em 0 0; }
 #release-editor .medium.tbl tr.track-artist-credit td table .close-artist-credit { float: right; margin: 1em 0 0 0; }
-#release-editor .medium.tbl tr.track-artist-credit td table .cancel-artist-credit { margin: 1em 0 0 5px; }
+/* #release-editor .medium.tbl tr.track-artist-credit td table .cancel-artist-credit { margin: 1em 0 0 5px; }  No cancel button yet */
 
 
 #release-editor .documentation div.barcode-container,

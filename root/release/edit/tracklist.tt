@@ -78,9 +78,6 @@
 
     <tr>
       <td colspan="3" class="buttons" style="padding:0">
-        <button type="button" class="negative cancel-artist-credit">
-          [%- l('Cancel') -%]
-        </button>
         <button type="button" class="positive close-artist-credit">
           [%- l('Done') -%]
         </button>
