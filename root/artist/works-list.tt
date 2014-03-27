@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="tbl">
   <thead>
     <tr>
@@ -9,7 +10,7 @@
       <th>[% l('Work') %]</th>
       <th>[% l('Writers') %]</th>
       <th>[% l('Artists') %]</th>
-      <th>[% l('ISWC') %]</th>
+      <th class="iswc">[% l('ISWC') %]</th>
       <th>[% l('Type') %]</th>
       <th>[% l('Language') %]</th>
       <th>[% l('Attributes') %]</th>
@@ -34,7 +35,7 @@
         <ul>
           [% FOR rel_artist=work.writers %]
             <li>
-              [% l('{artist} ({roles})', { artist => link_artist(rel_artist.entity),
+              [% l('{artist} <span class="comment">({roles})</span>', { artist => link_artist(rel_artist.entity),
                    roles  => rel_artist.roles.join(', ') }) %]
             </li>
           [% END %]
@@ -70,3 +71,4 @@
     [% END %]
   </tbody>
 </table>
+</div> <!-- .table-responsive -->

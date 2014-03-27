@@ -43,6 +43,7 @@ sub options_type
         'editor'        => l('Editor'),
         'freedb'        => l('FreeDB'),
         'tag'           => lp('Tag', 'noun'),
+        'all'           => lp('Unified'),
     );
 
     push @options, ( 'doc' => l('Documentation') ) if DBDefs->GOOGLE_CUSTOM_SEARCH;

@@ -14,10 +14,6 @@
     <td><code>[% recording.gid %]</code></td>
   </tr>
   <tr>
-    <th>[% l('Last updated:') %]</th>
-    <td>[% last_updated(recording) %]</td>
-  </tr>
-  <tr>
     <th>
       [% l('Permanent link:') %]
     </th>

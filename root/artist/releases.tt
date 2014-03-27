@@ -7,11 +7,11 @@
         ajax_form_url=c.uri_for_action('/ajax/filter_artist_releases_form', { artist_id => artist.id }) -%]
 
     [%- IF releases.size -%]
-      <form action="[% c.uri_for_action('/release/merge_queue') %]"
+      [%- WRAPPER "forms/form.tt" action=c.uri_for_action('/release/merge_queue') -%]
             method="post">
         [%- INCLUDE 'release_group/releases-list.tt' WRAPPER 'components/with-pager.tt' -%]
         [% form_submit(l('Add selected releases for merging')) WRAPPER form_row IF c.user_exists %]
-      </form>
+      [%- END -%}
     [%- END -%]
 
     [% IF va_only && pager.total_entries == 0 %]

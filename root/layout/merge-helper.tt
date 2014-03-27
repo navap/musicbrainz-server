@@ -1,5 +1,5 @@
 <div id="current-editing">
-  <form action="[% merge_link %]" method="get">
+  [%- WRAPPER "forms/form.tt" action=merge_link method='get' -%]
     <h2>[% l('Merge Process') %]</h2>
     <p>[% l('You currently have the following entities selected
       for merging:') %]</p>
@@ -25,13 +25,14 @@
       select the "merge" link.') %]
     </p>
     [% END %]
-    <div class="buttons" style="display: table-cell">
+
+    <div class="buttons">
       [% IF merger.ready_to_merge %]
-        <button type="submit" name="submit" value="merge" class="positive">[% l('Merge') %]</button>
+        <button type="submit" name="submit" value="merge" class="btn btn-sm btn-default">[% l('Merge') %]</button>
       [% END %]
-      <button type="submit" name="submit" value="remove">
+      <button type="submit" name="submit" value="remove" class="btn btn-sm btn-default">
         [% l('Remove selected entities') %]</button>
-      <button type="submit" name="submit" value="cancel" class="negative">[% l('Cancel') %]</button>
+      <button type="submit" name="submit" value="cancel" class="btn btn-sm btn-default">[% l('Cancel') %]</button>
     </div>
-  </form>
+  [%- END -%]
 </div>

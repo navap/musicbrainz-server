@@ -1,0 +1,7 @@
+<nav class="pills">
+    <ul class="nav nav-pills">
+        [%- FOREACH link IN list -%]
+            <li[% IF link.0 == id %] class="active"[% END %]>[% link.1 %]</li>
+        [%- END -%]
+    </ul>
+</nav>

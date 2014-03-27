@@ -21,16 +21,16 @@
 
 
     [%- USE r = FormRenderer(register_form) -%]
-    <form class="register" action="[% c.req.uri %]" method="post">
+    [%- WRAPPER "forms/form.tt" -%]
         [% form_row_text(r, 'username', l('Username:')) %]
-        <div class="row no-label">
-            <span class="input-note">[% l('Your username will be publicly visible.') %]</span>
+        <div class="form-group input-note">
+            <span class="col-sm-offset-2 col-sm-6">[% l('Your username will be publicly visible.') %]</span>
         </div>
         [% form_row_password(r, 'password', l('Password:')) %]
         [% form_row_password(r, 'confirm_password', l('Confirm password:')) %]
         [% form_row_text_long(r, 'email', l('Email:')) %]
-        <div class="row no-label">
-            <span class="input-note">[% l('You must provide a working email address if you wish to contribute to the database.') %]</span>
+        <div class="form-group input-note">
+            <span class="col-sm-offset-2 col-sm-6">[% l('You must provide a working email address if you wish to contribute to the database.') %]</span>
         </div>
         [%- IF use_captcha -%]
             <div class="row">
@@ -38,11 +38,11 @@
                 [%- captcha -%]
             </div>
         [%- END -%]
-        <div class="row no-label">
-            <p>[%- l('Please review the {coc|MusicBrainz Code of Conduct} before creating an account.', { coc => doc_link('Code_of_Conduct') }) %]</p>
-            [% form_submit(l('Create Account')) %]
+        <div class="form-group">
+          <p class="col-sm-offset-2 col-sm-6">[%- l('Please review the {coc|MusicBrainz Code of Conduct} before creating an account.', { coc => doc_link('Code_of_Conduct') }) %]</p>
         </div>
-    </form>
+        [% form_submit(l('Create Account')) %]
+    [%- END -%]
 
         <p>[%- l('If you have any questions, please review the {faq|FAQs} or {doc|documentation}
                   before {con|contacting us}. ',
@@ -60,4 +60,5 @@
                   please use the above form to create an account.') -%]</p>
 
 </div>
+
 [% END %]

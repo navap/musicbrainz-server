@@ -4,11 +4,11 @@
         <p>
             [%- l('Are you sure you wish to remove the area {area} from MusicBrainz?', { area => link_entity(area) }) -%]
         </p>
-        <form action="[% c.req.uri %]" method="post">
+        [%- WRAPPER "forms/form.tt" -%]
             [%- USE r = FormRenderer(form) -%]
             [%- INCLUDE 'forms/edit-note.tt' -%]
             [% enter_edit() %]
-        </form>
+        [%- END -%]
     [%- ELSE -%]
     <p>
        [% l('This area cannot be removed because there are still artists, labels, and/or releases using it.') -%]

@@ -50,7 +50,7 @@ sub _fix_html_links
 
 sub _fix_html_markup
 {
-    my ($self, $content, $index) = @_;
+    my ($self, $content, $index, $id) = @_;
 
     my $wiki_server = DBDefs->WIKITRANS_SERVER;
     my $tree = HTML::TreeBuilder::XPath->new;
@@ -65,6 +65,18 @@ sub _fix_html_markup
     for my $node ($tree->findnodes ('//a')->get_nodelist)
     {
         $self->_fix_html_links ($node, $index);
+    }
+
+    # Prepare navigation pills
+    for my $node ($tree->findnodes ('//ul[@class="nav nav-pills"]/li/strong[@class="selflink"]/..')->get_nodelist)
+    {
+		# Set parent li to active
+        $node->attr('class', 'active');
+    }
+    for my $node ($tree->findnodes ('//ul[@class="nav nav-pills"]/li/strong[@class="selflink"]')->get_nodelist)
+    {
+        # TODO: Change node name from 'strong' to 'a'
+        $node->attr('href', '/doc/' . $id);
     }
 
     for my $node ($tree->findnodes ('//img')->get_nodelist)
@@ -104,7 +116,7 @@ sub _create_page
     # Format nicely for <title>
     $title =~ s,/, / ,g;
 
-    $content = $self->_fix_html_markup($content, $index);
+    $content = $self->_fix_html_markup($content, $index, $id);
 
     my %args = ( title => $title, hierarchy => \@hierarchy, content  => $content );
     if (defined $version) {

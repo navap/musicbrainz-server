@@ -14,10 +14,6 @@
     <td><code>[% place.gid %]</code></td>
   </tr>
   <tr>
-    <th>[% l('Last updated:') %]</th>
-    <td>[% last_updated(place) %]</td>
-  </tr>
-  <tr>
     <th>
       [% l('Permanent link:') %]
     </th>

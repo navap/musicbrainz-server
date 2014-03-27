@@ -1,7 +1,7 @@
 [%- PROCESS "statistics/macros-header.tt" -%]
 [% WRAPPER 'statistics/layout.tt' title=l('Editors') full_width=1 page='editors' %]
 [%- MACRO display_editor_stats(data_points, table_label, editor_label, count_label) BLOCK -%]
-  <h3>[% table_label %]</h3>
+  <p><strong>[% table_label %]</strong></p>
   <table class="tbl">
     <thead>
       <tr>
@@ -17,31 +17,30 @@
       [%- END -%]
       [%- LAST UNLESS data_point.count -%]
       <tr class="[% loop.index % 2 == 0 ? 'ev' : 'odd' %]">
-        <td class="t">[% loop.count %]</td>
+        <td class="r">[% loop.count %]</td>
         <td>[% link_editor(data_point.editor) %]</td>
-        <td>[% add_commas(data_point.count) %]</td>
+        <td class="r">[% add_commas(data_point.count) %]</td>
       </tr>
     [%- END -%]
     </tbody>
   </table>
 [%- END -%]
 
-<p>[%- l('Last updated: {date}', { date => stats.date_collected }) -%]</p>
-
-<p>[% l('For the vote statistics, only yes or no votes are counted, abstain
-    votes are not counted.') %]</p>
-
 <div style="float:left; display:inline-block; margin-right: 50px;">
-  <h2 style="margin-top:0;">[%- l('Editors') -%]</h2>
+  <h2>[%- l('Editors') -%]</h2>
   [% display_editor_stats(top_recently_active_editors, l('Most active editors in the past week'), l('Editor'), l('Open and applied edits in past week')) %]
   [% display_editor_stats(top_editors, l('Top editors overall'), l('Editor'), l('Total applied edits')) %]
 </div>
 
 <div style="float:left; display:inline-block; margin-right: 50px;">
-  <h2 style="margin-top:0;">[%- l('Voters') -%]</h2>
+  <h2>[%- l('Voters') -%]</h2>
   [% display_editor_stats(top_recently_active_voters, l('Most active voters in the past week'), l('Voter'), l('Votes in past week')) %]
   [% display_editor_stats(top_voters, l('Top voters overall'), l('Voter'), l('Total votes')) %]
 </div>
+<div class="clearfix"></div>
 
+<p>[% l('For the vote statistics, only yes or no votes are counted, abstain
+    votes are not counted.') %]</p>
+[%- last_updated_stats -%]
 [%- PROCESS "statistics/macros-footer.tt" -%]
 [% END %]

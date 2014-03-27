@@ -22,7 +22,7 @@
                               <ul>
                                 [% FOR rel_artist=result.entity.writers %]
                                 <li>
-                                  [% l('{artist} ({roles})', { artist => link_artist(rel_artist.entity),
+                                  [% l('{artist} <span class="comment">({roles})</span>', { artist => link_artist(rel_artist.entity),
                                                                roles  => rel_artist.roles.join(', ') }) %]</li>
                                 [% END %]
                               </ul>

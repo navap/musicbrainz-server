@@ -4,6 +4,7 @@
     <script type="text/javascript">//<![CDATA[
         document.cookie = "javascript=true; path=/";
     //]]></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     [% css_manifest('common') %]
     [%- IF c.debug -%]
         <link rel="stylesheet" type="text/css" href="/static/styles/debug.css" />
@@ -14,7 +15,6 @@
     <link rel="search" type="application/opensearchdescription+xml" title="[%- l("MusicBrainz: Track") -%]" href="[% c.uri_for('/static/search_plugins/opensearch/musicbrainz_track.xml') %]" />
     [% IF no_javascript ~%]
         <style type="text/css">
-          #header-menu li:hover ul { left: auto; }
         </style>
     [%~ ELSE ~%]
         [%~ script_manifest('common.js.manifest') ~%]

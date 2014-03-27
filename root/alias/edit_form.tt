@@ -7,7 +7,7 @@
         View the {doc|alias documentation} for more details.', { doc => doc_link('Aliases') }) -%]
 </p>
 
-<form action="[% c.req.uri %]" method="post" class="edit-alias">
+[%- WRAPPER "forms/form.tt" class="edit-alias" -%]
   [% USE r = FormRenderer(form) %]
   <div class="half-width">
     <fieldset>
@@ -44,7 +44,7 @@
     [%- guesscase_bubble(show_guesscase_modes ? 0 : 1) -%]
     [%- sortname_bubble() -%]
   </div>
-</form>
+[%- END -%]
 
 <script>//<![CDATA[
 (function () {

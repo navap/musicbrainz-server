@@ -1,35 +1,37 @@
 [%- MACRO form_submit(label, class) BLOCK ~%]
-    <span class="buttons[% ' ' _ class IF class %]">
-        [%~ '<button type="submit">' _ label _ '</button>' ~%]
-    </span>
+    [%- WRAPPER form_row ~%]
+    <div class="col-sm-offset-2 col-sm-4">
+      <button type="submit" class="btn btn-sm btn-default[% ' ' _ class IF class %]">[% label %]</button>
+    </div>
+    [%~ END -%]
 [%~ END -%]
 
 [%- MACRO as_auto_editor BLOCK -%]
+    [%- USE r = FormRenderer(form) -%]
     [%- IF c.user.is_auto_editor -%]
-        <div class="row no-label">
-            <div class="auto-editor">
-                [%- USE r = FormRenderer(form) -%]
-                [%- r.checkbox('as_auto_editor') -%]
-                [%- r.label('as_auto_editor',
-                           l('Enable {autoed|auto-editor} privileges for this edit.',
-                            { autoed = doc_link('Auto-Editor') }), inline => 1) -%]
-            </div>
-        </div>
+        [%- form_row_checkbox(r, 'as_auto_editor',
+              l('Enable {autoed|auto-editor} privileges for this edit.', { autoed = doc_link('Auto-Editor') })
+            ) -%]
     [%- END -%]
 [%- END -%]
 
-[%- MACRO enter_edit(extra) BLOCK -%]
+[%- MACRO enter_edit(cancellable, extra) BLOCK -%]
     [%- as_auto_editor() -%]
-    <div class="row no-label buttons">
-        <button type="submit" class="submit positive">[% l('Enter edit') %]</button>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-4">
+        <button type="submit" class="btn btn-sm btn-default">[% l('Enter edit') %]</button>
+        [%- IF cancellable -%]
+          <button type="submit" name="submit" value="cancel" class="btn btn-sm btn-danger">[% l('Cancel') %]</button>
+        [%- END -%]
         [% extra %]
+      </div>
     </div>
 [%- END -%]
 
 [%- MACRO field_errors(form, field_name) BLOCK -%]
     [% field = form.field(field_name) || field_name %]
     [%- IF field.has_errors OR field.error_fields -%]
-        <ul class="errors">
+        <ul class="help-block list-unstyled errors">
           [%- FOR err IN field.errors -%]
             <li>[% err | html %]</li>
           [%- END -%]
@@ -42,62 +44,110 @@
     [%- END -%]
 [%- END -%]
 
+[%- MACRO has_errors(form, field_name) BLOCK -%]
+    [%- field = form.field(field_name) || field_name -%]
+    [%- IF field.has_errors OR field.error_fields -%]
+      1
+    [%- END -%]
+[%- END -%]
+
 [%- BLOCK form_row -%]
-    <div class="row" [% IF row_id %]id="[% row_id %]"[% END %]>
+    <div class="form-group[% IF row_error %] has-error[% END %]" [% IF row_id %]id="[% row_id %]"[% END %]>
+      [% content %]
+    </div>
+[%- END -%]
+
+[%- BLOCK form_row_inline -%]
+[%# Clone of form_row with a form-inline class %]
+    <div class="form-group form-inline[% IF row_error %] has-error[% END %]" [% IF row_id %]id="[% row_id %]"[% END %]>
       [% content %]
     </div>
 [%- END -%]
 
 [%- MACRO form_row_text(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.text(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      [% row_error = has_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label, { class => 'control-label col-sm-2' }) %]
+      <div class="col-sm-2">
+        [% r.text(field_name, { class => 'form-control input-sm' }) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_text_long(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.text(field_name, { size => 47 })  %]
-      [% field_errors(r.form, field_name) %]
+      [% row_error = has_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label, { class => 'control-label col-sm-2' }) %]
+      <div class="col-sm-4">
+        [% r.text(field_name, { class => 'form-control input-sm' }) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_textarea(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.textarea(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      [% row_error = has_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label, { class => 'control-label col-sm-2' }) %]
+      <div class="col-sm-6">
+        [% r.textarea(field_name, { class => 'form-control', rows => 4 }) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_password(r, field_name, label) BLOCK -%]
     [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label) %]
-      [% r.password(field_name) %]
-      [% field_errors(r.form, field_name) %]
+      [% row_error = has_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label, { class => 'control-label col-sm-2' }) %]
+      <div class="col-sm-2">
+        [% r.password(field_name, { class => 'form-control input-sm' }) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_checkbox(r, field_name, label) BLOCK -%]
-    <div class="row no-label">
-      [% r.checkbox(field_name) %]
-      [% r.label(field_name, label || r.form.field(field_name).label, inline => 1) %]
-      [% field_errors(r.form, field_name) %]
-    </div>
+    [% WRAPPER form_row %]
+      [% row_error = has_errors(r.form, field_name) %]
+      <div class="col-sm-offset-2 col-sm-4">
+        <div class="checkbox">
+          [% r.checkbox(field_name) %]
+          [% r.label(field_name, label || r.form.field(field_name).label) %]
+          [% field_errors(r.form, field_name) %]
+        </div>
+      </div>
+    [%- END -%]
+[%- END -%]
+
+[%- MACRO form_row_radio(r, field_name, label) BLOCK -%]
+    [% WRAPPER form_row %]
+      [% row_error = has_errors(r.form, field_name) %]
+      <div class="col-sm-offset-2 col-sm-4">
+        <div class="radio">
+          [% r.radio(field_name) %]
+          [% r.label(field_name, label || r.form.field(field_name).label) %]
+          [% field_errors(r.form, field_name) %]
+        </div>
+      </div>
+    [%- END -%]
 [%- END -%]
 
 [%- MACRO form_row_select(r, field_name, label, class) BLOCK -%]
     [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label, { class => class }) %]
-      [% r.select(field_name, { class => class }) -%]
-      [% field_errors(r.form, field_name) %]
+      [% row_error = has_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label, { class => 'control-label col-sm-2 ' _ class }) %]
+      <div class="col-sm-2">
+        [% r.select(field_name, { class => 'form-control input-sm ' _ class }) -%]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
 [%- MACRO form_row_text_list(r, field_name, label, item_name) BLOCK -%]
     [% WRAPPER form_row %]
+      [% row_error = has_errors(r.form, field_name) %]
       <label>[% label || r.form.field(field_name).label %]</label>
       <div class="form-row-text-list">
           <div style="display: none;"
@@ -135,10 +185,13 @@
 [%- END -%]
 
 [%- MACRO form_row_date(r, field_name, label) BLOCK -%]
-    [% WRAPPER form_row %]
-      [% r.label(field_name, label || r.form.field(field_name).label, fake => 1) %]
-      [% r.date(field_name) %]
-      [% field_errors(r.form, field_name) %]
+    [% WRAPPER form_row_inline %]
+      [% row_error = has_errors(r.form, field_name) %]
+      [% r.label(field_name, label || r.form.field(field_name).label, { class => 'control-label col-sm-2' }) %]
+      <div class="col-sm-3">
+        [% r.date(field_name, { class => 'form-control' }) %]
+        [% field_errors(r.form, field_name) %]
+      </div>
     [% END %]
 [%- END -%]
 
@@ -450,3 +503,7 @@
     [%- END %]
   </script>
 [%- END -%]
+
+[%- MACRO remove_icon(class) BLOCK ~%]
+  <a href="#"[% 'class="' _ class _ '"' IF class %]><span class="glyphicon glyphicon-remove"></span></a>
+[%~ END -%]

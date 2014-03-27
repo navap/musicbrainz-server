@@ -38,9 +38,7 @@
         [% field_errors(form2, 'biography') %]
     [% END %]
 
-        <div class="row no-label">
-            [% form_submit(l('Edit user')) %]
-        </div>
+        [% form_submit(l('Edit user')) %]
     </form>
 
 

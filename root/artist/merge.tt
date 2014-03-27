@@ -3,7 +3,7 @@
     <h1>[% l('Merge Artists') %]</h1>
     <p>[% l('You are about to merge the following artists into a single artist. Please
              select the artist which you would like other artists to be merged into:') %]</p>
-    <form action="[% c.req.uri %]" method="post">
+    [%- WRAPPER "forms/form.tt" -%]
         <ul>
             [% FOR entity=to_merge %]
             <li>
@@ -19,7 +19,7 @@
         [% form_row_checkbox(r, 'rename', l("Update artist credits to use the new artist's name")) %]
 
         [% INCLUDE "forms/edit-note.tt" %]
-        [% enter_edit('<button type="submit" name="submit" value="cancel" class="negative">' _ l('Cancel') _ '</button>') %]
-    </form>
+        [% enter_edit(1) %]
+    [%- END -%]
     </div>
 [% END %]

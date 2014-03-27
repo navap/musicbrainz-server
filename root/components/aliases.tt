@@ -5,6 +5,7 @@
         View the {doc|alias documentation} for more details.', { doc => doc_link('Aliases') }) -%]
 </p>
     [%- IF aliases.size > 0 -%]
+        <div class="table-responsive">
         <table class="tbl">
             <thead>
                 <tr>
@@ -68,6 +69,7 @@
             [%- END -%]
             </tbody>
         </table>
+        </div> <!-- .table-responsive -->
     [%- ELSE -%]
         <p>
             [%- l('{entity} has no aliases.', {entity => link_entity(entity)}) -%]

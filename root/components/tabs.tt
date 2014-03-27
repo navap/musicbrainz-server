@@ -1,7 +1,22 @@
-<div class="tabs">
-    <ul class="tabs">
+<nav class="tabs">
+    <ul class="nav nav-tabs">
         [%- FOREACH link IN list -%]
-            <li[% IF link.0 == page %] class="sel"[% END %]>[% link.1 %]</li>
+            <li[% IF link.0 == page %] class="active"[% END %]>[% link.1 %]</li>
+        [%- END -%]
+
+        [%- IF c.user_exists && edit_links -%]        
+        <li class="navbar-right dropdown[% IF page == 'edit' %] active[% END %]">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span></a>
+          <ul class="dropdown-menu">
+            [%- FOREACH link IN edit_links -%]
+                [%- IF link.0 -%]
+                  <li><a href="[% link.0 %]">[% link.1 %]</a></li>
+                [%- ELSE -%]
+                  <li class="divider"></li>
+                [%- END -%]
+            [%- END -%]
+          </ul>
+        </li>
         [%- END -%]
     </ul>
-</div>
+</nav>

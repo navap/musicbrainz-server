@@ -1,17 +1,18 @@
-[% WRAPPER "layout.tt" title=l("Edit Profile") full_width=1 %]
+[% WRAPPER "user/profile/layout.tt" title=l("Edit Profile") page="edit" %]
     [% script_manifest('edit.js.manifest') %]
 
-    <h1>[% l("Edit Profile") %]</h1>
+    <h2>[% l("Edit Profile") %]</h2>
 
     [%- WRAPPER 'layout/guidelines.tt' -%]
         [%- create_guideline(l('See also your {uri|user preferences}, which includes your privacy settings.', {uri => c.uri_for_action('/account/preferences')})) %]
         [%- create_guideline(l('If you change your email address, you will be required to verify it. ')) %]
         [%- create_guideline(l('If you would like to delete your account, go to {uri|the "Delete Account" tab in your profile}.',  {uri => c.uri_for_action("/admin/delete_user", user.name) }))%]
+        [%- create_guideline(l('Want to {uri|change your password}?.',  {uri => c.uri_for_action('/account/change_password') }))%]
     [% END %]
 
     [%- USE r = FormRenderer(form) -%]
 
-    <form action="[% c.req.uri %]" method="post" id="edit-profile-form">
+    [%- WRAPPER "forms/form.tt" id='edit-profile-form' -%]
       [%- IF server_details.testing_features -%]
         [%- warning(l('This is a development server. Your email address is not private or secure. Proceed with caution!')) -%]
       [%- END -%]
@@ -20,7 +21,7 @@
       [% form_row_select(r, 'gender_id', l('Gender:')) %]
       [% WRAPPER form_row %]
         [% area_field = form.field('area.name') %]
-        <label for="id-profile.area.name">[% l('Location:') %]</label>
+        [% r.label(area_field, l('Location:'), { class => 'control-label col-sm-2' }) %]
         <span class="area autocomplete">
           <img class="search" src="[% c.uri_for("/static/images/icons/search.png") %]" />
           <input type="hidden" class="gid" />
@@ -31,25 +32,25 @@
         [% field_errors(r.form, 'area.name') %]
       [% END %]
       [% WRAPPER form_row %]
-        [% r.label('birth_date', l('Birth date:'), fake => 1) %]
-        [% r.date('birth_date') %]
-        [% l('We will use your birth date to display your age in years on your profile page.') %]
-        [% field_errors(r.form, 'birth_date') %]
+        [% row_error = has_errors(r.form, 'birth_date') %]
+        [% r.label('birth_date', l('Birth date:'), { class => 'control-label col-sm-2' }) %]
+        <div class="col-sm-6">
+          [% r.date('birth_date') %]
+          [% field_errors(r.form, 'birth_date') %]
+          <p class="help-block">[% l('We will use your birth date to display your age in years on your profile page.') %]</p>
+        </div>
       [% END %]
-      [% WRAPPER form_row %]
-        [% r.label('biography', l('Bio:')) %]
-        [% r.textarea('biography', { cols => 80, rows => 5 }) %]
-        [% field_errors(form, 'biography') %]
-      [% END %]
+      [% form_row_textarea(r, 'biography', l('Bio:')) %]
 
       [% WRAPPER form_row %]
-        [% r.label('languages', l('Languages Known:'), fake => 1) %]
-        <ul class="inline">
+        [% r.label('languages', l('Languages Known:'), { class => 'control-label col-sm-2' }) %]
+        <div class="col-sm-6">
+        <ul class="inline list-unstyled">
           [% FOR language=form.field('languages').fields %]
           <li class="language">
             [% r.select(language.field('language_id')) %]
             [% r.select(language.field('fluency')) %]
-            <button class="remove">[% l('Remove') %]</button>
+            [% remove_icon('remove') %]
           </li>
           [% END %]
           <li>
@@ -58,17 +59,18 @@
             <span id="add-language-template" style="display: none">
               [% r.select(extra_field.field('language_id'), name => '', id => 'fluency-template', class => 'language_id',) %]
               [% r.select(extra_field.field('fluency'), name => '', class => 'fluency') %]
-              <button class="remove">[% l('Remove') %]</button>
+              [% remove_icon('remove') %]
             </span>
           </li>
         </ul>
+        </div>
       [% END %]
 
       <script>//<![CDATA[
       $(function() {
           var languageCount = $('li.language').size();
 
-          $('#edit-profile-form').on('click', 'button.remove', function (event) {
+          $('#edit-profile-form').on('click', 'a.remove', function (event) {
               event.preventDefault();
               $(this).parent('li').remove();
           });
@@ -90,10 +92,8 @@
       });
       //]]></script>
 
-      <div class="row no-label" id="edit-profile-submit">
       [% form_submit(l('Save')) %]
-      </div>
-    </form>
+    [%- END -%]
 
     <script type="text/javascript">//<![CDATA[
       MB.Control.EntityAutocomplete({ inputs: $("span.area.autocomplete") });

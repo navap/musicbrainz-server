@@ -5,7 +5,7 @@
   <p>[% l('You are viewing releases by {artist}.', { artist => link_entity(artist) }) %]</p>
   [% IF releases.size %]
     <p>[% l('Please select the medium you wish to attach this CD TOC to.') %]</p>
-    <form action="[% c.req.uri %]" method="get">
+    [%- WRAPPER "forms/form.tt" method='GET' -%]
       <input type="hidden" name="toc" value="[% toc %]" />
       <input type="hidden" name="artist" value="[% c.req.query_params.artist %]" />
       [% WRAPPER 'components/with-pager.tt' %]
@@ -41,17 +41,17 @@
         [% form_submit(lp('Attach CD TOC', 'button/menu')) %]
       </div>
       [% attach_list_script() %]
-    </form>
+    [%- END -%]
   [% ELSE %]
     <p>[% ln('{artist} has no releases which have only {n} track.',
              '{artist} has no releases which have {n} tracks.',
              cdtoc.track_count, { artist => link_entity(artist), n => cdtoc.track_count }) %]</p>
   [% END %]
 <p>[% l("If you can't find what you're looking for, you can add a new release:") %]</p>
-  <form action="[% c.uri_for('/release/add') %]" method="post">
+  [%- WRAPPER "forms/form.tt" action=c.uri_for('/release/add') -%]
     <input type="hidden" name="artist_credit.names.0.mbid"
            value="[% artist.gid %]" />
     <input type="hidden" name="mediums.0.toc" value="[% toc %]" />
     [% form_submit(l('Add a new release')) %]
-  </form>
-[% END %]
+  [%- END -%]
+[%- END -%]

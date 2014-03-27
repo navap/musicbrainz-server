@@ -37,16 +37,17 @@
 
     [%- IF release_groups.size -%]
         [%- WRAPPER 'components/with-pager.tt' -%]
-            <form action="[% c.uri_for_action('/release_group/merge_queue') %]"
-                method="post">
+            [%- WRAPPER "forms/form.tt" action=c.uri_for_action('/release_group/merge_queue') -%]
             [%- FOR rg=release_groups -%]
                 [% rgtype = rg.type_name || 'undefined' %]
                 [% IF last_rg_type != rgtype %]
                     [% IF last_rg_type.defined %]
                         </tbody>
                     </table>
+                    </div> <!-- table-responsive -->
                     [% END %]
                     <h3>[% rg.l_type_name || l('Unspecified type') %]</h3>
+                    <div class="table-responsive">
                     <table class="tbl">
                         <thead>
                             <tr>
@@ -63,7 +64,7 @@
                         <tbody>
                     [% last_rg_type = rgtype %]
                 [% END %]
-                <tr [% ' class="ev"' IF loop.count % 2 == 0 %]>
+                <tr>
                     [% IF c.user_exists %]
                     <td>
                         <input type="checkbox" name="add-to-merge"
@@ -75,7 +76,7 @@
                       [% link_release_group(rg) %]
                       [% disambiguation(rg) %]
                       [% FOR t=rg.secondary_types %]
-                        <span class="release-group-type">[% t.l_name %]</span>
+                        <span class="label label-info">[% t.l_name %]</span>
                       [% END %]
                     </td>
                     [% IF show_artists %]
@@ -88,9 +89,10 @@
             [% IF last_rg_type.defined %]
                 </tbody>
             </table>
-            [% END %]
-            [% form_submit(l('Merge release groups')) WRAPPER form_row IF c.user_exists %]
-            </form>
+            </div> <!-- table-responsive -->
+            [%- END -%]
+            [%- form_submit(l('Merge release groups')) WRAPPER form_row IF c.user_exists -%]
+            [%- END -%]
         [%- END -%]
     [%- END -%]
 

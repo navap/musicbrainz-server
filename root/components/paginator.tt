@@ -1,36 +1,37 @@
 [% IF pager && pager.last_page > 1 %]
+<div class="pagination-wrapper clearfix">
 [% DEFAULT page_var = 'page' %]
-<p class="pageselector">
+<ul class="pagination pagination-sm">
     [% IF pager.previous_page %]
-        <a href="[% c.req.uri_with( page => pager.first_page ) | html %]">&#171;</a>
-        <a href="[% c.req.uri_with( page => pager.previous_page ) | html %]">&#8249;</a>
+        <li><a href="[% c.req.uri_with( page => pager.first_page ) | html %]">&#171;</a></li>
+        <li><a href="[% c.req.uri_with( page => pager.previous_page ) | html %]">&#8249;</a></li>
     [% ELSE %]
-        <span>&#171;</span>
-        <span>&#8249;</span>
+        <li class="disabled"><span>&#171;</span></li>
+        <li class="disabled"><span>&#8249;</span></li>
     [% END %]
 
     [% start = (pager.current_page - 4) > 0 ? (pager.current_page - 4) : 1;
         FOREACH page IN [ start .. pager.last_page ] %]
         [% LAST IF loop.count > 9 %]
         [% IF pager.current_page == page %]
-        <a href="[% c.req.uri_with( $page_var => page ) | html %]" class="sel"><strong>[% page %]</strong></a>
+        <li class="active"><a href="[% c.req.uri_with( $page_var => page ) | html %]">[% page %]</a></li>
         [% ELSE %]
-        <a href="[% c.req.uri_with( $page_var => page ) | html %]">[% page %]</a>
+        <li><a href="[% c.req.uri_with( $page_var => page ) | html %]">[% page %]</a></li>
         [% END %]
     [% END %]
 
     [% IF pager.next_page %]
-        <a href="[% c.req.uri_with( page => pager.next_page ) | html %]">&#8250;</a>
-        <a href="[% c.req.uri_with( page => pager.last_page ) | html %]">&#187;</a>
+        <li><a href="[% c.req.uri_with( page => pager.next_page ) | html %]">&#8250;</a></li>
+        <li><a href="[% c.req.uri_with( page => pager.last_page ) | html %]">&#187;</a></li>
     [% ELSE %]
-        <span>&#8250;</span>
-        <span>&#187;</span>
+        <li class="disabled"><span>&#8250;</span></li>
+        <li class="disabled"><span>&#187;</span></li>
     [% END %]
-
-    [% IF guess_search %]
-      <em>[%- l('Page {cur} of at least {total}', { cur => add_commas(pager.current_page), total => add_commas(pager.last_page) }) -%]</em>
-    [% ELSE %]
-      <em>[%- l('Page {cur} of {total}', { cur => add_commas(pager.current_page), total => add_commas(pager.last_page) }) -%]</em>
-    [% END %]
-</p>
+</ul>
+[% IF guess_search %]
+  <em>[%- l('Page {cur} of at least {total}', { cur => add_commas(pager.current_page), total => add_commas(pager.last_page) }) -%]</em>
+[% ELSE %]
+  <em>[%- l('Page {cur} of {total}', { cur => add_commas(pager.current_page), total => add_commas(pager.last_page) }) -%]</em>
+[% END %]
+</div>
 [% END %]

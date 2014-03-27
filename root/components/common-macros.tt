@@ -480,8 +480,11 @@ END -%]
       image_url = '//gravatar.com/avatar/placeholder?d=mm&amp;s=' _ size;
     END;
     '<img src="' _ image_url _ '" class="gravatar" />' ;
+    '</a>';
+    '<a href="' _ link _ '">';
     '<bdi>' _ text _ '</bdi>';
     '</a>';
+
 END -%]
 
 [%- MACRO editor_type_info(editor) BLOCK; -%]
@@ -826,7 +829,7 @@ END -%]
 
 [%~ MACRO script_manifest(manifest) BLOCK ~%]
   [%~ IF server_details.developement_server -%]
-    [%~ USE date ~%]
+    [%~ USE date ~%][%#~ ?t= date.now ~%]
     [%~ FOR file IN c.model('FileCache').manifest_files(manifest, 'js'); ~%]
         <script type="text/javascript" src="[% c.uri_for("/static/") %][%- file -%]"></script>
     [%~ END ~%]
@@ -837,7 +840,7 @@ END -%]
 
 [%~ MACRO css_manifest(manifest) BLOCK ~%]
   [%~ IF server_details.developement_server ~%]
-    [%~ USE date -%]
+    [%~ USE date -%][%#~ ?t= date.now ~%]
     <link rel="stylesheet/less" type="text/css" href="[% c.uri_for("/static/") %][%- manifest -%].less" />
   [%~ ELSE ~%]
     <link rel="stylesheet" type="text/css" href="[% c.uri_for('/static/styles/') %][% c.model('FileCache').manifest_signature(manifest _ '.css.manifest', 'css') %].css" />
@@ -868,15 +871,19 @@ END -%]
 [%- END -%]
 
 [%- MACRO filter_button BLOCK -%]
-  <div style="float:right;margin-top:1.5em;"><a class="filter-button"><img src="[% c.uri_for('/static/images/icons/filter.png') %]" /></a> <a class="filter-button" href="#">[% l("Filter") %]</a></div>
+  <div style="float:right;margin-top:1.5em;"><span class="glyphicon glyphicon-filter"></span><a class="filter-button" href="#">[% l("Filter") %]</a></div>
 [%- END -%]
 
 [%- MACRO wikidoc_search_box BLOCK -%]
   <div class="wikidoc-search">
-    <form action="[% c.uri_for('/search') | html %]" method="get">
+    <form action="[% c.uri_for('/search') | html %]" method="get" class="form-inline">
       <input type="hidden" name="type" value="doc" />
-      <input type="text" name="query" placeholder="[% l('Search the documentation...')  %]" />
-      [% form_submit(l('Search'),'inline') %]
+      <div class="form-group">
+        <input type="text" name="query" id="doc-query" placeholder="[% l('Search the documentation...')  %]" class="form-control input-sm" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default btn-sm">[% l('Search') %]</button>
+      </div>
     </form>
   </div>
 [%- END -%]
@@ -989,21 +996,20 @@ END -%]
 
 [%- MACRO relationship_edit_links(rel) BLOCK -%]
   [%- IF rel.editor_can_edit(c.user) -%]
-  [
-      <a href="[% c.uri_for_action('/edit/relationship/delete', {
-          type0 => rel.link.type.entity0_type,
-          type1 => rel.link.type.entity1_type,
-          id => rel.id,
-          returnto => c.req.uri
-      }) %]">[% l('Remove') %]</a>
-      |
       <a href="[% c.uri_for_action('/edit/relationship/edit', {
           type0 => rel.link.type.entity0_type,
           type1 => rel.link.type.entity1_type,
           id => rel.id,
           returnto => c.req.uri
-      }) %]">[% l('Edit') %]</a>
-  ]
+      }) %]"><span class="glyphicon glyphicon-pencil"></span></a>
+
+      <a href="[% c.uri_for_action('/edit/relationship/delete', {
+          type0 => rel.link.type.entity0_type,
+          type1 => rel.link.type.entity1_type,
+          id => rel.id,
+          returnto => c.req.uri
+      }) %]"><span class="glyphicon glyphicon-remove"></span></a>
+  
   [%- END -%]
 [%- END -%]
 
@@ -1083,4 +1089,20 @@ END -%]
       [%- END %]
     </ul>
   [%- END %]
+[%- END -%]
+
+[%- MACRO last_updated(entity) BLOCK -%]
+  [%- IF entity.last_updated -%]
+    <p class="lastupdate">[% l('Last updated on {date}', { date => UserDate.format(entity.last_updated) }) %]</p>
+  [%- END -%]
+[%- END -%]
+
+[%- MACRO last_updated_search(last_updated) BLOCK -%]
+  [%- IF last_updated -%]
+    <p class="lastupdate">[% l('Last updated on {date}', { date => UserDate.format(last_updated) }) %]</p>
+  [%- END -%]
+[%- END -%]
+
+[%- MACRO last_updated_stats BLOCK -%]
+  <p class="lastupdate">[%- l('Last updated on {date}', { date => stats.date_collected }) -%]</p>
 [%- END -%]

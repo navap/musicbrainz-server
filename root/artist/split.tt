@@ -25,7 +25,7 @@
 
    [% ELSE %]
 
-   <form action="[% c.req.uri %]" method="post">
+   [%- WRAPPER "forms/form.tt" -%]
      [%- USE r = FormRenderer(form) -%]
      <div class="half-width">
        <p>
@@ -47,8 +47,8 @@
        [%- artist_credit_table() -%]
        [%- guesscase_bubble() -%]
      </div>
-   </form>
-   [% END %]
+   [%- END -%]
+   [%- END -%]
 
   <script type="text/javascript">//<![CDATA[
       MB.Control.initialize_artist_credit();

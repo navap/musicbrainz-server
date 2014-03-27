@@ -9,6 +9,7 @@
 
 [% select_all = 1 UNLESS select_all.defined %]
 
+<div class="table-responsive">
 <table class="tbl">
     <thead>
         <tr>
@@ -75,3 +76,4 @@
         [%- END -%]
     </tbody>
 </table>
+</div> <!-- table-responsive -->

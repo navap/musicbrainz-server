@@ -7,7 +7,7 @@
     [%- info_links.push(['delete', link_collection(collection, 'delete', l('Remove'))]) -%]
 [%- END -%]
 
-<div class="collectionheader">
+<div class="entity-header collection-header">
     <h1>[% link_collection(collection) %]</h1>
     <p class="subheader">
         <span class="prefix">~</span>

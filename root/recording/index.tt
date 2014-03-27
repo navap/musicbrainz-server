@@ -3,6 +3,7 @@
     <h2 class="appears-on-releases">[%- l('Appears on releases') -%]</h2>
     [%- WRAPPER "components/with-pager.tt" %]
         [%- IF tracks.size -%]
+            <div class="table-responsive">
             <table class="tbl">
                 <thead>
                     <tr>
@@ -39,6 +40,7 @@
                   [% END %]
                 </tbody>
             </table>
+            </div> <!-- table-responsive -->
         [%- ELSE -%]
             <p>[% l('No releases found which feature this recording.') %]</p>
         [%- END -%]

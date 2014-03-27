@@ -3,7 +3,8 @@
     <h1>[% l('Merge Release Groups') %]</h1>
     <p>[% l('You are about to merge the following release groups into a single release group. Please
              select the release group which you would like other release groups to be merged into:') %]</p>
-    <form action="[% c.req.uri %]" method="post">
+
+    [%- WRAPPER "forms/form.tt" -%]
         <table class="tbl">
             <thead>
                 <tr>
@@ -41,7 +42,7 @@
         [% field_errors(form, 'target') %]
 
         [% INCLUDE "forms/edit-note.tt" %]
-        [% enter_edit('<button type="submit" name="submit" value="cancel" class="negative">' _ l('Cancel') _ '</button>') %]
-    </form>
+        [% enter_edit(1) %]
+    [%- END -%]
     </div>
 [% END %]

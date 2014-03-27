@@ -1,0 +1,38 @@
+Questions
+* table-bordered?
+* border around language selector?
+* purple table-striped?
+
+TODO
+* Where are warning() error() used?
+  * Use glyphicon instead?
+* Remove full_width in layout.tt?
+* Products menu
+* 'Overview' link is considered a name variation and has a span in the way
+* Fix table-striped with subheadings
+* Fix relationship links in header.tt (old values in layout.tt)
+* Capitalization of headers
+* Sidebar for timeline statistics
+* Relationship display
+* country statistics sort arrow icons
+* Remove ratings page; replace with inline ratings display; http://lmfao.org.uk/inlineratings.png
+
+TODO Forms
+* Rollout forms/form.tt WRAPPER
+* Capability to specify help blocks
+* has_errors
+
+SEARCH
+* 'Add entity' link at top right
+* Area: from column
+
+JS
+* Use annotation-collapse. Use it for wikipedia and shrink the visible height
+
+Finishing touches
+* Fix !server_details.staging_server
+* Fix image paths in less
+
+Things to review
+* https://bitbucket.org/navap/musicbrainz-server/src/worf/lib/MusicBrainz/Server/Data/Statistics.pm?at=master#cl-653
+* Search results last_updated display

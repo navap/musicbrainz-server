@@ -1,0 +1,3 @@
+<form [% 'id="' _ id _ '" ' IF id %]action="[% action || c.req.uri | html %]" method="[% method || 'post' %]" class="form-horizontal[% ' ' _ class IF class %]">
+  [% content %]
+</form>

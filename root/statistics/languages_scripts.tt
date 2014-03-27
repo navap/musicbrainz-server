@@ -2,17 +2,17 @@
 
 [%- MACRO entry(entity, type) BLOCK -%]
 <tr[% ' class="ev"' IF loop.count % 2 == 0 %]>
-  <td class="t">[% loop.count %]</td>
+  <td class="r">[% loop.count %]</td>
   [% IF type == 'lang' %]
     <td>[% entity.entity.l_name || l('Unknown language') %]</td>
-    <td class="t">
+    <td class="r">
       [%- link_searchable_property(type, entity.entity.iso_code_3 || 'unknown', 'release', add_commas(entity.releases)) -%]</td>
-    <td class="t">
+    <td class="r">
       [%- link_searchable_property(type, entity.entity.iso_code_3 || 'unknown', 'work', add_commas(entity.works)) -%]</td>
-    <td class="t">[% add_commas(entity.total) %]</td>
+    <td class="r">[% add_commas(entity.total) %]</td>
   [% ELSIF type == 'script' %]
     <td>[% entity.entity.l_name || l('Unknown script') %]</td>
-    <td class="t">
+    <td class="r">
       [%- link_searchable_property(type, entity.entity.iso_code || 'unknown', 'release', add_commas(entity.count)) -%]</td>
   [% END %]
 </tr>
@@ -20,11 +20,8 @@
 
 [% WRAPPER 'statistics/layout.tt' title=l('Languages and Scripts') full_width=1 page='languages-scripts' %]
 
-<p>[%- l('Last updated: {date}', { date => date_collected }) -%]</p>
-<p>[%- l('All other available languages and scripts have 0 releases and works.') -%]</p>
-
 <div style="float:left; display:inline-block; margin-right: 50px;">
-  <h2 style="margin-top:0;">[%- l('Languages') -%]</h2>
+  <h2>[%- l('Languages') -%]</h2>
   <table class="tbl" id="languages-table">
     <thead>
       <tr>
@@ -45,7 +42,7 @@
 </div>
 
 <div style="float:left; display:inline-block;">
-  <h2 style="margin-top:0;">[%- l('Scripts') -%]</h2>
+  <h2>[%- l('Scripts') -%]</h2>
   <table class="tbl" id="scripts-table">
     <thead>
       <tr>
@@ -62,6 +59,10 @@
     </tbody>
   </table>
 </div>
+<div class="clearfix"></div>
+
+<p>[%- l('All other available languages and scripts have 0 releases and works.') -%]</p>
+[%- last_updated_stats -%]
 [%- PROCESS "statistics/macros-footer.tt" -%]
 
 <script type="text/javascript">//<![CDATA[

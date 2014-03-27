@@ -10,10 +10,7 @@
         [% form_row_text_long(r, 'oauth_redirect_uri', l('Callback URL:')) %]
         [% END %]
         <input type="hidden" name="application.oauth_type" value="[% application.oauth_type %]" />
-
-        <div class="row no-label">
         [% form_submit(l('Update')) %]
-        </div>
     </form>
 
 [% END %]

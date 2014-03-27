@@ -6,7 +6,7 @@
                          { doc => doc_link('Alias') })) %]
 [% END %]
 
-<form action="[% c.req.uri %]" method="post">
+[%- WRAPPER "forms/form.tt" -%]
   [% INCLUDE 'forms/edit-note.tt' %]
   [% enter_edit() %]
-</form>
+[%- END -%]

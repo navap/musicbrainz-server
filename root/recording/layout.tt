@@ -53,14 +53,13 @@
         [%- INCLUDE "layout/sidebar/sidebar-licenses.tt" source=recording -%]
 
         [%- INCLUDE "layout/sidebar/sidebar-favicons.tt" source=recording -%]
-
-        [%- INCLUDE "layout/sidebar/sidebar-lastupdate.tt" entity=recording -%]
     [% END %]
   [%- END -%]
 
   <div id="content">
     [%- INCLUDE 'recording/header.tt' %]
     [%- content -%]
+    [%- last_updated(recording) -%]
   </div>
 
 [%- END -%]

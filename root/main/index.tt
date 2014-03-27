@@ -1,120 +1,63 @@
 [% WRAPPER "layout.tt" nosuffix=1 title=l("MusicBrainz - The Open Music Encyclopedia") homepage=1 %]
-    <div class="sidebar" id="sidebar">
-      <div style="float: right;">
-        <div id="taggers" class="triple-column feature-column">
-            <h2 class="taggers">[% l('Tag Your Music') %]</h2>
-            <img src="[% c.uri_for('/static/images/logos/musicbrainz-picard.png') %]" alt="MusicBrainz Picard logo" />
-            <ul>
-                <li><a href="[% doc_link('MusicBrainz_Picard') %]">[% l('MusicBrainz Picard') %]</a></li>
-                <li><a href="[% doc_link('Jaikoz') %]">[% l('Jaikoz Tagger') %]</a></li>
-                <li><a href="[% doc_link('Magic_MP3_Tagger') %]">[% l('Magic MP3 Tagger') %]</a></li>
-                <li><a href="[% doc_link('Yate_Music_Tagger') %]">[% l('Yate Music Tagger') %]</a></li>
-                <li><a href="[% doc_link('SongKong_Tagger') %]">[% l('SongKong Tagger') %]</a></li>
-            </ul>
-        </div>
-
-        <div id="quick-start" class="triple-column feature-column">
-            <h2>[% l('Quick Start') %]</h2>
-            <img src="[% c.uri_for('/static/images/layout/quick-start.png') %]" alt="quick start icon" />
-            <ul>
-                <li><a href="[% doc_link('Beginners_Guide') %]">[% l('Beginners guide') %]</a></li>
-                <li><a href="[% doc_link('How_Editing_Works') %]">[% l('Editing introduction') %]</a></li>
-                <li><a href="[% doc_link('Style') %]">[% l('Style guidelines') %]</a></li>
-                <li><a href="[% doc_link('Frequently_Asked_Questions') %]">[% l('FAQs') %]</a></li>
-            </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="sidebar" id="sidebar2">
-      <div id="blog-feed" class="triple-column feature-column">
-        <h2>[% l('MusicBrainz Blog') %]</h2>
-        [% IF blog.defined %]
-        <p style="margin: 1em 0 0;"><strong>[% l('Latest posts:') %]</strong></p>
-        <ul style="margin: 0; padding-left: 20px;">
-          [% FOR item IN blog.items %]
-            <li><a href="[% item.url %]">[% item.title %]</a></li>
-            [% LAST IF loop.count == 6 %]
-          [% END %]
-        </ul>
-        <p style="margin: 1em 0; text-align: right;">
-          <strong><a href="http://blog.musicbrainz.org">[% l('Read more »') %]</a></strong>
-        </p>
-        [% ELSE %]
-        <p style="margin: 0; text-align: center">[% l('The blog is currently unavailable.') %]</p>
+    <div id="blog-feed" class="">
+      <h2>[% l('Latest blog posts') %]</h2>
+      [% IF blog.defined %]
+      <ul style="margin: 0; padding-left: 20px;">
+        [% FOR item IN blog.items %]
+          <li><a href="[% item.url %]">[% item.title %]</a></li>
+          [% LAST IF loop.count == 10 %]
         [% END %]
-      </div>
+      </ul>
+      <p style="margin: 1em 0; text-align: right;">
+        <strong><a href="http://blog.musicbrainz.org">[% l('Read more »') %]</a></strong>
+      </p>
+      [% ELSE %]
+      <p style="margin: 0; text-align: center">[% l('The blog is currently unavailable.') %]</p>
+      [% END %]
     </div>
 
     <div id="content">
         <h1>[% l('Welcome to MusicBrainz!') %]</h1>
         <p>
-            [% l('MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public.') %]
+            [% l('We\'re a community edited music enclyopedia that collects music metadata and makes it available for everyone to use. We aim to be the <strong>ultimate source of music information</strong> and want you to get involved!') %]
         </p>
 
-        <p>
-            [% l('MusicBrainz aims to be:') %]
-        </p>
+	<h2>Contribute to the data</h2>
+	<p>[% l('Whether you\'re a musician or a fan, <strong>{uri|create an account}</strong> and start contributing!',
+		{ uri => c.uri_for_action('/account/register') }) %]</p>
 
-        <ol>
-            <li>
-                [% l('<strong>The ultimate source of music information</strong> by allowing anyone to contribute and releasing the {doc|data} under {doc2|open licenses}.',
-                    { doc => doc_link('MusicBrainz_Database'),
-                      doc2 => doc_link('About/Data_License') }) %]
-            </li>
-            <li>
-                [% l('<strong>The universal lingua franca for music</strong> by providing a reliable and unambiguous form of {doc|music identification}, enabling both people and machines to have meaningful conversations about music.',
-                    { doc => doc_link('MusicBrainz_Identifier') }) %]
-            </li>
-        </ol>
+	<h2>Tag your music</h2>
+	<p>[% l('Is your music a mess? Use our data to tag your files using <strong>{doc2|MusicBrainz Picard}</strong> or one of our affiliate taggers: <strong>{doc3|Jaikoz}</strong>, <strong>{doc4|Magic MP3 Tagger}</strong>, <strong>{doc5|Yate}</strong>, or <strong>{doc6|SongKong}</strong>.',
+		{ doc2 => doc_link('MusicBrainz_Picard'),
+			doc3 => doc_link('Jaikoz'),
+			doc4 => doc_link('Magic_MP3_Tagger'),
+			doc5 => doc_link('Yate_Music_Tagger'),
+			doc6 => doc_link('SongKong_Tagger'),
+			doc7 => doc_link('Tagger_Affiliate_Program') }) %]</p>
 
-        <p>
-            [% l('Like Wikipedia, MusicBrainz is maintained by a global community of users and we want everyone &#x2014; including you &#x2014; to {doc|participate and contribute}.',
-                { doc => doc_link('How_To_Contribute') }) %]
-        </p>
+	<h2>Use the data</h2>
+	<p>
+		[% l('Are you a developer looking to use MusicBrainz data? Find out more about our <strong>{doc|API}</strong> or <strong>{doc2|development libraries}</strong>.',
+			{ doc => doc_link('XML_Web_Service'),
+			  doc2 => doc_link('Developer_Resources') }) %]
+	</p>
 
-        <div class="linkbar">
-            [% l('{about|More Information} &#x2014; {faq|FAQs} &#x2014; {contact|Contact Us}',
-                { about => doc_link('About'),
-                  contact => doc_link('Contact_Us'),
-                  faq => doc_link('Frequently_Asked_Questions') }) %]
-        </div>
+	<h2>Download the data</h2>
+	<p>
+		[% l('Want your own copy? The majority of data in the database is released into the Public Domain and can be <strong>{doc|downloaded for free}</strong>.',
+		{ doc => doc_link('MusicBrainz_Database') }) %]</p>
 
-        <p>
-            [% l('MusicBrainz is operated by the {uri|MetaBrainz Foundation}, a California based 501(c)(3) tax-exempt non-profit corporation dedicated to keeping MusicBrainz {free|free and open source}.',
-                { uri => "http://metabrainz.org",
-                  free => doc_link('About/Data_License') }) %]
-        </p>
+    <p>
+        [% l('MusicBrainz is operated by the {uri|MetaBrainz Foundation}, a California based 501(c)(3) tax-exempt non-profit corporation dedicated to keeping MusicBrainz {free|free and open source}.',
+            { uri => "http://metabrainz.org",
+              free => doc_link('About/Data_License') }) %]
+    </p>
 
     </div>
 
-    <div id="triple">
-        <div id="community" class="triple-column first-column feature-column">
-            <h2 class="community">[% l('Community') %]</h2>
-            <img src="[% c.uri_for('/static/images/layout/community.png') %]" alt="community icon" />
-            <p>
-                <a href="[% doc_link('How_To_Contribute') %]">[% l('Become a part of our <strong>global community</strong> and <strong>start contributing!</strong>') %]</a>
-            </p>
-        </div>
+    <hr style="margin: 20px 0; border-color: #ffba58" />
 
-        <div id="products" class="triple-column feature-column">
-            <h2 class="products">[% l('MusicBrainz Database') %]</h2>
-            <img src="[% c.uri_for('/static/images/layout/download.png') %]" alt="download icon" />
-            <p>
-                <a href="[% doc_link('MusicBrainz_Database') %]">[% l('The majority of the data in the <strong>MusicBrainz Database</strong> is released into the <strong>Public Domain</strong> and can be downloaded and used <strong>for free</strong>.') %]</a>
-            </p>
-        </div>
-
-        <div id="developers" class="triple-column last-column feature-column">
-            <h2 class="developers">[% l('Developers') %]</h2>
-            <img src="[% c.uri_for('/static/images/layout/developer.png') %]" alt="developers icon" />
-            <p>
-                <a href="[% doc_link('Developer_Resources')  %]">[% l('Use our <strong>XML web service</strong> or <strong>development libraries</strong> to create your own MusicBrainz-enabled applications.') %]</a>
-            </p>
-        </div>
-    </div>
-
-    <div style="clear: both; padding-top: 1%;" class="feature-column">
+    <div style="clear: both;" class="feature-column">
       <h2>[% l('Recent Additions') %]</h2>
       <div style="height: 160px; overflow: hidden;">
         [% FOR release=releases %]

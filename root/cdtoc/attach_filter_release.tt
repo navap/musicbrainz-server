@@ -2,7 +2,7 @@
 
 [% WRAPPER 'layout.tt' title=lp('Attach CD TOC', 'header') full_width=1 %]
   <h1>[% lp('Attach CD TOC', 'header') %]</h1>
-  <form action="[% c.req.uri_for_action('/cdtoc/attach') %]" method="get">
+  [%- WRAPPER "forms/form.tt" action=c.req.uri_for_action('/cdtoc/attach') method='GET' -%]
     [% USE r = FormRenderer(query_release) %]
     <input type="hidden" name="toc" value="[% toc %]" />
     [% WRAPPER form_row %]
@@ -10,9 +10,9 @@
       [% r.text('query') %]
       [% form_submit(l('Search'), 'inline') %]
     [% END %]
-  </form>
+  [%- END -%]
 
-  <form action="[% c.req.uri %]" method="GET">
+  [%- WRAPPER "forms/form.tt" method='GET' -%]
     <input type="hidden" name="toc" value="[% toc %]" />
     [% r.hidden('query') %]
     [%- IF results.size -%]
@@ -62,15 +62,15 @@
         </div>
       </div>
     [%- END -%]
-  </form>
+  [%- END -%]
 
   <h2>[% l('Add a new release') %]</h2>
   <p>[% l("If you don't see the release you are looking for, you can still add a new one,
     using this CD TOC:") %]</p>
 
-  <form action="[% c.uri_for('/release/add') %]" method="post">
+  [%- WRAPPER "forms/form.tt" action="[% c.uri_for('/release/add') -%]
     <input type="hidden" name="name" value="[% query_release.field('query').value %]" />
     <input type="hidden" name="mediums.0.toc" value="[% toc %]" />
     [% form_submit(l('Add a new release')) %]
-  </form>
+  [%- END -%]
 [% END %]

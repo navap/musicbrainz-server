@@ -101,14 +101,13 @@
         </ul>
 
         [%- INCLUDE "layout/sidebar/sidebar-favicons.tt" source=label -%]
-
-        [%- INCLUDE "layout/sidebar/sidebar-lastupdate.tt" entity=label -%]
     [% END %]
   [% END -%]
 
   <div id="content">
     [%- INCLUDE "label/header.tt" -%]
     [%- content -%]
+    [%- last_updated(label) -%]
   </div>
 
 [%- END -%]

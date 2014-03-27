@@ -4,13 +4,10 @@
 
         [%- USE r = FormRenderer(form) -%]
 
-        <form action="[% c.req.uri | html %]" method="post">
+        <form action="[% c.req.uri | html %]" method="post" class="form-horizontal">
             [% form_row_text_long(r, 'page', l('Page:')) %]
             [% form_row_text(r, 'version', l('Version:')) %]
-
-            <div class="row no-label">
-                [% form_submit(l('Create')) %]
-            </div>
+            [% form_submit(l('Create')) %]
         </form>
     </div>
 [% END %]

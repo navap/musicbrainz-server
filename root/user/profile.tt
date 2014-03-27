@@ -140,7 +140,7 @@
     [% END %]
 
     <h2>[% l('Statistics') %]</h2>
-    <table class="statistics">
+    <table class="tbl user-statistics">
         <thead>
         <tr>
             <th colspan="2">[% l('Edits ({view_url|view})', { view_url => c.uri_for_action('/user/edits/all', [ user.name ]) }) %]</th>
@@ -149,31 +149,56 @@
 
         <tbody>
         [% WRAPPER statistics name=lp("Accepted", 'edit descriptor') %]
-            [% l('{count} ({view_url|view})', { count => add_commas(user.accepted_edits), view_url => c.uri_for_action('/user/edits/accepted', [ user.name ]) }) %]
+            [% IF user.accepted_edits > 0 %]
+            [% l('{view_url|count}', { count => add_commas(user.accepted_edits), view_url => c.uri_for_action('/user/edits/accepted', [ user.name ]) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
 
         [% WRAPPER statistics name=l("Auto-edits") %]
-            [% l('{count} ({view_url|view})', { count => add_commas(user.accepted_auto_edits), view_url => c.uri_for_action('/user/edits/autoedits', [ user.name ]) }) %]
+            [% IF user.accepted_auto_edits > 0 %]
+            [% l('{view_url|count}', { count => add_commas(user.accepted_auto_edits), view_url => c.uri_for_action('/user/edits/autoedits', [ user.name ]) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
 
         [% WRAPPER statistics name=l("Voted down") %]
-            [% l('{count} ({view_url|view})', { count => add_commas(user.rejected_edits), view_url => c.uri_for_action('/user/edits/rejected', [ user.name ]) }) %]
+            [% IF user.rejected_edits > 0 %]
+            [% l('{view_url|count}', { count => add_commas(user.rejected_edits), view_url => c.uri_for_action('/user/edits/rejected', [ user.name ]) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
 
         [% WRAPPER statistics name=l("Failed") %]
-            [% l('{count} ({view_url|view})', { count => add_commas(user.failed_edits), view_url => c.uri_for_action('/user/edits/failed', [ user.name ]) }) %]
+            [% IF user.failed_edits > 0 %]
+            [% l('{view_url|count}', { count => add_commas(user.failed_edits), view_url => c.uri_for_action('/user/edits/failed', [ user.name ]) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
 
         [% WRAPPER statistics name=l("Open") %]
-            [% l('{count} ({view_url|view})', { count => add_commas(open_count), view_url => c.uri_for_action('/user/edits/open', [ user.name ]) }) %]
+            [% IF open_count > 0 %]
+            [% l('{view_url|count}', { count => add_commas(open_count), view_url => c.uri_for_action('/user/edits/open', [ user.name ]) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
 
         [% WRAPPER statistics name=l("Cancelled") %]
-            [% l('{count} ({view_url|view})', { count => add_commas(cancelled_count), view_url => c.uri_for_action('/user/edits/cancelled', [ user.name ]) }) %]
+            [% IF cancelled_count > 0 %]
+            [% l('{view_url|count}', { count => add_commas(cancelled_count), view_url => c.uri_for_action('/user/edits/cancelled', [ user.name ]) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
 
         [% WRAPPER statistics name=l("Last 24 hours") %]
-            [% l('{count} ({view_url|view})', { count => add_commas(last_day_count),
+            [% IF last_day_count > 0 %]
+            [% l('{view_url|count}', { count => add_commas(last_day_count),
                      view_url => c.uri_for('/search/edits', {
                          auto_edit_filter => '', order => 'desc',
                          negation => '0', combinator => 'and',
@@ -185,12 +210,15 @@
                          'conditions.1.operator' => '>',
                          'conditions.1.args.0' => '24 hours ago'
                      }) }) %]
+            [% ELSE %]
+            0
+            [% END %]
         [% END %]
         </tbody>
     </table>
 
 
-    <table class="statistics" title="[% l('This table shows a summary of votes cast by this editor.') %]">
+    <table class="tbl user-statistics" title="[% l('This table shows a summary of votes cast by this editor.') %]">
         <thead>
           <tr>
             <th colspan="3">
@@ -244,5 +272,16 @@
                 </tr>
         </tfoot>
     </table>
+
+    <div class="clearfix"></div>
+
+    [%- IF viewing_own_profile -%]
+    <h2>[% l('Donation Check') %]</h2>
+
+    <p>[% l('MusicBrainz is run by the non-profit MetaBrainz Foundation. Please {uri|consider donating}.', { uri => 'http://metabrainz.org/donate' }) %]</p>
+    
+    <p>[% l('You can {uri|check your donation status here}.', { uri => c.uri_for_action("/account/donation") }) %]</p>
+    [%- END -%]
+
 
 [% END %]

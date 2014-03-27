@@ -34,9 +34,7 @@
         [% END %]
       </div>
     </div>
-    <div class="row no-label">
-      [% form_submit(confirm_label) %]
-    </div>
+    [% form_submit(confirm_label) %]
 [% ELSE %]
     <div class="row">
       <div class="no-label">

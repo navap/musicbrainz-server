@@ -4,8 +4,8 @@
         {release} by {artist}?', { discid => cdtoc.discid, format => medium.format_name,
                                    pos => medium.position, release => link_entity(medium.release),
                                    artist => artist_credit(medium.release.artist_credit) }) -%]</p>
-  <form action="[% c.req.uri %]" method="post">
+  [%- WRAPPER "forms/form.tt" -%]
       [% INCLUDE "forms/edit-note.tt" %]
       [% enter_edit() %]
-  </form>
+  [%- END -%]
 [% END %]

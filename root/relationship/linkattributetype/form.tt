@@ -17,7 +17,5 @@
         [% form_field_errors(form, 'description') %]
     [% END %]
 
-    <div class="row no-label">
-        [% form_submit(l('Save')) %]
-    </div>
+    [% form_submit(l('Save')) %]
 </form>

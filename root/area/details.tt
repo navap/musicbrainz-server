@@ -14,10 +14,6 @@
     <td><code>[% area.gid %]</code></td>
   </tr>
   <tr>
-    <th>[% l('Last updated:') %]</th>
-    <td>[% last_updated(area) %]</td>
-  </tr>
-  <tr>
     <th>
       [% l('Permanent link:') %]
     </th>

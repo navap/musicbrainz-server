@@ -1,4 +1,4 @@
-    <form action="[% c.req.uri %]" method="post">
+    [%- WRAPPER "forms/form.tt" -%]
         [% USE r = FormRenderer(form) %]
         <fieldset>
             <legend>[% l('CD stub details') %]</legend>
@@ -20,10 +20,8 @@
                 </div>
             [% END %]
         </fieldset>
-        <div class="row no-label">
-            [% form_submit(l('Submit')) %]
-        </div>
-    </form>
+        [% form_submit(l('Submit')) %]
+    [%- END -%]
 
     <script type="text/javascript">//<![CDATA[
         function vaswitch(artist_value)

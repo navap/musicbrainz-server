@@ -120,8 +120,10 @@ sub countries : Local
 
     $c->stash(
         template => 'statistics/countries.tt',
-        stats    => $country_stats,
-        date_collected => $stats->{date_collected}
+        countries    => $country_stats,
+        stats => {
+            date_collected => $stats->{date_collected}
+        }
     );
 }
 
@@ -206,7 +208,9 @@ sub languages_scripts : Path('languages-scripts')
         template => 'statistics/languages_scripts.tt',
         language_stats => [ rev_nsort_by { $_->{total} } @language_stats ],
         script_stats => $script_stats,
-        date_collected => $stats->{date_collected}
+        stats => { 
+            date_collected => $stats->{date_collected}
+        }
     );
 }
 

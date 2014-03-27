@@ -21,15 +21,16 @@
   <h3>[% l('{artist} - {name}', { artist => cdstubtoc.cdstub.artist,
                                   name => cdstubtoc.cdstub.title }) %]</h3>
   [% INCLUDE 'cdstub/cdstub.tt' %]
-  <form action="[% c.uri_for_action('/cdstub/import', [ cdstubtoc.discid ]) %]" method="get">
+
+  [%- WRAPPER "forms/form.tt" action=c.uri_for_action('/cdstub/import', [ cdstubtoc.discid ]) method='GET' -%]
     <p>[% form_submit(l('Import CD Stub')) %]</p>
-  </form>
+  [%- END -%]
 
   [% IF possible_mediums.size %]
   <h2>[% l('Possible Mediums') %]</h2>
   <p>[% l('Based on the above CD stub, we also found the following releases in MusicBrainz
            that may be related:') %]</p>
-  <form action="[% c.req.uri %]" method="GET">
+  [%- WRAPPER "forms/form.tt" method='GET' -%]
     <input type="hidden" name="toc" value="[% toc %]" />
     <table class="tbl">
       <thead>
@@ -50,29 +51,25 @@
       </tbody>
     </table>
     <p>[% form_submit(l('Attach Disc ID')) %]</p>
-  </form>
+  [%- END -%]
   [% END %]
   [% END %]
 
   <h2>[% l('Search by artist') %]</h2>
-  <form action="[% c.req.uri_for_action('/cdtoc/attach') %]" method="get">
+  [%- WRAPPER "forms/form.tt" action=c.req.uri_for_action('/cdtoc/attach') method='GET' -%]
     [% USE r = FormRenderer(query_artist) %]
     <input type="hidden" name="toc" value="[% toc %]" />
     [% form_row_text(r, 'query', l('Artist:')) %]
-    <div class="row no-label">
-      [% form_submit(l('Search')) %]
-    </div>
-  </form>
+    [% form_submit(l('Search')) %]
+  [%- END -%]
 
   <h2>[% l('Search by release') %]</h2>
-  <form action="[% c.req.uri_for_action('/cdtoc/attach') %]" method="get">
+  [%- WRAPPER "forms/form.tt" action=c.req.uri_for_action('/cdtoc/attach') method='GET' -%]
     [% USE r = FormRenderer(query_release) %]
     <input type="hidden" name="toc" value="[% toc %]" />
     [% form_row_text(r, 'query', l('Release:')) %]
-    <div class="row no-label">
-      [% form_submit(l('Search')) %]
-    </div>
-  </form>
+    [% form_submit(l('Search')) %]
+  [%- END -%]
 [% ELSE %]
   [% IF medium_cdtocs.size %]
   <h2>[% l('Matching CDs') %]</h2>

@@ -15,4 +15,8 @@ lib/knockout/knockout-postbox.js
 
 lib/aclass/aclass.js
 
+lib/bootstrap/bootstrap-3.1.1/js/collapse.js
+lib/bootstrap/bootstrap-3.1.1/js/dropdown.js
+lib/bootstrap/bootstrap-3.1.1/js/transition.js
+
 scripts/common

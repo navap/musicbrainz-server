@@ -4,7 +4,7 @@
     <p>[% l('You are about to merge the following labels into a single label. Please
              select the label which you would like other labels to be merged into:') %]</p>
 
-    <form action="[% c.req.uri %]" method="post">
+    [%- WRAPPER "forms/form.tt" -%]
         <table class="tbl">
             <thead>
                 <tr>
@@ -46,8 +46,8 @@
         [% field_errors(form, 'target') %]
 
         [% INCLUDE "forms/edit-note.tt" %]
-        [% enter_edit('<button type="submit" name="submit" value="cancel" class="negative">' _ l('Cancel') _ '</button>') %]
-    </form>
+        [% enter_edit(1) %]
+    [%- END -%]
     </div>
 [% END %]
 

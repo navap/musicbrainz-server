@@ -6,7 +6,7 @@
                :                                   '' %]
 
     [% FOR group=relationships.pairs %]
-        <table class="details" style="width: 100%">
+        <table class="tbl details" style="width: 100%">
         [%- FOREACH relationship IN group.value.pairs -%]
             <tr>
                 <th>[% relationship.key %]:</th>
@@ -15,7 +15,7 @@
                         [% relationship_target_links(rel) %]
 
                         [%- IF c.user_exists -%]
-                            <span style="float: right">
+                            <span class="relationship-edit-links">
                                 [%- relationship_edit_links(rel) -%]
                             </span>
                         [%- END -%]

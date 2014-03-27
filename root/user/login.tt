@@ -14,30 +14,31 @@
     </p>
 
     [%- USE r = FormRenderer(login_form) -%]
-    <form action="[% login_action | html %]" method="post">
-        [% IF login_form.has_errors || bad_login -%]
-            <div class="row no-label">
-                <span class="error"><strong>[% l('Incorrect username or password') %]</strong></span>
+    [%- WRAPPER "forms/form.tt" action=login_action -%]
+        [%- IF login_form.has_errors || bad_login -%]
+            <div class="form-group has-error">
+                <span class="col-sm-offset-2 col-sm-6 help-block error"><strong>[% l('Incorrect username or password') %]</strong></span>
             </div>
         [%- END %]
         [% form_row_text(r, 'username', l('Username:')) %]
         [% form_row_password(r, 'password', l('Password:')) %]
         [% IF server_details.staging_server && server_details.is_sanitized %]
-            <div class="row no-label">
-                <span class="input-note" style="color: #f22; font-weight: bold;">[% l('This is a development server; all passwords have been reset to "mb".') %]</span>
+            <div class="form-group">
+                <strong><span class="col-sm-offset-2 col-sm-6 text-danger">[% l('This is a development server; all passwords have been reset to "mb".') %]</span></strong>
             </div>
         [% END %]
 
         [% form_row_checkbox(r, 'remember_me', l('Keep me logged in')) %]
 
-        <div class="row no-label">
-            [% form_submit(l('Log In'), 'login') %]
-        </div>
-    </form>
+        [% form_submit(l('Log In'), 'login') %]
 
-    <p>
-        [% l('Forgot your {link1|username} or {link2|password}?',
-            { link1 => c.uri_for_action('/account/lost_username'),
-              link2 => c.uri_for_action('/account/lost_password') }) %]
-    </p>
+        <div class="form-group">
+          <p class="col-sm-offset-2 col-sm-6">
+            [% l('Forgot your {link1|username} or {link2|password}?',
+                { link1 => c.uri_for_action('/account/lost_username'),
+                  link2 => c.uri_for_action('/account/lost_password') }) %]
+          </p>
+        </div>
+    [% END %]
+
 [% END %]

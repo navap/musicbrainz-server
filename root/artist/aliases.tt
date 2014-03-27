@@ -12,6 +12,7 @@
           -%]
         </p>
 
+        <div class="table-responsive">
         <table class="tbl">
             <thead>
                 <tr>
@@ -42,6 +43,7 @@
             [%- END -%]
             </tbody>
         </table>
+        </div> <!-- .table-responsive -->
     [%- END -%]
 
 [%- END -%]

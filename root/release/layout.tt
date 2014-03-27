@@ -3,12 +3,12 @@
     name => release.name
 }) %]
 [%- WRAPPER "layout.tt" title=title ? main_title _ " - ${title}" : main_title -%]
+  [% INCLUDE 'release/sidebar.tt' editing=0 UNLESS full_width %]
 
-    [% INCLUDE 'release/sidebar.tt' editing=0 UNLESS full_width %]
-
-    <div id="content">
-        [%- INCLUDE "release/header.tt" -%]
-        [%- content -%]
-    </div>
+  <div id="content">
+    [%- INCLUDE "release/header.tt" -%]
+    [%- content -%]
+    [%- last_updated(release) -%]
+  </div>
 
 [% END %]

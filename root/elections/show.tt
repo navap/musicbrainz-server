@@ -110,6 +110,7 @@
 
     <h2>[% l('Votes cast') %]</h2>
 
+    [% IF election.votes.size > 0 %]
     <table class="tbl" style="width:auto">
         <thead>
             <tr>
@@ -134,5 +135,8 @@
         [%- END -%]
         </tbody>
     </table>
+    [% ELSE %]
+      <p>[% l('This election has not been voted on yet.') %]</p>
+    [% END %]
 
 [% END %]

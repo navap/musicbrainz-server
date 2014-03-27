@@ -2,15 +2,59 @@
     ['index', link_release_group(rg, 'show', l('Overview'))],
     ['tags', link_release_group(rg, 'tags', l('Tags'))],
     ['details', link_release_group(rg, 'details', l('Details'))],
-    ['edit', link_release_group(rg, 'edit', l('Edit'))],
 ] -%]
 
-<div class="rgheader">
+[%- 
+    edit_links = [
+      [c.uri_for_action('/release_editor/add', { 'release-group' = rg.gid }), l('Add release')],
+      [],
+    ];
+
+    IF entity.latest_annotation.text;
+      edit_links.push(
+        [c.uri_for(c.controller.action_for('edit_annotation'), [ rg.gid ]), l('Edit annotation')]
+      );
+    ELSE;
+      edit_links.push(
+        [c.uri_for(c.controller.action_for('edit_annotation'), [ rg.gid ]), l('Add annotation')]
+      );
+    END;
+
+    IF number_of_revisions > 0;
+      edit_links.push(
+        [c.uri_for(c.controller.action_for('annotation_history'), [ rg.gid ]), l('View annotation history')]
+      );
+    END;
+
+    edit_links.push(
+      [],
+      [c.uri_for_action('/release_group/merge_queue', { 'add-to-merge' => rg.id }), l('Merge release group')],
+      [c.uri_for_action('/release_group/set_cover_art', [ rg.gid ]), l('Set cover art')],
+    );
+
+    edit_links.push(
+      [],
+      ['#', l('Use in a relationship')],
+      ['#', l('Relate to ...')],
+      ['#', l('Relate to URL')],
+      [],
+      [c.uri_for_action('/release_group/open_edits', [ rg.gid ]), l('Open edits')],
+      [c.uri_for_action('/release_group/edits', [ rg.gid ]), l('Editing history')],
+    );
+-%]
+
+<header class="entity-header release-group-header">
+    [%- IF rg.cover_art -%]
+      <div class="cover-art">
+        [%- display_artwork (rg.cover_art) -%]
+      </div>
+    [%- END -%]
+
     <h1>[% link_release_group(rg) %] [% disambiguation(rg) %]</h1>
     <p class="subheader">
         <span class="prefix">~</span>
             [% l('Release group by {artist}', {artist = artist_credit(rg.artist_credit)})%]
     </p>
-</div>
+</header>
 
-[% INCLUDE 'components/tabs.tt' list=info_links %]
+[% INCLUDE 'components/tabs.tt' list=info_links edit_links=edit_links %]

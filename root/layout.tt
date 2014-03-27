@@ -1,37 +1,42 @@
+[%- MACRO print_language_link(language) BLOCK -%]
+    <a href="[% c.uri_for_action('/set_language', [ language.0 ]) %]">
+      [%- print_language_name(language) -%]
+    </a>
+[%- END -%]
+[%- MACRO print_language_name(language) BLOCK -%]
+    [%- IF language.1.native_language != '' -%]
+        [%- language.1.native_language | ucfirst -%][%- IF language.1.native_territory != '' %] ([%- language.1.native_territory | ucfirst -%])[%- END -%]
+    [%- ELSE -%][[%- language.1.id -%]][%- END -%]
+[%- END -%]
 [% set_header() %]
     [%- INCLUDE 'layout/head.tt' -%]
     <body>
-        [%- IF c.debug -%][%- INCLUDE 'debug/stats.tt' -%][%- END ~%]
+      <div id="wrap">
+        [%- IF c.debug -%][%- INCLUDE 'debug/stats.tt' -%][%- END -%]
 
-        <div id="header">
-            <div id="header-logo">
-                <a href="/" class="logo" title="MusicBrainz"><strong>MusicBrainz</strong></a>
-                <div>
-                    [% USE sidebar = FormRenderer(sidebar_search, id_prefix => 'header') ~%]
-                    <form action="[% c.uri_for('/search') %]" method="get">
-                        [% sidebar.text('query', { placeholder => l('search') }) %]
-                        [% sidebar.select('type') %]
-                        [% sidebar.hidden('method', { value => 'indexed' }) %]
-                        [% form_submit(l('Search'), 'inline') %]
-                    </form>
-                </div>
-                [% IF server_details.git.branch ~%]
-                  <div class="git-branch">
-                    [%~ l('Running: <span class="tooltip" title="{msg}">{branch} ({sha})</span>',
-                         { branch => server_details.git.branch,
-                           msg => html_escape(server_details.git.msg),
-                           sha => server_details.git.sha}) ~%]
-                  </div>
-                [%~ END %]
-            </div>
-            <div id="header-menu">
-                <div>
-                    [%- INCLUDE "layout/menu.tt" -%]
-                </div>
-            </div>
-        </div>
+        <header>
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">MusicBrainz</a>
+              </div>
 
-        [% IF server_details.staging_server %]
+              <div id="navbar" class="collapse navbar-collapse">
+                [%- INCLUDE "layout/menu.tt" -%]
+              </div>
+            </nav>
+
+            <div class="navbar-trim">
+            </div>
+        </header>
+
+
+        [% IF !server_details.staging_server %]
             <div class="server-details">
                 <p>
                     [%~ server_details.staging_server_description || l('This is a MusicBrainz development server.') =%]
@@ -77,40 +82,92 @@
             </div>
         [% END %]
 
-        <div id="page"[% IF full_width %] class="fullwidth"[% END %][% IF homepage %] class="homepage"[% END %]>
+        <main id="page" class="container-fluid[% IF full_width %] fullwidth[% END %][% IF homepage %] homepage[% END %]">
             [%- content -%]
             <div style="clear: both"></div>
+            [%- INCLUDE 'layout/merge-helper.tt'
+                IF c.try_get_session('merger') AND !hide_merge_helper -%]
+        </main>
+      </div>
+
+      <footer>
+        <div class="container-fluid">
+          [% IF server_languages.size > 1 -%]
+            <div class="pull-right">
+              <div class="btn-group dropup language-selector">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-globe"></span>
+                  [% FOREACH language = server_languages; IF language.0 == current_language -%]
+                    [%- print_language_name(language) -%]
+                    [%- LAST; END -%]
+                  [%- END %]
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  [%- FOREACH language = server_languages -%]
+                      <li>[%- print_language_link(language) -%]</li>
+                  [%- END %]
+                      <li>
+                          <a href="[% c.uri_for_action('/set_language', [ 'unset' ] ) %]">[%- l('(reset language)') -%]</a>
+                      </li>
+                </ul>
+              </div>
+
+              <div class="btn-group dropup">
+                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                  <span class="glyphicon glyphicon-globe"></span>
+                  [% FOREACH language = server_languages; IF language.0 == current_language -%]
+                    [%- print_language_name(language) -%]
+                    [%- LAST; END -%]
+                  [%- END %]
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                  [%- FOREACH language = server_languages -%]
+                      <li>[%- print_language_link(language) -%]</li>
+                  [%- END %]
+                      <li>
+                          <a href="[% c.uri_for_action('/set_language', [ 'unset' ] ) %]">[%- l('(reset language)') -%]</a>
+                      </li>
+                </ul>
+              </div>
+
+              [%- IF server_details.git.branch -%]
+                <p class="git-branch">
+                  [%- l('<code class="tooltip" title="{msg}">{branch} ({sha})</code>',
+                       { branch => server_details.git.branch,
+                         msg => html_escape(server_details.git.msg),
+                         sha	  => server_details.git.sha}) -%]
+                </p>
+              [%- END -%]
+            </div>
+          [%- END %]
+
+          <p>
+              <a href="http://metabrainz.org/donate" class="internal">[% l('Donate') %]</a> |
+              <a href="//wiki.musicbrainz.org/" class="internal">[% l('Wiki') %]</a> |
+              <a href="http://forums.musicbrainz.org/" class="internal">[% l('Forums') %]</a> |
+              <a href="http://tickets.musicbrainz.org/" class="internal">[% l('Bug Tracker') %]</a> |
+              <a href="http://twitter.com/MusicBrainz" class="internal">[% l('Twitter') %]</a>
+              [%- IF server_details.beta_redirect %] |
+              <a href="[% c.uri_for('/set-beta-preference') %]" class="internal">[% server_details.is_beta ? l('Stop using beta site') : l('Use beta site') %]</a>
+              [%- END -%]
+              [%- IF last_replication_date -%]
+              <br />
+              [% l('Last replication packet received at {datetime}',
+                   { datetime => UserDate.format(last_replication_date) }) %]
+              [%- END -%]
+          </p>
+
+          <p>
+              [% l('Cover Art provided by the {caa|Cover Art Archive}. Hosted by {host|Digital West}. Sponsored by: {url1|Google},
+                    {url2|OSUOSL} and {more|others...}. ',
+                  { host => '//digitalwest.net/',
+                    url1 => 'http://www.google.com/',
+                    url2 => '//osuosl.org/',
+                    more => 'http://metabrainz.org/doc/Sponsors',
+                    caa  => '//coverartarchive.org/' }) %]
+          </p>
         </div>
-
-        [%- INCLUDE 'layout/merge-helper.tt'
-           IF c.try_get_session('merger') AND !hide_merge_helper -%]
-
-        <div id="footer">
-            <p class="left">
-                <a href="http://metabrainz.org/donate" class="internal">[% l('Donate') %]</a> |
-                <a href="//wiki.musicbrainz.org/" class="internal">[% l('Wiki') %]</a> |
-                <a href="http://forums.musicbrainz.org/" class="internal">[% l('Forums') %]</a> |
-                <a href="http://tickets.musicbrainz.org/" class="internal">[% l('Bug Tracker') %]</a> |
-                <a href="https://twitter.com/MusicBrainz" class="internal">[% l('Twitter') %]</a>
-                [%- IF server_details.beta_redirect %] |
-                <a href="[% c.uri_for('/set-beta-preference') %]" class="internal">[% server_details.is_beta ? l('Stop using beta site') : l('Use beta site') %]</a>
-                [%- END -%]
-                [%- IF last_replication_date -%]
-                <br />
-                [% l('Last replication packet received at {datetime}',
-                     { datetime => UserDate.format(last_replication_date) }) %]
-                [%- END -%]
-            </p>
-
-            <p class="right">
-                [% l('Cover Art provided by the {caa|Cover Art Archive}. Hosted by {host|Digital West}. Sponsored by: {url1|Google},
-                      {url2|OSUOSL} and {more|others...}. ',
-                    { host => '//www.digitalwest.net/',
-                      url1 => 'https://www.google.com/',
-                      url2 => '//osuosl.org/',
-                      more => 'http://metabrainz.org/doc/Sponsors',
-                      caa  => '//coverartarchive.org/' }) %]
-            </p>
-        </div>
+      </footer>
     </body>
 </html>

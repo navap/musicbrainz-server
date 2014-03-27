@@ -1,5 +1,5 @@
 [% WRAPPER 'components/with-pager.tt' %]
-<form action="[% c.uri_for_action(c.namespace _ '/annotation_diff', [ entity.gid ]) %]">
+[%- WRAPPER "forms/form.tt" action=c.uri_for_action(c.namespace _ '/annotation_diff', [ entity.gid ]) -%]
   <table class="tbl" id="annotation-history">
     <thead>
       <tr>
@@ -37,8 +37,8 @@
   <p>
     [% form_submit(l('Compare versions')) %]
   </p>
-</form>
-[% END %]
+[%- END -%]
+[%- END -%]
 
 <script type="text/javascript">//<![CDATA[
   (function () {

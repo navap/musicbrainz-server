@@ -74,13 +74,12 @@
         </ul>
 
         [%- INCLUDE "layout/sidebar/sidebar-favicons.tt" source=place -%]
-
-        [%- INCLUDE "layout/sidebar/sidebar-lastupdate.tt" entity=place -%]
     [% END %]
   [% END -%]
 
   <div id="content">
     [%- INCLUDE "place/header.tt" -%]
+    [%- last_updated(place) -%]
     [%- content -%]
   </div>
 

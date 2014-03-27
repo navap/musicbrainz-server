@@ -14,7 +14,7 @@
     ) -%]
 [% END %]
 
-<div class="areaheader">
+<div class="entity-header area-header">
     <h1>[%- link_area(area) %] [% disambiguation(area) %]</h1>
     <p class="subheader">
         <span class="prefix">~</span>

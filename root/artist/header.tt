@@ -9,15 +9,63 @@
     ['details', link_artist(artist, 'details', l('Details'))],
 ] -%]
 
-[% info_links.push(
-    ['edit', link_artist(artist, 'edit', l('Edit'))]
-   ) UNLESS artist.is_special_purpose %]
+[%- edit_links = [
+      [c.uri_for_action('/artist/edit', [ artist.gid ]), l('Edit artist')]
+    ];
 
-<div class="artistheader">
+    IF !artist.is_special_purpose;
+      edit_links.push(
+        [],
+        [c.uri_for_action('/release_group/create', { artist = artist.gid }), l('Add release group')],
+        [c.uri_for_action('/release_editor/add', { artist = artist.gid }), l('Add release')],
+        [c.uri_for_action('/recording/create', { artist = artist.gid }), l('Add recording')],
+        [c.uri_for_action('/work/create', { artist = artist.gid }), l('Add work')],
+        [],
+      ); 
+
+      IF entity.latest_annotation.text;
+        edit_links.push(
+          [c.uri_for(c.controller.action_for('edit_annotation'), [ artist.gid ]), l('Edit annotation')]
+        );
+      ELSE;
+        edit_links.push(
+          [c.uri_for(c.controller.action_for('edit_annotation'), [ artist.gid ]), l('Add annotation')]
+        );
+      END;
+
+      IF number_of_revisions > 0;
+        edit_links.push(
+          [c.uri_for(c.controller.action_for('annotation_history'), [ artist.gid ]), l('View annotation history')]
+        );
+      END;
+
+      edit_links.push(
+        [c.uri_for_action('/artist/split', [ artist.gid ]), l('Split into separate artists')]
+      );
+    END;
+
+    edit_links.push(
+      [c.uri_for_action('/artist/merge_queue', { 'add-to-merge' => artist.id }), l('Merge artist')]
+    );
+
+    IF !artist.is_special_purpose;
+      edit_links.push(
+        [],
+        ['#', l('Use in a relationship')],
+        ['#', l('Relate to ...')],
+        ['#', l('Relate to URL')],
+        [],
+        [c.uri_for_action('/artist/open_edits', [ artist.gid ]), l('Open edits')],
+        [c.uri_for_action('/artist/edits', [ artist.gid ]), l('Editing history')],
+      );
+    END;
+-%]
+
+<header class="entity-header artist-header">
     <h1>[% link_artist(artist) %] [% disambiguation(artist) %]</h1>
     <p class="subheader">
         <span class="prefix">~</span> [% html_escape(artist.l_type_name) or l('Artist') %]
     </p>
-</div>
+</header>
 
-[% INCLUDE 'components/tabs.tt' list=info_links %]
+[% INCLUDE 'components/tabs.tt' list=info_links edit_links=edit_links %]

@@ -36,9 +36,7 @@
             [% END %]
           </div>
         </div>
-        <div class="row no-label">
-          [% form_submit(l('Select')) %]
-        </div>
+        [% form_submit(l('Select')) %]
     [%- END -%]
   </form>
 [% END %]

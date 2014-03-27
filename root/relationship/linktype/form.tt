@@ -177,9 +177,7 @@ function examplePrefix(i, s) {
     </fieldset>
     [% END %]
 
-    <div class="row no-label">
-        [% form_submit(l('Save')) %]
-    </div>
+    [% form_submit(l('Save')) %]
 </form>
 
 <script type="text/javascript">

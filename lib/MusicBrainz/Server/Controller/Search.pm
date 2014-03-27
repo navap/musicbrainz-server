@@ -38,7 +38,8 @@ sub search : Path('')
 
     if ($form->process( params => $c->req->query_params ))
     {
-        if ($form->field('type')->value eq 'annotation' ||
+        if ($form->field('type')->value eq 'all' ||
+            $form->field('type')->value eq 'annotation' ||
             $form->field('type')->value eq 'freedb'     ||
             $form->field('type')->value eq 'cdstub') {
             $form->field('method')->value('indexed')
@@ -185,12 +186,20 @@ sub external : Private
 
     $c->detach('/search/editor') if $type eq 'editor';
 
-    $self->do_external_search($c,
+	if ($type eq 'all') {
+	    $self->do_unified_search($c,
+                              query    => $query,
+                              type     => $type,
+                              limit    => 100,
+                              advanced => $form->field('method')->value eq 'advanced');
+	} else {
+	    $self->do_external_search($c,
                               query    => $query,
                               type     => $type,
                               limit    => $form->field('limit')->value,
                               page     => $c->request->query_params->{page},
                               advanced => $form->field('method')->value eq 'advanced');
+	}
 
     $c->stash->{template} ="search/results-$type.tt";
 }
@@ -247,7 +256,57 @@ sub do_external_search {
         $c->stash->{pager}    = $ret->{pager};
         $c->stash->{offset}   = $ret->{offset};
         $c->stash->{results}  = $ret->{results};
-        $c->stash->{last_updated}  = $ret->{last_updated};
+        $c->stash->{last_updated} = $ret->{last_updated};
+        $c->stash->{raw_data}  = $ret->{raw_data};
+    }
+}
+
+sub do_unified_search {
+    my ($self, $c, %opts) = @_;
+
+
+	my $limit = looks_like_number($opts{limit}) ? $opts{limit} : 25;
+    $limit = min(max(1, $limit), 100);
+
+    my $advanced = $opts{advanced} ? 1 : 0;
+    my $query = $opts{query};
+    my $type  = $opts{type};
+
+    my $search = $c->model('Search');
+    my $ret = $search->unified_search($type,
+                                       $query,
+                                       $limit,
+                                       $advanced);
+
+    if (exists $ret->{error})
+    {
+        # Something went wrong with the search
+        my $template = 'search/error/';
+
+        # Switch on the response code to decide which template to provide
+        given($ret->{code})
+        {
+            when (404) { $template .= 'no-results.tt'; }
+            when (403) { $template .= 'no-info.tt'; };
+            when (414) { $template .= 'uri-too-large.tt'; };
+            when (500) { $template .= 'internal-error.tt'; }
+            when (400) { $template .= 'invalid.tt'; }
+            when (503) { $template .= 'rate-limit.tt'; }
+
+            default { $template .= 'general.tt'; }
+        }
+
+        $c->stash->{content}  = $ret->{error};
+        $c->stash->{query}    = $query;
+        $c->stash->{template} = $template;
+
+        $c->detach;
+    }
+    else
+    {
+        $c->stash->{results}  = $ret->{results};
+        $c->stash->{last_updated} = $ret->{last_updated};
+        $c->stash->{raw_data}  = $ret->{raw_data};
     }
 }
 

@@ -1,21 +1,39 @@
 [% WRAPPER "layout.tt" full_width=1 title=page.title -%]
     <div id="content" class="wikicontent">
-        [%- IF google_custom_search -%]
-          [%- wikidoc_search_box -%]
-        [%- END -%]
+
+[%- about_links = [
+    ['About', l('{uri|About}', { uri => doc_link('About') })],
+    ['About/Team', l('{uri|Team}', { uri => doc_link('About/Team') })],
+    ['', l('{uri|Statistics}', { uri => c.uri_for('/statistics') })],
+    ['Contact_Us', l('{uri|Contact}', { uri => doc_link('Contact_Us') })],
+] -%]
+[%# INCLUDE 'components/pills.tt' list=about_links %]
 
         <h1 class="hierarchy-links">
             [%- FOR link IN page.hierarchy -%]
-                [% IF loop.first %]
+                [%- IF loop.first -%]
                     [%- doc = link -%]
-                [% ELSE %]
-                    [% doc = doc _ "/" _ link %]
-                [% END %]
+                [%- ELSE -%]
+                    [%- doc = doc _ "/" _ link -%]
+                [%- END -%]
 
                 <a href="[%- doc_link(doc.replace(' ', '_')) -%]" [% ' style="font-weight:bold;"' IF loop.last %]>[%- link -%]</a>
-                [% ' / ' IF !loop.last %]
-            [% END %]
+                [%- ' / ' IF !loop.last -%]
+            [%- END -%]
         </h1>
+
+<!--
+<nav class="pills">
+  <ul class="nav nav-pills">
+    <li[% IF id == 'Products' %] class="active"[% END %]>[% l('{uri|Products}', { uri => doc_link('Products') }) %]</li>
+    <li[% IF id == 'About' %] class="active"[% END %]>[% l('{uri|About}', { uri => doc_link('About') }) %]</li>
+  </ul>
+</nav>
+-->
+
+        [%- IF google_custom_search -%]
+          [%- wikidoc_search_box -%]
+        [%- END -%]
 
         [%- IF !page.version -%]
             <div class="wikidocs-header">
@@ -27,7 +45,7 @@
         [%- page.content -%]
 
         [%- IF page.version -%]
-            <div class="wikidocs-footer">
+            <p class="wikidocs-footer">
                 [%- l('This page is {doc|transcluded} from revision {version} of {title}.',
                     {
                         doc => doc_link('WikiDocs'),
@@ -35,13 +53,13 @@
                         title => '<a href="' _ wiki_link(wiki_server, id) _ '" class="internal">' _ page.title _ '</a>',
                     }
                 ) -%]
-            </div>
+            </p>
         [%- ELSE -%]
-            <div class="wikidocs-footer">
+            <p class="wikidocs-footer">
             [%- l('This page is {doc|transcluded} from {title}.',
                  { doc => doc_link('WikiDocs'),
                    title => '<a href="//' _ wiki_server _ '/' _ id _ '" class="internal">' _ page.title _ '</a>' }) -%]
-            </div>
+            </p>
         [%- END -%]
     </div>
 [%- END -%]

@@ -1,0 +1,613 @@
+// Core variables and mixins
+@import "bootstrap-3.1.1/less/variables.less";
+@import "bootstrap-3.1.1/less/mixins.less";
+
+// Reset
+@import "bootstrap-3.1.1/less/normalize.less";
+@import "bootstrap-3.1.1/less/print.less";
+
+// Core CSS
+@import "bootstrap-3.1.1/less/scaffolding.less";
+@import "bootstrap-3.1.1/less/type.less";
+@import "bootstrap-3.1.1/less/code.less";
+@import "bootstrap-3.1.1/less/grid.less";
+@import "bootstrap-3.1.1/less/tables.less";
+@import "bootstrap-3.1.1/less/forms.less";
+@import "bootstrap-3.1.1/less/buttons.less";
+
+// Components
+@import "bootstrap-3.1.1/less/component-animations.less";
+@import "bootstrap-3.1.1/less/glyphicons.less";
+@import "bootstrap-3.1.1/less/dropdowns.less";
+@import "bootstrap-3.1.1/less/button-groups.less";
+//@import "bootstrap-3.1.1/less/input-groups.less";
+@import "bootstrap-3.1.1/less/navs.less";
+@import "bootstrap-3.1.1/less/navbar.less";
+//@import "bootstrap-3.1.1/less/breadcrumbs.less";
+@import "bootstrap-3.1.1/less/pagination.less";
+//@import "bootstrap-3.1.1/less/pager.less";
+@import "bootstrap-3.1.1/less/labels.less";
+//@import "bootstrap-3.1.1/less/badges.less";
+//@import "bootstrap-3.1.1/less/jumbotron.less";
+//@import "bootstrap-3.1.1/less/thumbnails.less";
+@import "bootstrap-3.1.1/less/alerts.less";
+//@import "bootstrap-3.1.1/less/progress-bars.less";
+//@import "bootstrap-3.1.1/less/media.less";
+//@import "bootstrap-3.1.1/less/list-group.less";
+@import "bootstrap-3.1.1/less/panels.less";
+//@import "bootstrap-3.1.1/less/wells.less";
+//@import "bootstrap-3.1.1/less/close.less";
+
+// Components w/ JavaScript
+//@import "bootstrap-3.1.1/less/modals.less";
+//@import "bootstrap-3.1.1/less/tooltip.less";
+//@import "bootstrap-3.1.1/less/popovers.less";
+//@import "bootstrap-3.1.1/less/carousel.less";
+
+// Utility classes
+@import "bootstrap-3.1.1/less/utilities.less";
+@import "bootstrap-3.1.1/less/responsive-utilities.less";
+
+/* ==========================================================================
+   Custom LESS
+   ========================================================================== */
+
+@import "widgets.less";
+
+@orange:                  #ffba58;
+@purple:                  #736dab;
+
+@brand-primary:           @orange;
+@link-color:              #002bba;
+@link-hover-color:        darken(@orange, 15%); // #ff9a0c
+
+@font-size-base:          12px; // 14px
+@font-size-h1:            25px; // ~36px
+
+@icon-font-path:          "/static/lib/bootstrap/bootstrap-3.1.1/fonts/";
+
+
+// Navbar
+@navbar-height:                    25px;
+@navbar-default-bg:                @purple;
+//@navbar-default-border:            @orange;
+@navbar-default-link-color:        #fff;
+@navbar-default-link-hover-color:  darken(@orange, 10%); // #ffa525
+@navbar-default-link-active-color: #fff;
+@navbar-default-link-active-bg:    darken(@orange, 10%); // #ffa525
+@navbar-default-brand-color:       @navbar-default-link-color;
+@navbar-default-brand-hover-color: @navbar-default-link-hover-color;
+@navbar-default-toggle-icon-bar-bg:#fff;
+
+// Dropdown
+@dropdown-link-hover-color:        #fff;
+@dropdown-link-hover-bg:           darken(@orange, 10%); // #ffa525
+
+// Nav/tabs
+@nav-link-padding:                 5px 10px;
+
+// Pagination
+@pagination-active-color:              #fff;
+@pagination-color:                     #000;
+
+// Tables
+//@table-bg-accent:               rgba(166, 158, 247, 0.1);
+
+
+
+/*
+@navbar-default-link-hover-color:          @component-active-color;
+@navbar-default-link-hover-bg:             @component-active-bg;
+@navbar-default-link-active-color:         @component-active-color;
+@navbar-default-link-active-bg:            @component-active-bg;
+@dropdown-link-hover-color:      @component-active-color;
+@dropdown-link-hover-bg:         @component-active-bg;
+*/
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html, body {
+  height: 100%;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  margin: 0 auto -90px;
+  padding: 0 0 90px;
+
+  #page {
+    padding-top: 15px;
+
+    #content {
+      position: relative; // anchor the cover art image
+    }
+  }
+}
+
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+
+.navbar {
+  border-radius: 0;
+  border: none;
+  margin-bottom: 0;
+
+  .navbar-brand {
+    font-weight: bold;
+    padding: 4px;
+    margin: 0 5px 0 10px;
+  }
+}
+
+.navbar-trim {  
+  border-style: solid;
+  border-width: 0 0 5px 0;
+  border-color: @orange;
+  //border-radius: 0 0 8px 8px;
+}
+
+
+@media (max-width: @screen-sm) {
+  .navbar-toggle {
+    padding: 4px 5px;
+    margin-top: 3px;
+    margin-bottom: 0;
+
+    .icon-bar {
+      height: 1px;
+    }
+
+    .icon-bar + .icon-bar {
+      margin-top: 3px;
+    }
+  }
+
+  .navbar {
+    //border-radius: 0 0 4px 4px;
+  }
+
+  .nav.navbar-nav {
+    //margin-left: -15px; // No extra padding on left
+  }
+}
+
+#header-search {
+  display: inline-block;
+
+  #search-field {
+    margin-top: -5px;
+    height: 20px;
+  }
+}
+
+#header-search-toggle {
+  display: inline-block;
+}
+
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.nav-tabs {
+  > li {
+    &.active > a {
+      &,
+      &:hover,
+      &:focus {
+        font-weight: bold;
+      }
+    }
+
+    &.dropdown > a.dropdown-toggle {  // Fix a bootstrap bug
+      cursor: auto;
+    }
+  }
+
+  a:hover {
+    color: darken(@link-color, 15%);
+  }
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.pagination-wrapper { margin: 10px 0; }
+
+.pagination {
+  display: inline;
+  margin-right: 10px;
+
+  > .active > a,
+  > .active > span {
+    &,
+    &:hover,
+    &:focus {
+      font-weight: bold;            // More oomph
+      color: @gray;
+    }
+  }
+
+  > .disabled {
+    > span,
+    > span:hover,
+    > span:focus,
+    > a,
+    > a:hover,
+    > a:focus {
+      cursor: default;              // Remove ugly not-allowed cursor
+      background-color: @gray-lighter;  
+    }
+  }
+}
+
+.pagination-sm {
+  .pagination-size(3px; 10px; @font-size-small; @border-radius-small);
+}
+
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+.tbl {
+  .table;
+  .table-bordered;
+  .table-condensed;
+  .table-striped;
+}
+
+table {
+  .c        { text-align: center; }
+  .r        { text-align: right; }
+  .pos      { width: 2em; }
+  .year     { width: 4em; }
+  .date     { width: 7em; }
+  .country  { width: 4em; }
+  .rating   { width: 50px; }
+  .count    { width: 2em; }
+  .iswc     { width: 115px; }
+  .edit     { width: 29px; text-align: center; }    // Wrench widget
+
+  .spacer   { border-right: none; }
+  .spacer + * { border-left: none; }
+
+  .subh {
+    th {
+      padding: 0 5px;
+    }
+  }
+
+  td {
+    vertical-align: middle !important;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+}
+
+/* Allow tables to have a non-100% width */
+.table-nonfluid { width: auto; }
+
+.table-noborder {
+  &.table > tbody > tr > th,
+  &.table > tbody > tr > td {
+    border: none;
+  }
+}
+
+/* Overrides for specific tables */
+.tbl {
+  &.user-statistics {
+    float: left;
+    width: auto;
+    margin-right: 1em;
+    margin-bottom: 0;
+
+    thead th {
+      text-align: center;
+    }
+  }
+
+  &.database-statistics {
+    width: auto;
+    //min-width: 500px;
+
+    td { text-align: right; }
+    .c { text-align: center; font-weight: bold; }
+
+    tr.thead {
+      th { text-align: center; }
+    }
+
+    tr:not(.thead) {
+      th:not(.spacer) { min-width: 300px; }
+    }
+
+    td.divider-pre, td.divider { border-right-color: transparent; }
+  }
+}
+
+@media (max-width: @screen-sm-min) {
+  .tbl.database-statistics {
+    min-width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Content
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  //color: @brand-primary;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+h1 a {
+  color: #000;
+}
+
+h2 {
+  color: #fc6714;
+}
+
+img.gravatar {
+  margin-right: 6px;
+  border: 1px solid #ddd;
+  padding: 1px;
+}
+
+span.comment {
+  color: @gray-light;
+}
+
+p.lastupdate {
+  .small;
+  .text-muted;
+}
+
+.relationship-edit-links {
+  visibility: hidden;
+}
+
+tr:hover .relationship-edit-links {
+  visibility: visible;
+}
+
+/* ==========================================================================
+   Primary Content
+   ========================================================================== */
+
+.main { 
+
+}
+
+
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+
+#sidebar {
+  border: 1px solid;
+  display: inline-block;
+}
+
+@media (max-width: @screen-sm) {
+  .sidebar {
+  }
+}
+
+/* ==========================================================================
+   WikiDocs
+   ========================================================================== */
+
+.wikicontent {
+  .wikidoc-search {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    input#doc-query { width: 200px; }
+  }
+
+  .nav-pills {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #toc {
+    float: right;
+    background-color: #f9f9f9;
+    border: 1px solid @table-border-color;
+    border-collapse: separate;
+    padding: 5px;
+    margin-left: 10px;
+    max-width: 50%;
+
+    h2 {
+      color: #000;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      margin: 0 0 5px 0;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 0;
+      list-style-type: none;
+
+      ul {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .wikidocs-footer {
+    .text-muted;
+    .small;
+
+    display: inline-block; /* reduce hoverable area */
+    margin: 0;
+  }
+}
+
+@media (max-width: @screen-sm-min) {
+  .wikicontent {
+    .wikidoc-search {
+      position: relative;
+      margin: 10px 0;
+
+      // Override default bootstrap behaviour of turning an inline form
+      // into a vertical form for mobile users
+      .form-group {
+        display: inline-block;
+      }
+    }
+
+    #toc {
+      float: none;
+      max-width: 100%;
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+footer {
+  margin-top: 15px;
+  //margin-bottom: 15px;
+
+  > div {
+    border-top: 2px solid @brand-primary;
+    padding-top: 15px;
+  }
+
+  .language-selector {
+    margin-bottom: 8.5px;
+
+    .dropdown-toggle {
+      border: none;
+      background: none !important;
+      box-shadow: none !important;
+
+      &:hover, &:active {
+        //border: 1px solid;
+      }
+    }
+  }
+
+  .pull-right {
+    text-align: right;
+  }
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+form {
+  &.form-horizontal {
+    .control-label { padding-top: 4px; } // Compensate for reduced height of .input-sm
+  }
+
+  ul.errors {
+    margin-bottom: 0;
+  }
+
+  .input-note {
+    margin-top: -10px;    // Reduce distance to above row to only 5px
+
+    span {
+      font-style: italic;
+      font-size: 85%;
+    }
+  }
+
+  // Hack for date fields
+  //.partial-date input { .form-control; }
+}
+
+
+/* ==========================================================================
+   Entity
+   ========================================================================== */
+
+.entity-header {
+  padding-left: 38px;
+  background: 0 4px no-repeat;
+
+  h1 { margin: 0; }
+  p { margin: 0; }
+}
+
+.blank-header         { background-image: data-uri('../../images/entity/blank_lg.png') }
+.artist-header        { background-image: data-uri('../../images/entity/artist_lg.png') }
+.release-header       { background-image: data-uri('../../images/entity/release_lg.png') }
+.release-group-header { background-image: data-uri('../../images/entity/release_group_lg.png') }
+.recording-header     { background-image: data-uri('../../images/entity/recording_lg.png') }
+.place-header         { background-image: data-uri('../../images/entity/place_lg.png') }
+.label-header         { background-image: data-uri('../../images/entity/label_lg.png') }
+.work-header          { background-image: data-uri('../../images/entity/work_lg.png') }
+.collection-header, .area-header { background-image: data-uri('../../images/entity/blank_lg.png') } /* TODO: create collection, area icons */
+
+.cover-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  .artwork-image img {
+    width: 150px;
+  }
+}
+
+nav.tabs {
+  margin-top: 1em;
+}
+
+/* ==========================================================================
+   Classes
+   ========================================================================== */
+
+.text-muted {
+  a { color: @text-muted; }
+
+  &:hover a { color: @link-color; }
+
+  a:hover { color: @link-hover-color; }
+}
+
+/* ==========================================================================
+   Home page
+   ========================================================================== */
+
+.homepage #blog-feed {
+  float: right;
+  width: 200px;
+}
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+
+@media (min-width: @screen-sm-min) { }
+
+@media (min-width: @screen-md-min) { }
+
+@media (min-width: @screen-lg-min) { }

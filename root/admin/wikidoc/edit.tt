@@ -4,7 +4,7 @@
 
         [%- USE r = FormRenderer(form) -%]
 
-        <form action="[% c.req.uri | html %]" method="post">
+        [%- WRAPPER "forms/form.tt" action=c.req.uri method='post' class='form-horizontal' -%]
             <div class="row">
                 <label>[% l('Page:') %]</label>
                 <span>[% page | html %]</span>
@@ -16,10 +16,7 @@
             </div>
 
             [% form_row_text(r, 'version', l('New version:')) %]
-
-            <div class="row no-label">
-                [% form_submit(l('Update')) %]
-            </div>
-        </form>
+            [% form_submit(l('Update')) %]
+        [%- END -%]
     </div>
 [% END %]
